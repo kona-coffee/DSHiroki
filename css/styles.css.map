@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "styles.css",
-	"sourceRoot": "/Users/hiroking/Desktop/blog/test",
+	"sourceRoot": "/Users/hiroking/Desktop/blog/DShiroki",
 	"sources": [
 		"themes/hugo-swift-theme/assets/sass/main.sass",
 		"themes/hugo-swift-theme/assets/sass/_variables.sass",

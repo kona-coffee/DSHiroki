@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Scientist Hiroki&#39;s Blog</title>
+    <link>https://kona-coffee.github.io/DSHiroki/en/</link>
+    <description>Recent content on Data Scientist Hiroki&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 07 Nov 2021 09:40:00 +0900</lastBuildDate><atom:link href="https://kona-coffee.github.io/DSHiroki/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to get economy index data from FRED web site</title>
+      <link>https://kona-coffee.github.io/DSHiroki/en/finance/getfreddata/</link>
+      <pubDate>Sun, 07 Nov 2021 09:40:00 +0900</pubDate>
+      
+      <guid>https://kona-coffee.github.io/DSHiroki/en/finance/getfreddata/</guid>
+      <description>How to get economy index data from FRED web site Hello this is data scientist HIROKI. Don’t you have some problem that you want to get economy index data for analyzing but you have no idea how to do it? I also have this type of problem for a half year and I found how to solve it.
+This blog is for you who have below problems.
+I can explain how to get the stock data from yahoo finance with simple matlab code.</description>
+    </item>
+    
+    <item>
+      <title>The way how to get daily stock data from Yahoo finance by only one line Matlab code</title>
+      <link>https://kona-coffee.github.io/DSHiroki/en/finance/getstockdata/</link>
+      <pubDate>Sun, 31 Oct 2021 09:15:35 +0900</pubDate>
+      
+      <guid>https://kona-coffee.github.io/DSHiroki/en/finance/getstockdata/</guid>
+      <description>The way how to get daily stock data from Yahoo finance by only one line Matlab code Hello I’m data scientist Hiroki.
+Have you ever thinking if you can download daily stock data so that you can analyze it for your investment haven’t you?
+And you have no idea where you can get the data don’t you?
+This blog is for you who may have below trouble
+I can explain how to get the stock data from yahoo finance with only one matlab code.</description>
+    </item>
+    
+  </channel>
+</rss>
