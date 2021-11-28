@@ -5,7 +5,30 @@
     <link>https://kona-coffee.github.io/DSHiroki/en/</link>
     <description>Recent content on Data Scientist Hiroki&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 07 Nov 2021 09:40:00 +0900</lastBuildDate><atom:link href="https://kona-coffee.github.io/DSHiroki/en/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Nov 2021 10:16:50 +0900</lastBuildDate><atom:link href="https://kona-coffee.github.io/DSHiroki/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>株価の時系列データをフーリエ解析してみた①</title>
+      <link>https://kona-coffee.github.io/DSHiroki/en/finance/timeanalysisbasic/</link>
+      <pubDate>Tue, 09 Nov 2021 10:16:50 +0900</pubDate>
+      
+      <guid>https://kona-coffee.github.io/DSHiroki/en/finance/timeanalysisbasic/</guid>
+      <description>株価の時系列データをフーリエ解析してみた こんにちは、データサイエンティスト・ヒロキです。
+投資に慣れてきたので株価データを自分で分析し、将来の動向などを予測したいけど、テクニカル分析の本などを見てみても、応用の事ばかり書いていてなんだか難しく感じる。もう少し時系列データの基本的なことを学びたい。とお困りの方いらっしゃったりしませんでしょうか？私もそうでした。
+そこでこの記事では、
+・株価データの分析をしたいけど、時系列分析ってなんか難しそう ・テクニカル分析などの本を目にしたことあるが、もう少し基本的なことを学びたい ・フーリエ？聞いたことあるけどなんか難しそう   という方のために、時系列データの3つの基本パターンとフーリエ解析の基礎を解説していきたいと思います。優しく解説していきますので、ご安心ください🙂
+時系列データの3つの基本パターン  直流成分（平均値） 周期変動（sin波やcos波） 不規則変動（ランダムノイズ）  時系列データは上記3つのパターンの組み合わせでできていると考えられます。  なんとなく、足し合わせると株価の変動と似ているのがわかるかと思います。
+まずは、時系列データというのは、直流成分と周期変動と不規則変動の3種類から構成されているんだな〜と理解できれば大丈夫です。
+時系列データを直流成分と周期変動に分解することを(離散)フーリエ変換と言います。
+詳しくはヨビノリさんのYouTubeをご覧ください。   具体例 Matlabコードを使って具体例も提示していきます。 このblogで紹介しているプログラムを実行するにはMatlabに加えてMatlabから提供されているCurve Fitting Toolboxが必要です。
+“Matlab持ってないよ”という方も無料でMatlabを30日利用できるトライアルがありますのでご安心ください。またCurve Fitting Toolboxも無料のトライアル版が提供されていますのでご安心ください。
+こちら からインストールお願いします。
+さて、いきなりですが、下記グラフを重ね合わせると何になるでしょうか？
+  答えは日経平均データを3項までのフーリエ級数展開モデルで近似したグラフです。 実際の日経平均のデータと比較したグラフをつくりました。   このように分解することで、どのくらいの大きさの周期がどのタイミングでやってくるのかの目安を知ることができます。もちろんこれだけでは投資判断できませんが経済の動向や企業分析などファンダメンタルな考察と組み合わせることで、判断の手助けになるかもしれません。
+コード 上記具体例に使用したMatlabコードを示します。
+事前にyahoofinanceの時系列データにアクセスできるプログラムファイルをこちら からダウンロードし、作業フォルダに保存しておいてください。
+%日経平均のデータを入手 NIKKEI = hist_stock_data(&amp;#39;09112011&amp;#39;,&amp;#39;09112021&amp;#39;,&amp;#39;^N225&amp;#39;); %日付データ(グラフの横軸)をyearという変数に格納 year=NIKKEI.Date; L=length(year); x=[1:L]&amp;#39;; %欠損データを補完し、YYに格納 [YY,TF] = fillmissing(NIKKEI.Close,&amp;#39;linear&amp;#39;,&amp;#39;SamplePoints&amp;#39;,year); %3項までのフーリエ級数展開でフィッティング(curve fitting toolboxが必要) f2 = fit(x,YY,&amp;#39;fourier3&amp;#39;) %フーリエ係数を変数に格納 a0=f2.a0; a1=f2.a1; a2=f2.a2; a3=f2.a3; b1=f2.b1; b2=f2.</description>
+    </item>
+    
     <item>
       <title>How to get economy index data from FRED web site</title>
       <link>https://kona-coffee.github.io/DSHiroki/en/finance/getfreddata/</link>
@@ -14,7 +37,7 @@
       <guid>https://kona-coffee.github.io/DSHiroki/en/finance/getfreddata/</guid>
       <description>How to get economy index data from FRED web site Hello this is data scientist HIROKI. Don’t you have some problem that you want to get economy index data for analyzing but you have no idea how to do it? I also have this type of problem for a half year and I found how to solve it.
 This blog is for you who have below problems.
-I can explain how to get the stock data from yahoo finance with simple matlab code.</description>
+・To compare two data(stock data and economy index data) in the same graph ・To download economy index data like GDP and FF ratio.</description>
     </item>
     
     <item>
@@ -27,7 +50,7 @@ I can explain how to get the stock data from yahoo finance with simple matlab co
 Have you ever thinking if you can download daily stock data so that you can analyze it for your investment haven’t you?
 And you have no idea where you can get the data don’t you?
 This blog is for you who may have below trouble
-I can explain how to get the stock data from yahoo finance with only one matlab code.</description>
+・You can’t find where you can download the stock data from.</description>
     </item>
     
   </channel>

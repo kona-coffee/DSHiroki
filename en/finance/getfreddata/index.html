@@ -80,7 +80,12 @@
 <p>Hello this is data scientist HIROKI.
 Don’t you have some problem that you want to get economy index data for analyzing but you have no idea how to do it? I also have this type of problem for a half year and I found how to solve it.</p>
 <p>This blog is for you who have below problems.</p>
-<!-- raw HTML omitted -->
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+<ul style="color:red">
+<li>・To compare two data(stock data and economy index data) in the same graph</li>
+<li>・To download economy index data like GDP and FF ratio.</li>
+</ul>
+</div>
 <p>I can explain how to get the stock data from yahoo finance with simple matlab code.<br>
 To run this code showed in this article, you need <a href="https://jp.mathworks.com/products/datafeed.html">Datafeed Toolbox</a> which is provided with Matlab.<br>
 If your PC didn’t install matlab yet, don’t worry. They have 30 day’s free trial for you. and Datafeed toolbox free trial also available.<br>
@@ -131,7 +136,7 @@ t=datetime(d.Data(:,<span style="color:#ae81ff">1</span>),<span style="color:#e6
 data1=d.Data(:,<span style="color:#ae81ff">2</span>);
 fredData = timetable(t,data1);
 <span style="color:#66d9ef">end</span>
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><br/>  
 <p>Just in case, the economy symbol should be used as the same one as shown below red point on the <a href="https://fred.stlouisfed.org/series/GDPC1">FRED web site</a>.<br>
 
 <figure >
@@ -154,7 +159,8 @@ You can get GDP data from Oct 24th 1950 to Oct 24th 2021(just as an example)😀
 </figure>
 
 </p>
-<!-- raw HTML omitted -->
+  <br/>   
+  <br/>  
 <h1 id="example">Example</h1>
 <p>As an example I can show you the code which give you S&amp;P500 data and GDP data comparison in the same graph. Before running this code, please download <a href="https://jp.mathworks.com/matlabcentral/fileexchange/18458-hist_stock_data-start_date-end_date-varargin?s_tid=srchtitle">this program</a> which you can access the yahoo finance data with. And save the same directory of below matlab file.</p>
 <p>Copy below code and paste it and run. Then you can get the graph showing S&amp;P500 and GDP🙂</p>
@@ -202,7 +208,7 @@ t=datetime(d.Data(:,<span style="color:#ae81ff">1</span>),<span style="color:#e6
 data1=d.Data(:,<span style="color:#ae81ff">2</span>);
 fredData = timetable(t,data1);
 <span style="color:#66d9ef">end</span>
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div>  <br/>   
 <p>If you want to change the range of x axis, please delete the comment out ‘%’ in the middle of the code as shown below in order to enable below code.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">str = [&#34;<span style="color:#ae81ff">2005</span><span style="color:#f92672">-</span><span style="color:#ae81ff">10</span><span style="color:#f92672">-</span><span style="color:#ae81ff">24</span>&#34;,&#34;<span style="color:#ae81ff">2021</span><span style="color:#f92672">-</span><span style="color:#ae81ff">10</span><span style="color:#f92672">-</span><span style="color:#ae81ff">24</span>&#34;];
 xlim(datetime(str))
@@ -412,7 +418,10 @@ xlim(datetime(str))
 </p>
 <h1 id="next-blog">Next blog</h1>
 <p>I’ll explain how to analyze stock time line data.💹</p>
-<!-- raw HTML omitted -->
+<br/>  
+<br/>   
+Thank you for reading.
+Hiroki🐶
 
     
     <div class = 'post_extra'><div class = 'copy' data-share = 'Copy' data-copied = 'Copied'><svg>
@@ -427,6 +436,24 @@ xlim(datetime(str))
   
   <aside><h3>More from Data Scientist Hiroki&#39;s Blog</h3>
 <ul class='posts aside'>
+<li class = 'post_item fp'>
+  <a class = 'post_card' href='https://kona-coffee.github.io/DSHiroki/en/finance/timeanalysisbasic/' title = '株価の時系列データをフーリエ解析してみた①' style = 'background-image: url(https://kona-coffee.github.io/DSHiroki/images/mathFurie.png);'>
+  </a>
+  <div class = 'excerpt'>
+    <div class = 'excerpt_meta'><div class = 'copy' data-share = 'Copy' data-copied = 'Copied'><svg>
+  <use xlink:href="#copy"></use>
+</svg>
+</div>
+
+    </div>
+    <h3 class = 'post_link'>
+      <a href='https://kona-coffee.github.io/DSHiroki/en/finance/timeanalysisbasic/'>株価の時系列データをフーリエ解析してみた①</a>
+    </h3>
+    <p class = 'pale'>株価の時系列データをフーリエ解析してみた こんにちは、データサイエンティスト・ヒロキです。
+投資に慣れてきたので株価データを自分で分析し、将来の動向などを予測したいけど、テクニカル …</p>
+  </div>
+</li>
+
 <li class = 'post_item fp'>
   <a class = 'post_card' href='https://kona-coffee.github.io/DSHiroki/en/finance/getstockdata/' title = 'The way how to get daily stock data from Yahoo finance by only one line Matlab code' style = 'background-image: url(https://kona-coffee.github.io/DSHiroki/images/669807_s.jpg);'>
   </a>
