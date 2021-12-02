@@ -14,7 +14,7 @@
 
 <head>
   <meta name="google-site-verification" content="jMgk06_1fynaHhhz3MtyldzvpUHakxxCsYYFeDtN1JQ" />
-  <title>株価の時系列データをフーリエ解析してみた① | Data Scientist Hiroki&#39;s Blog</title>
+  <title>How to calculate fourie analysis for stock time series data | Data Scientist Hiroki&#39;s Blog</title>
   <meta charset='utf-8'>
   <meta name="generator" content="Hugo 0.88.1" />
   <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
@@ -34,18 +34,18 @@
 
 <meta property = 'og:locale' content = 'en_US' />
 <meta property="og:type" content="article">
-<meta property = 'og:title' content = '株価の時系列データをフーリエ解析してみた①' />
-<meta name="description" content="株価の時系列データをフーリエ解析してみた こんにちは、データサイエンティスト・ヒロキです。
-投資に慣れてきたので株価データを自分で分析し、将来の動向などを予測したいけど、テクニカル分析の本などを見てみても、応用の事ばかり書いていてなんだか難しく感じる。もう少し時系列データの基本的なことを学びたい。とお困りの方いらっしゃ …">
-<meta property = 'og:description' content = '株価の時系列データをフーリエ解析してみた こんにちは、データサイエンティスト・ヒロキです。
-投資に慣れてきたので株価データを自分で分析し、将来の動向などを予測したいけど、テクニカル分析の本などを見てみても、応用の事ばかり書いていてなんだか難しく感じる。もう少し時系列データの基本的なことを学びたい。とお困りの方いらっしゃ …'>
+<meta property = 'og:title' content = 'How to calculate fourie analysis for stock time series data' />
+<meta name="description" content="How to calculate fourie analysis for stock time series data Hello this is data scientist Hiroki.
+Don&rsquo;t you have some trouble for future analysis of stock …">
+<meta property = 'og:description' content = 'How to calculate fourie analysis for stock time series data Hello this is data scientist Hiroki.
+Don&rsquo;t you have some trouble for future analysis of stock …'>
 <meta property = 'og:url' content = 'https://kona-coffee.github.io/DSHiroki/en/finance/timeanalysisbasic/' />
 <meta property = 'og:image' content = 'https://kona-coffee.github.io/DSHiroki/images/mathFurie.png'/>
 <meta name = 'twitter:card' content = 'summary_large_image' />
 <meta name = 'twitter:creator' content = ''>
-<meta name = 'twitter:title' content = '株価の時系列データをフーリエ解析してみた①' />
-<meta property = 'twitter:description'  content = '株価の時系列データをフーリエ解析してみた こんにちは、データサイエンティスト・ヒロキです。
-投資に慣れてきたので株価データを自分で分析し、将来の動向などを予測したいけど、テクニカル分析の本などを見てみても、応用の事ばかり書いていてなんだか難しく感じる。もう少し時系列データの基本的なことを学びたい。とお困りの方いらっしゃ …'/>
+<meta name = 'twitter:title' content = 'How to calculate fourie analysis for stock time series data' />
+<meta property = 'twitter:description'  content = 'How to calculate fourie analysis for stock time series data Hello this is data scientist Hiroki.
+Don&rsquo;t you have some trouble for future analysis of stock …'/>
 <meta name = 'twitter:image' content = 'https://kona-coffee.github.io/DSHiroki/images/mathFurie.png' />
 <link rel='apple-touch-icon' sizes='180x180' href='https://kona-coffee.github.io/DSHiroki/images/icons/apple-touch-icon.png'>
 <link rel='icon' type='image/png' sizes='32x32' href='https://kona-coffee.github.io/DSHiroki/images/icons/favicon-32x32.png'>
@@ -76,28 +76,29 @@
     <main>
 
 <section class = 'post_header' style = 'background-image:url(https://kona-coffee.github.io/DSHiroki/images/mathFurie.png);'>
-  <h1 class='post_title'>株価の時系列データをフーリエ解析してみた①</h1>
+  <h1 class='post_title'>How to calculate fourie analysis for stock time series data</h1>
 </section>
 <div class = 'post'>
-  <article class='post_content'><h1 id="株価の時系列データをフーリエ解析してみた">株価の時系列データをフーリエ解析してみた</h1>
-<p>こんにちは、データサイエンティスト・ヒロキです。</p>
-<p>投資に慣れてきたので株価データを自分で分析し、将来の動向などを予測したいけど、テクニカル分析の本などを見てみても、応用の事ばかり書いていてなんだか難しく感じる。もう少し時系列データの基本的なことを学びたい。とお困りの方いらっしゃったりしませんでしょうか？私もそうでした。</p>
-<p>そこでこの記事では、</p>
+  <article class='post_content'><h1 id="how-to-calculate-fourie-analysis-for-stock-time-series-data">How to calculate fourie analysis for stock time series data</h1>
+<p>Hello this is data scientist Hiroki.</p>
+<p>Don&rsquo;t you have some trouble for future analysis of stock time data, and do you want to use the basic mathmatics for it? I also have some trouble especially when I read the technical analysis books of stock time data. I wanted to use the besic mathmatics theory for the stock time data analysis. so I decided to write this blog.</p>
+<p>This blog is for you who have below problems.</p>
 <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
 <ul style="color:red">
-<li>・株価データの分析をしたいけど、時系列分析ってなんか難しそう</li>
-<li>・テクニカル分析などの本を目にしたことあるが、もう少し基本的なことを学びたい</li>
-<li>・フーリエ？聞いたことあるけどなんか難しそう</li>
+<li>・you feel it is difficult to conduct time data analysis of stock data.</li>
+<li>・you read some thechnical analysis books about stock data but you feel it is something different what you need.</li>
+<li>・you want to use some basic mathmatic theory like fourier transformation for stock data analysis.</li>
 </ul>
 </div>
-<p>という方のために、時系列データの3つの基本パターンとフーリエ解析の基礎を解説していきたいと思います。優しく解説していきますので、ご安心ください🙂</p>
-<h2 id="時系列データの3つの基本パターン">時系列データの3つの基本パターン</h2>
+<p>let&rsquo;s start below 3 step basic pattern of fourier transformation.<br>
+I&rsquo;ll tell you step by step, don&rsquo;t worry🙂</p>
+<h2 id="basic-three-pattern-of-time-series-data">basic three pattern of time series data</h2>
 <ol>
-<li>直流成分（平均値）</li>
-<li>周期変動（sin波やcos波）</li>
-<li>不規則変動（ランダムノイズ）</li>
+<li>Direct current component（average）</li>
+<li>Periodic fluctuation（sin wave）</li>
+<li>Irreguler fluctuation（random noise）</li>
 </ol>
-<p>時系列データは上記3つのパターンの組み合わせでできていると考えられます。
+<p>Any time series data consist of linear combination of above 3 pattern.</p>
 
 <figure >
     
@@ -106,23 +107,20 @@
     
 </figure>
 
-</p>
-<p>なんとなく、足し合わせると株価の変動と似ているのがわかるかと思います。</p>
-<p>まずは、時系列データというのは、直流成分と周期変動と不規則変動の3種類から構成されているんだな〜と理解できれば大丈夫です。</p>
-<p>時系列データを直流成分と周期変動に分解することを(離散)フーリエ変換と言います。</p>
-<p>詳しくはヨビノリさんのYouTubeをご覧ください。
+
+<p>Somehow you can understand the similarity of the both data.<br>
+For the very first step, it is ok that you understand time series data consist of linear combination of direct current component and periodic fluctuation and
+irreguler fluctuation.</p>
+<p>To resolve time series data into direct current component and periodic fluctuation is called Fourier series expansion.</p>
+<p>Please check below Yobinori&rsquo;s Youtube link in detail(in Japanese though).<br>
 
 <div class = 'video'>
   <iframe src='https://www.youtube.com/embed/bjBZEKdlLD0?controls=1&rel=0'></iframe>
 </div>
 </p>
-<h1 id="具体例">具体例</h1>
-<p>Matlabコードを使って具体例も提示していきます。
-このblogで紹介しているプログラムを実行するには<a href="https://jp.mathworks.com/products/matlab.html">Matlab</a>に加えてMatlabから提供されている<a href="https://jp.mathworks.com/products/curvefitting.html">Curve Fitting Toolbox</a>が必要です。</p>
-<p>“Matlab持ってないよ”という方も無料でMatlabを30日利用できるトライアルがありますのでご安心ください。また<a href="https://jp.mathworks.com/products/curvefitting.html">Curve Fitting Toolbox</a>も無料のトライアル版が提供されていますのでご安心ください。<br>
-<a href="https://jp.mathworks.com/campaigns/products/trials.html?prodcode=ML">こちら</a>
-からインストールお願いします。</p>
-<p>さて、いきなりですが、下記グラフを重ね合わせると何になるでしょうか？<br>
+<h1 id="example">Example</h1>
+<p>I have a Question!! for you at first.
+what will it be if below graph is added all?</p>
 
 
 <figure class="xImage">
@@ -814,9 +812,8 @@
 
   </a>
 </figure>
-</p>
-<p>答えは日経平均データを3項までのフーリエ級数展開モデルで近似したグラフです。
-実際の日経平均のデータと比較したグラフをつくりました。
+
+<p>The answer is approximation of Nikkei225 time series data by fourier series expansion until 3 items.</p>
 
 
 <figure class="xImage">
@@ -976,30 +973,36 @@
 
   </a>
 </figure>
-</p>
-<p>このように分解することで、どのくらいの大きさの周期がどのタイミングでやってくるのかの目安を知ることができます。もちろんこれだけでは投資判断できませんが経済の動向や企業分析などファンダメンタルな考察と組み合わせることで、判断の手助けになるかもしれません。</p>
-<h1 id="コード">コード</h1>
-<p>上記具体例に使用したMatlabコードを示します。<br>
-事前にyahoofinanceの時系列データにアクセスできるプログラムファイルを<a href="https://jp.mathworks.com/matlabcentral/fileexchange/18458-hist_stock_data-start_date-end_date-varargin?s_tid=srchtitle">こちら</a>
-からダウンロードし、作業フォルダに保存しておいてください。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab"><span style="color:#75715e">%日経平均のデータを入手</span>
+
+<p>By resolving like this, you can get the signal size and period which you can find when signal peak will come.<br>
+ofcourse it is not enough that you cna judge your investing timing when you buy or sell the stock. But I think it will be one strong evidence of your judgement.</p>
+<h1 id="code">Code</h1>
+<p>As an example let&rsquo;s look at below Matlab code.<br>
+To run this code showed in this article, you need <a href="https://jp.mathworks.com/products/matlab.html">Matlab</a> and <a href="https://jp.mathworks.com/products/curvefitting.html">Curve Fitting Toolbox</a>which is provided with Matlab.
+If your PC didn’t install matlab yet, don’t worry. They have [30 day’s free trial(https://jp.mathworks.com/campaigns/products/trials.html?prodcode=ML) for you. and <a href="https://jp.mathworks.com/products/curvefitting.html">Curve Fitting toolbox free trial</a> also available.
+If you are not good at programming, don’t worry. You can just copy and paste of this blog code. I’ll explain how to do it step by step from now. Let’s get started!😉</p>
+<p>At first you need to download the program file which you can download any stock data from yahoo finance.
+please access <a href="https://jp.mathworks.com/matlabcentral/fileexchange/18458-hist_stock_data-start_date-end_date-varargin?s_tid=srchtitle">this weblink</a> and download the file and save it to the same directory of workspase.</p>
+<p>copy below code and paste it to the matlab workspase and run.<br>
+then you will get the same result as showen above example.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab"><span style="color:#75715e">%to get Nikkei225 data from yahoo finance</span>
 NIKKEI = hist_stock_data(<span style="color:#e6db74">&#39;09112011&#39;</span>,<span style="color:#e6db74">&#39;09112021&#39;</span>,<span style="color:#e6db74">&#39;^N225&#39;</span>);
 
-<span style="color:#75715e">%日付データ(グラフの横軸)をyearという変数に格納</span>
+<span style="color:#75715e">%to store the date data into the variable named year</span>
 year=NIKKEI.Date;
 L=length(year);
 x=[<span style="color:#ae81ff">1</span>:L]<span style="color:#f92672">&#39;</span>;
 
 
-<span style="color:#75715e">%欠損データを補完し、YYに格納</span>
+<span style="color:#75715e">%to complement the missing data and store the complemented data into the variable named YY </span>
 [YY,TF] = fillmissing(NIKKEI.Close,<span style="color:#e6db74">&#39;linear&#39;</span>,<span style="color:#e6db74">&#39;SamplePoints&#39;</span>,year);
 
 
-<span style="color:#75715e">%3項までのフーリエ級数展開でフィッティング(curve fitting toolboxが必要)</span>
+<span style="color:#75715e">%curve fitting by 3 item fourier series expansion(your PC needs curve fitting toolbox)</span>
 f2 = fit(x,YY,<span style="color:#e6db74">&#39;fourier3&#39;</span>)
 
 
-<span style="color:#75715e">%フーリエ係数を変数に格納</span>
+<span style="color:#75715e">%to store the fourier coefficient to the variable</span>
 a0=f2.a0;
 a1=f2.a1;
 a2=f2.a2;
@@ -1009,18 +1012,18 @@ b2=f2.b2;
 b3=f2.b3;
 w=f2.w;
 
-<span style="color:#75715e">%直流成分、周期変動、不規則変動に分解</span>
-y1=a0<span style="color:#f92672">*</span>ones(L,<span style="color:#ae81ff">1</span>);<span style="color:#75715e">%直流成分</span>
-y2_sin=b1<span style="color:#f92672">*</span>sin(x<span style="color:#f92672">*</span>w)<span style="color:#f92672">+</span>b2<span style="color:#f92672">*</span>sin(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>x<span style="color:#f92672">*</span>w)<span style="color:#f92672">+</span>b3<span style="color:#f92672">*</span>sin(<span style="color:#ae81ff">3</span><span style="color:#f92672">*</span>x<span style="color:#f92672">*</span>w); <span style="color:#75715e">%周期変動</span>
-y2_cos=a1<span style="color:#f92672">*</span>cos(x<span style="color:#f92672">*</span>w)<span style="color:#f92672">+</span>a2<span style="color:#f92672">*</span>cos(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>x<span style="color:#f92672">*</span>w)<span style="color:#f92672">+</span>a3<span style="color:#f92672">*</span>cos(<span style="color:#ae81ff">3</span><span style="color:#f92672">*</span>x<span style="color:#f92672">*</span>w);<span style="color:#75715e">%周期変動</span>
-y3=<span style="color:#ae81ff">200</span><span style="color:#f92672">*</span>randn(L,<span style="color:#ae81ff">1</span>);<span style="color:#75715e">%不規則変動</span>
+<span style="color:#75715e">%resolve signal into linear combination of direct current component and periodic fluctuation</span>
+irreguler fluctuation
+y1=a0<span style="color:#f92672">*</span>ones(L,<span style="color:#ae81ff">1</span>);<span style="color:#75715e">%direct current component</span>
+y2_sin=b1<span style="color:#f92672">*</span>sin(x<span style="color:#f92672">*</span>w)<span style="color:#f92672">+</span>b2<span style="color:#f92672">*</span>sin(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>x<span style="color:#f92672">*</span>w)<span style="color:#f92672">+</span>b3<span style="color:#f92672">*</span>sin(<span style="color:#ae81ff">3</span><span style="color:#f92672">*</span>x<span style="color:#f92672">*</span>w); <span style="color:#75715e">%periodic fluctuation</span>
+y2_cos=a1<span style="color:#f92672">*</span>cos(x<span style="color:#f92672">*</span>w)<span style="color:#f92672">+</span>a2<span style="color:#f92672">*</span>cos(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>x<span style="color:#f92672">*</span>w)<span style="color:#f92672">+</span>a3<span style="color:#f92672">*</span>cos(<span style="color:#ae81ff">3</span><span style="color:#f92672">*</span>x<span style="color:#f92672">*</span>w);<span style="color:#75715e">%periodic fluctuation</span>
+y3=<span style="color:#ae81ff">200</span><span style="color:#f92672">*</span>randn(L,<span style="color:#ae81ff">1</span>);<span style="color:#75715e">%Irreguler fluctuation</span>
 
 
-<span style="color:#75715e">%分解したものを足し合わせる</span>
 y=y1<span style="color:#f92672">+</span>y2_sin<span style="color:#f92672">+</span>y2_cos<span style="color:#f92672">+</span>y3;
 
 
-<span style="color:#75715e">%日経平均と足し合わせたものを比較するグラフ</span>
+<span style="color:#75715e">%create graph</span>
 figure
 plot(year,YY);
 hold on
@@ -1031,7 +1034,6 @@ title(<span style="color:#e6db74">&#39;日経平均株価&#39;</span>)
 legend(<span style="color:#e6db74">&#39;日経平均&#39;</span>,<span style="color:#e6db74">&#39;フーリエ近似&#39;</span>)
 
 
-<span style="color:#75715e">%直流成分、周期変動、不規則変動に分解したものをそれぞれ描かせるグラフ</span>
 figure
 subplot(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
     plot(year,y1)
@@ -1072,9 +1074,8 @@ subplot(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">1</span
     plot(year,y3)
     ylim([<span style="color:#f92672">-</span><span style="color:#ae81ff">5000</span> <span style="color:#ae81ff">5000</span>])
     text(datetime(<span style="color:#e6db74">&#39;2013-01-04&#39;</span>),<span style="color:#ae81ff">3800</span>,<span style="color:#e6db74">&#39;3.不規則変動  y=200*randn(L,1)&#39;</span>)
-</code></pre></div><h1 id="参考文献">参考文献</h1>
-<p>本記事を書くにあたって下記文献を参考にしています。
-基本的な内容が体系的に優しく書かれているので初学者におすすめの入門書です。</p>
+</code></pre></div><h1 id="references">references</h1>
+<p>below books are good for entry level worker or student who want to know the basic theory about fourie transformation, written in japanese though.</p>
 <p><a href="https://www.amazon.co.jp/gp/product/4274066177?pf_rd_r=EX4GHJ7DSSZHX0JT61BE&pf_rd_p=9527901b-e3cc-4501-a349-8831130ac3fb&pd_rd_r=07708e35-20e5-4c5a-84a7-386d5e922987&pd_rd_w=yXwMk&pd_rd_wg=azpC8&linkCode=li3&tag=dshiroshi-22&linkId=31274604d23e653f53252d288ddfaea1&language=ja_JP&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4274066177&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=dshiroshi-22&language=ja_JP" ></a><img src="https://ir-jp.amazon-adsystem.com/e/ir?t=dshiroshi-22&language=ja_JP&l=li3&o=9&a=4274066177" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /><br>
 <a href="https://amzn.to/3narxRc">マンガでわかるフーリエ解析(Amazonリンク)</a></p>
 <br/>  
@@ -1084,19 +1085,18 @@ subplot(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">1</span
 <p><a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AE%E6%99%82%E7%B3%BB%E5%88%97%E5%88%86%E6%9E%90-%E7%9F%B3%E6%9D%91-%E8%B2%9E%E5%A4%AB/dp/4489021259?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&keywords=%E5%85%A5%E9%96%80%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AE%E6%99%82%E7%B3%BB%E5%88%97%E5%88%86%E6%9E%90&qid=1636876888&s=books&sr=1-1&linkCode=li3&tag=dshiroshi-22&linkId=540c96d616dcba227dd8ec4003ba1a4b&language=ja_JP&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4489021259&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=dshiroshi-22&language=ja_JP" ></a><img src="https://ir-jp.amazon-adsystem.com/e/ir?t=dshiroshi-22&language=ja_JP&l=li3&o=9&a=4489021259" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /><br>
 <a href="https://amzn.to/3CbASMN">入門はじめての時系列分析/盛岡書房</a><br>
 <br/><br>
-<br/><br>
-Matlabの基本的なことを勉強したいという方には、下記書籍がおすすめです。</p>
+<br/></p>
 <p><a href="https://www.amazon.co.jp/MATLAB%E5%85%A5%E9%96%80-I%E3%83%BB-BOOKS-%E9%AB%98%E4%BA%95-%E4%BF%A1%E5%8B%9D/dp/4875932677?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&keywords=matlab%E5%85%A5%E9%96%80&qid=1636418889&sr=8-3&linkCode=li3&tag=dshiroshi-22&linkId=11490625c49a8fdd679ab43e47cbc936&language=ja_JP&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4875932677&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=dshiroshi-22&language=ja_JP" ></a><img src="https://ir-jp.amazon-adsystem.com/e/ir?t=dshiroshi-22&language=ja_JP&l=li3&o=9&a=4875932677" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /><br>
 <a href="https://jp.mercari.com/item/m27300568116">MATLAB入門(メルカリ)</a>　<a href="https://amzn.to/3oeijm8">MATLAB入門(Amazon)</a></p>
-<h1 id="参考動画">参考動画</h1>
-<p>こちらの動画も非常に面白いのでぜひご覧ください。
+<h1 id="relative-movies">Relative movies</h1>
+<p>below movie is also very cool. please check it out!!
 
 <div class = 'video'>
   <iframe src='https://www.youtube.com/embed/spUNpyF58BY?controls=1&rel=0'></iframe>
 </div>
 </p>
-<h1 id="次回">次回</h1>
-<p>次回はもう少し効率的に周期間隔を把握する手法とも言えるスペクトル分析を紹介したいと思います。</p>
+<p>thank you so much for reading this blog.</p>
+<p>Hiroki🐶</p>
 
     
     <div class = 'post_extra'><div class = 'copy' data-share = 'Copy' data-copied = 'Copied'><svg>
