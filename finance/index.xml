@@ -37,6 +37,37 @@
     </item>
     
     <item>
+      <title>相関係数を優しく手計算〜広瀬すずさんと土屋太鳳さん💕の相関係数は高い？！〜</title>
+      <link>https://kona-coffee.github.io/DSHiroki/finance/correlationcoefficient/</link>
+      <pubDate>Wed, 24 Nov 2021 10:16:50 +0900</pubDate>
+      
+      <guid>https://kona-coffee.github.io/DSHiroki/finance/correlationcoefficient/</guid>
+      <description>相関係数を手計算してみた 生徒：「2つの銘柄の株価データを比較して売り買いのタイミングを分析したいです」
+先生：「そんな時は相関係数を求めればいいのだよ」
+生徒：「いきなり言われてもそもそも相関係数って何？」
+という方いらっしゃいませんでしょうか？
+そこで、この記事では、
+・相関係数って何かわからない ・大学で相関関係について学んだことはあるけど、あまり覚えていない、復習したい ・2つのデータを比較してどれくらい似ているかを知りたいけどその手法がわからない ・相関関係を計算できるようになりたい   という方のために、相関係数を手計算で計算してみることを試みます。 本記事を読むことで、相関係数とは何か？どうやって計算するのか？がわかるようになります。 優しく解説していきますので、ご安心ください🙂
+相関係数って何？ 相関係数ってなんですか？2つのデータがどれくらい似ているか？を表しています。 似ているというのは文字通り顔がそっくりの時に使われるあの言葉と同じです。 マークザッカーバーグとサバンナの高橋茂雄も相関係数が高そうです😁 広瀬すずさんと土屋太鳳さんはどうでしょうかね？  ふむふむ👀
+相関係数は高そうです😍   どうやるの？〜手計算で相関係数を計算してみる〜 相関係数rの定義式は下記で表されます。
+$$\begin{align*} r&amp;amp;=\frac{\sum (x_{i}-\bar{x})(y_{i}-\bar{y})}{\sqrt{\sum (x_{i}-\bar{x})^2}\sqrt{\sum (y_{i}-\bar{y})^2}} \\
+&amp;amp;=\frac{\sum (x_{i}-\bar{x})(y_{i}-\bar{y})/n}{\sqrt{\frac{\sum(x_{i}-\bar{x})^2}{n}}\sqrt{\frac{\sum(y_{i}-\bar{y})^2}{n}}} \\
+&amp;amp;=\frac{V_{xy}}{\sigma_{x}\sigma_{y}} \\
+\end{align*}$$
+$$\begin{align*} V_{xy}&amp;amp;: xとyの共分散 \\
+\sigma_{x}&amp;amp;: xの標準偏差 \\
+\sigma_{y}&amp;amp;: yの標準偏差 \\
+\end{align*}$$
+なんのこっちゃ？と感じられると思うので、順を追って説明していきます。
+相関係数は下記4ステップで計算できます。
+ 平均を計算する 標準偏差を計算する xとyの共分散(偏差の積の平均)を計算する 関係数を計算する  具体的にxとyに下記データが入力されているとして計算してみます。
+電卓で計算できるので、順を追って確かめてみてください。
+$$\begin{align*} x&amp;amp;=(1,2,3,4,5) \\
+y&amp;amp;=(2,8,6,4,10) \end{align*}$$
+1. 平均を計算する $$\begin{align*} \bar{x}&amp;amp;=\frac{1+2+3+4+5}{5} =3 \\</description>
+    </item>
+    
+    <item>
       <title>株価の時系列データをフーリエ解析してみた①</title>
       <link>https://kona-coffee.github.io/DSHiroki/finance/timeanalysisbasic/</link>
       <pubDate>Tue, 09 Nov 2021 10:16:50 +0900</pubDate>
