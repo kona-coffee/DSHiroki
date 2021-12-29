@@ -99,5 +99,15 @@
                 />
   </url><url>
     <loc>https://kona-coffee.github.io/DSHiroki/finance/spectrumanalysis/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://kona-coffee.github.io/DSHiroki/en/finance/spectrumanalysis/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://kona-coffee.github.io/DSHiroki/finance/spectrumanalysis/"
+                />
   </url>
 </urlset>
