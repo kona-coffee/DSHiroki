@@ -5,7 +5,17 @@
     <link>https://kona-coffee.github.io/DSHiroki/en/</link>
     <description>Recent content on Data Scientist Hiroki&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 09 Nov 2021 10:16:50 +0900</lastBuildDate><atom:link href="https://kona-coffee.github.io/DSHiroki/en/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Nov 2021 10:16:50 +0900</lastBuildDate><atom:link href="https://kona-coffee.github.io/DSHiroki/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>spectrum analysis for stock data</title>
+      <link>https://kona-coffee.github.io/DSHiroki/en/finance/spectrumanalysis/</link>
+      <pubDate>Wed, 24 Nov 2021 10:16:50 +0900</pubDate>
+      
+      <guid>https://kona-coffee.github.io/DSHiroki/en/finance/spectrumanalysis/</guid>
+      <description>spectrum analysis for stock data Hello this is data scientist Hiroki.
+Don&amp;rsquo;t you have some trouble for future analysis of stock time data, and do you want to use the basic mathmatics for it? I also have some trouble especially when I read the technical analysis books of stock time data. I wanted to use the besic mathmatics theory for the stock time data analysis. so I decided to write this blog.</description>
+    </item>
+    
     <item>
       <title>How to calculate fourie analysis for stock time series data</title>
       <link>https://kona-coffee.github.io/DSHiroki/en/finance/timeanalysisbasic/</link>
