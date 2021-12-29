@@ -264,8 +264,9 @@ The image is shown like below.</p>
 This graph is called Periodogrum.</p>
 <p>One caution, we cannot find the phase infomation which is about when the peak is comming from the periodogrum.<br>
 If you want to know it you can use Fourie analysis of time series data as shown <a href="https://kona-coffee.github.io/DSHiroki/finance/timeanalysisbasic/">previous blog</a></p>
-<p>Again, this periodigrum merit is you can find the period between the peak and how big the peak is at a grance.<br>
-I can find the body line period and how big it is by the way like below pictures^_^<br>
+<p>Again, this periodigrum merit is you can find the period between the peak and how big the peak is at a grance.</p>
+ <br/>  
+<p>BTW, I can find the body line period and how big it is by the way like below pictures^_^<br>
 <a target="_blank"  href="https://www.amazon.co.jp/gp/product/B0932QTWB5/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B0932QTWB5&linkCode=as2&tag=dshiroshi-22&linkId=1baa402dd85c99818faed66267db5b50"><img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B0932QTWB5&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=dshiroshi-22" ></a>
 <a target="_blank"  href="https://www.amazon.co.jp/gp/product/B098NPF7F4/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B098NPF7F4&linkCode=as2&tag=dshiroshi-22&linkId=44003a7cfe0fc1856b3c45b9895b5e75"><img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B098NPF7F4&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=dshiroshi-22" ></a>
 <a target="_blank"  href="https://www.amazon.co.jp/gp/product/B094CFNP7S/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B094CFNP7S&linkCode=as2&tag=dshiroshi-22&linkId=3721e8ed11e4d8ca5a6c5ebdb947d17b"><img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B094CFNP7S&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=dshiroshi-22" ></a>
@@ -282,32 +283,31 @@ please access <a href="https://jp.mathworks.com/matlabcentral/fileexchange/18458
 </ol>
 <p>Just copy below code and paste it to the matlab workspase and run.<br>
 then you will get the same result as showen above example.</p>
-<pre><code>```Matlab
-%download the stock data from yahoo finance.
-data = hist_stock_data('09112011','09112021','2502.T');
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">
+   <span style="color:#75715e">%download the stock data from yahoo finance.</span>
+   data = hist_stock_data(<span style="color:#e6db74">&#39;09112011&#39;</span>,<span style="color:#e6db74">&#39;09112021&#39;</span>,<span style="color:#e6db74">&#39;2502.T&#39;</span>);
 
 
-y=data.Close;
-t=data.Date;
+   y=data.Close;
+   t=data.Date;
 
-%if the missing data available interpolate it and store the result inti YY.
-[YY,TF] = fillmissing(y,'linear','SamplePoints',t);
+   <span style="color:#75715e">%if the missing data available interpolate it and store the result inti YY.</span>
+   [YY,TF] = fillmissing(y,<span style="color:#e6db74">&#39;linear&#39;</span>,<span style="color:#e6db74">&#39;SamplePoints&#39;</span>,t);
 
-%define one year as 245 business day.
-Fs=245;
+   <span style="color:#75715e">%define one year as 245 business day.</span>
+   Fs=<span style="color:#ae81ff">245</span>;
 
-%conduct the fourie transformation and output the power spectrum density and frequency.
-[pxx,f] = periodogram(YY,rectwin(length(y)),length(y),Fs);
+   <span style="color:#75715e">%conduct the fourie transformation and output the power spectrum density and frequency.</span>
+   [pxx,f] = periodogram(YY,rectwin(length(y)),length(y),Fs);
 
-%create graph
-plot(f,10*log10(pxx))
-xlabel('Cycles/Year')
-ylabel('dB / (Cycles/Year)')
-title('Periodogram')
-xlim([0 10])
-```  
-</code></pre>
-<p>you can get any stocks periodogram by changing the ticker symbole of the first line of above sample code.</p>
+   <span style="color:#75715e">%create graph</span>
+   plot(f,<span style="color:#ae81ff">10</span><span style="color:#f92672">*</span>log10(pxx))
+   xlabel(<span style="color:#e6db74">&#39;Cycles/Year&#39;</span>)
+   ylabel(<span style="color:#e6db74">&#39;dB / (Cycles/Year)&#39;</span>)
+   title(<span style="color:#e6db74">&#39;Periodogram&#39;</span>)
+   xlim([<span style="color:#ae81ff">0</span> <span style="color:#ae81ff">10</span>])
+
+</code></pre></div><p>you can get any stocks periodogram by changing the ticker symbole of the first line of above sample code.</p>
 <h1 id="next-time">next time</h1>
 <p>I&rsquo;ll write about correlation corfficient next time.</p>
 <h1 id="references">references</h1>
