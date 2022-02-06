@@ -14,7 +14,7 @@
 
 <head>
   <meta name="google-site-verification" content="jMgk06_1fynaHhhz3MtyldzvpUHakxxCsYYFeDtN1JQ" />
-  <title>相関係数を優しく手計算〜広瀬すずさんと土屋太鳳さん💕の相関係数は高い？！〜 | Data Scientist Hiroki&#39;s Blog</title>
+  <title>相関係数を手計算 | Data Scientist Hiroki&#39;s Blog</title>
   <meta charset='utf-8'>
   <meta name="generator" content="Hugo 0.88.1" />
   <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
@@ -34,7 +34,7 @@
 
 <meta property = 'og:locale' content = 'en_US' />
 <meta property="og:type" content="article">
-<meta property = 'og:title' content = '相関係数を優しく手計算〜広瀬すずさんと土屋太鳳さん💕の相関係数は高い？！〜' />
+<meta property = 'og:title' content = '相関係数を手計算' />
 <meta name="description" content="相関係数を手計算してみた 生徒：「2つの銘柄の株価データを比較して売り買いのタイミングを分析したいです」
 先生：「そんな時は相関係数を求めればいいのだよ」
 生徒：「いきなり言われてもそもそも相関係数って何？」
@@ -51,7 +51,7 @@
 <meta property = 'og:image' content = 'https://kona-coffee.github.io/DSHiroki/images/kankei.jpg'/>
 <meta name = 'twitter:card' content = 'summary_large_image' />
 <meta name = 'twitter:creator' content = ''>
-<meta name = 'twitter:title' content = '相関係数を優しく手計算〜広瀬すずさんと土屋太鳳さん💕の相関係数は高い？！〜' />
+<meta name = 'twitter:title' content = '相関係数を手計算' />
 <meta property = 'twitter:description'  content = '相関係数を手計算してみた 生徒：「2つの銘柄の株価データを比較して売り買いのタイミングを分析したいです」
 先生：「そんな時は相関係数を求めればいいのだよ」
 生徒：「いきなり言われてもそもそも相関係数って何？」
@@ -88,7 +88,7 @@
     <main>
 
 <section class = 'post_header' style = 'background-image:url(https://kona-coffee.github.io/DSHiroki/images/kankei.jpg);'>
-  <h1 class='post_title'>相関係数を優しく手計算〜広瀬すずさんと土屋太鳳さん💕の相関係数は高い？！〜</h1>
+  <h1 class='post_title'>相関係数を手計算</h1>
 </section>
 <div class = 'post'>
   <article class='post_content'><h1 id="相関係数を手計算してみた">相関係数を手計算してみた</h1>
@@ -109,12 +109,11 @@
 本記事を読むことで、相関係数とは何か？どうやって計算するのか？がわかるようになります。
 <p>優しく解説していきますので、ご安心ください🙂</p>
 <h2 id="相関係数って何">相関係数って何？</h2>
-<pre><code>相関係数ってなんですか？2つのデータがどれくらい似ているか？を表しています。
-似ているというのは文字通り顔がそっくりの時に使われるあの言葉と同じです。  
-マークザッカーバーグとサバンナの高橋茂雄も相関係数が高そうです😁  
-広瀬すずさんと土屋太鳳さんはどうでしょうかね？  
-</code></pre>
-<p>ふむふむ👀<br>
+<p>相関係数ってなんですか？2つのデータがどれくらい似ているか？を表しています。<br>
+似ているというのは文字通り顔がそっくりの時に使われるあの言葉と同じです。<br>
+マークザッカーバーグとサバンナの高橋茂雄も相関係数が高そうです😁<br>
+広瀬すずさんと土屋太鳳さんはどうでしょうかね？<br>
+ふむふむ👀<br>
 相関係数は高そうです😍
 
 <div class = 'video'>
@@ -139,7 +138,7 @@ V_{xy}&amp;: xとyの共分散 \\<br>
 <li>平均を計算する</li>
 <li>標準偏差を計算する</li>
 <li>xとyの共分散(偏差の積の平均)を計算する</li>
-<li>関係数を計算する</li>
+<li>相関係数を計算する</li>
 </ol>
 <p>具体的にxとyに下記データが入力されているとして計算してみます。<br>
 電卓で計算できるので、順を追って確かめてみてください。<br>
@@ -155,11 +154,11 @@ y&amp;=(2,8,6,4,10)
 <h3 id="2-標準偏差平均との偏差の二乗の平均の平方根を計算する">2. 標準偏差(平均との偏差の二乗の平均の平方根)を計算する</h3>
 <p>偏差(平均との差)の二乗を計算<br>
 $$\begin{align*}
-x_{i}-\bar{x}&amp;=((1-3)^2,(2-3)^2,(3-3)^2,(4-3)^2,(5-3)^2)　\\<br>
+(x_{i}-\bar{x})^2&amp;=((1-3)^2,(2-3)^2,(3-3)^2,(4-3)^2,(5-3)^2)　\\<br>
 &amp;=(4,1,0,1,4)　\\<br>
 \end{align*}$$</p>
 <p>$$\begin{align*}
-y_{i}-\bar{y}&amp;=((2-6)^2,(8-6)^2,(6-6)^2,(4-6)^2,(10-6)^2)　\\<br>
+(y_{i}-\bar{y})^2&amp;=((2-6)^2,(8-6)^2,(6-6)^2,(4-6)^2,(10-6)^2)　\\<br>
 &amp;=(16,4,0,4,16)　\\<br>
 \end{align*}$$</p>
 <p>その平均の平方根を計算</p>
