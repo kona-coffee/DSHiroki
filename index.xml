@@ -5,7 +5,40 @@
     <link>https://kona-coffee.github.io/DSHiroki/</link>
     <description>Recent content on Data Scientist Hiroki&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 24 Nov 2021 10:16:50 +0900</lastBuildDate><atom:link href="https://kona-coffee.github.io/DSHiroki/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 May 2022 18:53:19 +0900</lastBuildDate><atom:link href="https://kona-coffee.github.io/DSHiroki/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【解説】車両運動 非線形グレーボックスモデリング</title>
+      <link>https://kona-coffee.github.io/DSHiroki/engineering/vehicleidnlgreymodel/</link>
+      <pubDate>Tue, 03 May 2022 18:53:19 +0900</pubDate>
+      
+      <guid>https://kona-coffee.github.io/DSHiroki/engineering/vehicleidnlgreymodel/</guid>
+      <description>MATLAB 車両運動の非線形グレーボックス モデリングの解説 こんにちは、データサイエンティスト・ヒロキです。
+そういえば私、理系男子でした。当然のことながら、ガンダムと自動車が好きであります。
+最近話題の自動運転。そもそも車ってどういうメカニズムで動くのでしょうか？ 大学時代に制御工学の授業で線形システムの解析をMATLABで行ったことならばあるぞ。
+よーし、「MATLAB+車両運動シミュレーション」でgoogle検索、車両運動の非線形グレーボックス モデリング をポチッと
+難しい・・・😅
+そこでこの記事では、
+・グレースケーモデリングって何？ ・MATLABで車両運動シミュレーションをしたいけれど、MATLAB Webサイトが理解できない。   という方のために、MATLABのWebサイト 車両運動の非線形グレーボックス モデリングの解説を試みます。 本記事を読むことで、このHPに書かれていることが理解できるようになります。
+優しく解説していきますので、ご安心ください🙂
+まず自動車の平面運動を記述する2輪モデルと呼ばれている運動方程式はこちら。
+その導出はこちらの記事をご参考ください。
+ここで、ふと疑問に思った方もいるかもしれません。
+2輪モデルは線形システムなのに、なぜタイトルに非線形と書いているのか？
+その謎は、、、
+はい、一定速で運転している時は線形システムなのですが、
+加減速を伴う運動を考える場合は非線形システムとなるのです。
+速度も変数として考えた車両の運動方程式の解説としては、
+こちらのYoutubeの16:00~の解説が非常に丁寧でわかりやすいかと思います。
+  さて、一通り車両の運動方程式の成り立ちを理解したところで、
+MATLABのHP 車両運動の非線形グレーボックス モデリングに紹介されている運動方程式を記述してみましょう。
+車両運動のモデル化 ニュートンの運動の法則と一部の基本的な幾何学的関係を使用して、車両の重心 (COG) で測定した前後方向の速度 $v_x(t)$、横方向の速度 $v_y(t)$、ヨーレート $r(t)$ を、次の 3 つの微分方程式で記述できます。
+$$\begin{align*} \frac{dv_x(t)}{dt}=v_{y(t)} \times r(t)+\frac{1}{m} \times \lbrace&amp;amp;(F_{xFL(t)}+F_{xFR(t)}) \times \cos(\delta(t)) \\
+&amp;amp;-(F_{yFL(t)}+F_{yFR(t)}) \times \sin(\delta(t)) \\
+&amp;amp;+F_{xRL(t)}+F_{xRR(t)} \\
+&amp;amp;-C_A*v_{x(t)}^2\rbrace \end{align*}$$
+$$\begin{align*} \frac{dv_y(t)}{dt}=-v_{x(t)} \times r(t)+\frac{1}{m} \times \lbrace&amp;amp;(F_{xFL(t)}+F_{xFR(t)}) \times \sin(\delta(t)) \\</description>
+    </item>
+    
     <item>
       <title>相関係数を手計算</title>
       <link>https://kona-coffee.github.io/DSHiroki/finance/correlationcoefficient/</link>
