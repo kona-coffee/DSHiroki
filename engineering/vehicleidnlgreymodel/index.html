@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang='ja'>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-213373913-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-213373913-1');
+</script>
+
+
+<head>
+  <meta name="google-site-verification" content="jMgk06_1fynaHhhz3MtyldzvpUHakxxCsYYFeDtN1JQ" />
+  <title>【解説】車両運動 非線形グレーボックスモデリング | Data Scientist Hiroki&#39;s Blog</title>
+  <meta charset='utf-8'>
+  <meta name="generator" content="Hugo 0.88.1" />
+  <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+  <meta http-equiv = 'X-UA-Compatible' content = 'IE=edge'>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-213373913-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-213373913-1');
+</script>
+
+
+
+<meta property = 'og:locale' content = 'en_US' />
+<meta property="og:type" content="article">
+<meta property = 'og:title' content = '【解説】車両運動 非線形グレーボックスモデリング' />
+<meta name="description" content="MATLAB 車両運動の非線形グレーボックス モデリングの解説 こんにちは、データサイエンティスト・ヒロキです。
+そういえば私、理系男子でした。当然のことながら、ガンダムと自動車が好きであります。
+最近話題の自動運転。そもそも車ってどういうメカニズムで動くのでしょうか？ 大学時代に制御工学の授業で線形システムの解析 …">
+<meta property = 'og:description' content = 'MATLAB 車両運動の非線形グレーボックス モデリングの解説 こんにちは、データサイエンティスト・ヒロキです。
+そういえば私、理系男子でした。当然のことながら、ガンダムと自動車が好きであります。
+最近話題の自動運転。そもそも車ってどういうメカニズムで動くのでしょうか？ 大学時代に制御工学の授業で線形システムの解析 …'>
+<meta property = 'og:url' content = 'https://kona-coffee.github.io/DSHiroki/engineering/vehicleidnlgreymodel/' />
+<meta property = 'og:image' content = 'https://kona-coffee.github.io/DSHiroki/images/car.jpg'/>
+<meta name = 'twitter:card' content = 'summary_large_image' />
+<meta name = 'twitter:creator' content = ''>
+<meta name = 'twitter:title' content = '【解説】車両運動 非線形グレーボックスモデリング' />
+<meta property = 'twitter:description'  content = 'MATLAB 車両運動の非線形グレーボックス モデリングの解説 こんにちは、データサイエンティスト・ヒロキです。
+そういえば私、理系男子でした。当然のことながら、ガンダムと自動車が好きであります。
+最近話題の自動運転。そもそも車ってどういうメカニズムで動くのでしょうか？ 大学時代に制御工学の授業で線形システムの解析 …'/>
+<meta name = 'twitter:image' content = 'https://kona-coffee.github.io/DSHiroki/images/car.jpg' />
+<link rel='apple-touch-icon' sizes='180x180' href='https://kona-coffee.github.io/DSHiroki/images/icons/apple-touch-icon.png'>
+<link rel='icon' type='image/png' sizes='32x32' href='https://kona-coffee.github.io/DSHiroki/images/icons/favicon-32x32.png'>
+<link rel='icon' type='image/png' sizes='16x16' href='https://kona-coffee.github.io/DSHiroki/images/icons/favicon-16x16.png'>
+<link rel='manifest' href='https://kona-coffee.github.io/DSHiroki/images/icons/site.webmanifest'>
+
+  <link rel='canonical' href='https://kona-coffee.github.io/DSHiroki/engineering/vehicleidnlgreymodel/'>
+  <link rel = 'stylesheet' href = 'https://kona-coffee.github.io/DSHiroki/css/styles.42db596b1300421b76166668f896d65a0e912909aa95394f74e207c69da0d0b652fe2ad414cb6b746661857c824297f791d6df38fce0872ba2a9ccaa421a6b89.css' integrity = 'sha512-QttZaxMAQht2FmZo&#43;JbWWg6RKQmqlTlPdOIHxp2g0LZS/irUFMtrdGZhhXyCQpf3kdbfOPzghyuiqcyqQhpriQ=='>
+</head>
+
+  <body><div class = 'nav-drop'>
+  <div class = 'nav-body'>
+    
+      <a href = 'https://kona-coffee.github.io/DSHiroki/en' class = 'nav_item'>English Page</a>
+      <a href = 'https://kona-coffee.github.io/DSHiroki/info/privacy' class = 'nav_item'>プライバシーポリシー</a>
+    <div class = 'nav-close'></div>
+  </div>
+</div><header class = 'nav' >
+  <nav class = 'nav-menu'>
+    <a href='https://kona-coffee.github.io/DSHiroki/' class = 'nav-brand nav_item'>Data Scientist Hiroki&#39;s Blog</a>
+    <div class = 'nav_bar-wrap'>
+      <div class = 'nav_bar'></div>
+    </div>
+  </nav>
+</header>
+
+
+    <main>
+
+<section class = 'post_header' style = 'background-image:url(https://kona-coffee.github.io/DSHiroki/images/car.jpg);'>
+  <h1 class='post_title'>【解説】車両運動 非線形グレーボックスモデリング</h1>
+</section>
+<div class = 'post'>
+  <article class='post_content'><h1 id="matlab-車両運動の非線形グレーボックス-モデリングhttpsjpmathworkscomhelpidentugmodeling-a-vehicle-dynamics-systemhtmlの解説"><a href="https://jp.mathworks.com/help/ident/ug/modeling-a-vehicle-dynamics-system.html">MATLAB 車両運動の非線形グレーボックス モデリング</a>の解説</h1>
+<p>こんにちは、データサイエンティスト・ヒロキです。<br>
+そういえば私、理系男子でした。当然のことながら、ガンダムと自動車が好きであります。<br>
+最近話題の自動運転。そもそも車ってどういうメカニズムで動くのでしょうか？ <br>
+大学時代に制御工学の授業で線形システムの解析をMATLABで行ったことならばあるぞ。<br>
+よーし、「MATLAB+車両運動シミュレーション」でgoogle検索、<a href="https://jp.mathworks.com/help/ident/ug/modeling-a-vehicle-dynamics-system.html">車両運動の非線形グレーボックス モデリング</a> をポチッと</p>
+<p>難しい・・・😅</p>
+<p>そこでこの記事では、</p>
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+<ul style="color:red">
+<li>・グレースケーモデリングって何？</li>
+<li>・MATLABで車両運動シミュレーションをしたいけれど、MATLAB Webサイトが理解できない。</li>
+</ul>
+</div>
+<p>という方のために、<a href="https://jp.mathworks.com/help/ident/ug/modeling-a-vehicle-dynamics-system.html">MATLABのWebサイト 車両運動の非線形グレーボックス モデリング</a>の解説を試みます。
+本記事を読むことで、このHPに書かれていることが理解できるようになります。</p>
+<p>優しく解説していきますので、ご安心ください🙂</p>
+<p>まず自動車の平面運動を記述する2輪モデルと呼ばれている運動方程式はこちら。</p>
+<p>その導出はこちらの記事をご参考ください。</p>
+<p>ここで、ふと疑問に思った方もいるかもしれません。<br>
+2輪モデルは線形システムなのに、なぜタイトルに非線形と書いているのか？</p>
+<p>その謎は、、、</p>
+<p>はい、一定速で運転している時は線形システムなのですが、<br>
+加減速を伴う運動を考える場合は非線形システムとなるのです。</p>
+<p>速度も変数として考えた車両の運動方程式の解説としては、<br>
+こちらのYoutubeの16:00~の解説が非常に丁寧でわかりやすいかと思います。<br>
+
+<div class = 'video'>
+  <iframe src='https://www.youtube.com/embed/m8aAYCVv1Qk?controls=1&rel=0'></iframe>
+</div>
+</p>
+<p>さて、一通り車両の運動方程式の成り立ちを理解したところで、<br>
+<a href="https://jp.mathworks.com/help/ident/ug/modeling-a-vehicle-dynamics-system.html">MATLABのHP 車両運動の非線形グレーボックス モデリング</a>に紹介されている運動方程式を記述してみましょう。</p>
+<h2 id="車両運動のモデル化">車両運動のモデル化</h2>
+<p>ニュートンの運動の法則と一部の基本的な幾何学的関係を使用して、車両の重心 (COG) で測定した前後方向の速度 $v_x(t)$、横方向の速度 $v_y(t)$、ヨーレート $r(t)$ を、次の 3 つの微分方程式で記述できます。</p>
+<p>$$\begin{align*}
+\frac{dv_x(t)}{dt}=v_{y(t)} \times r(t)+\frac{1}{m} \times  \lbrace&amp;(F_{xFL(t)}+F_{xFR(t)}) \times \cos(\delta(t)) \\<br>
+&amp;-(F_{yFL(t)}+F_{yFR(t)}) \times \sin(\delta(t))  \\<br>
+&amp;+F_{xRL(t)}+F_{xRR(t)}  \\<br>
+&amp;-C_A*v_{x(t)}^2\rbrace
+\end{align*}$$</p>
+<p>$$\begin{align*}
+\frac{dv_y(t)}{dt}=-v_{x(t)} \times r(t)+\frac{1}{m} \times  \lbrace&amp;(F_{xFL(t)}+F_{xFR(t)}) \times \sin(\delta(t)) \\<br>
+&amp;(F_{yFL(t)}+F_{yFR(t)}) \times \cos(\delta(t))  \\<br>
+&amp;+F_{yRL(t)}+F_{yRR(t)}\rbrace
+\end{align*}$$</p>
+<p>$$\begin{align*}
+\frac{dv_r(t)}{dt}=\frac{1}{J} \times  \lbrace&amp; a(F_{xFL(t)}+F_{xFR(t)}) \times \sin(\delta(t)) \\<br>
+&amp;+a \times (F_{yFL(t)}+F_{yFR(t)}) \times \cos(\delta(t)))  \\<br>
+&amp;-b \times (F_{yRL(t)}+F_{yRR(t)})\rbrace
+\end{align*}$$</p>
+<p>ここで、<br>
+$C_A$: 空気抵抗に関する係数[1/m] $(C_A=\frac{1}{2} \times R \times C_d \times A)$<br>
+$\delta(t)$: ステアリング角度[°]<br>
+$J$: は慣性モーメント[kgm^2]<br>
+$b$: は重心から前後の軸までの距離[m]</p>
+<p>タイヤに働く力(前後力と横力)は次の線形近似でモデル化できると仮定します。<br>
+$$\begin{align*}
+&amp;F_{xi(t)} = C_x \times s_{i(t)} \\<br>
+&amp;F_{yi(t)} = C_y \times \alpha_{i(t)}    \\ <br>
+&amp;for \quad i = {FL, FR, RL, RR} \\<br>
+\end{align*}$$</p>
+<p>ここで、<br>
+$C_x$ と $C_y$ はそれぞれ前後方向と横方向のタイヤ剛性です。<br>
+ここで、これらの剛性パラメーターは 4 つのタイヤすべてで等しいと仮定しています。<br>
+$s_{i(t)}$ はタイヤ $i$ の (前後方向の) スリップ角、$\alpha_{i(t)}$ はタイヤ スリップ角です。</p>
+<p>前輪駆動の車両 (ここで検討) の場合、スリップ $s_{FL(t)}$ と $s_{FR(t)}$ は、後輪がスリップしない
+($s_{RL(t)} = s_{RR(t)} = 0$)と仮定して、個々の車輪速度 (測定済み) から導出されます。<br>
+前輪について、タイヤ スリップ角 $\alpha_{Fj(t)}$ は次のように記述できます ($v_{x(t)}$ &gt; 0 の場合)。</p>
+<p>$$\begin{align*}
+\alpha_{Fj(t)} = &amp;\delta(t) - \arctan(\frac{v_y(t) + a*r(t)}{v_x(t)})  \\<br>
+\sim &amp;\delta(t) - \frac{v_y(t) + a*r(t)}{v_x(t)}   \\<br>
+for \quad j = &amp; {L, R}
+\end{align*}$$</p>
+<p>後輪についても同様に、タイヤ スリップ角 $\alpha_Rj(t)$ を次のように記述できます。
+$$\begin{align*}
+\alpha_Rj(t) = &amp;- \arctan((v_y(t) - b*r(t))/v_x(t))  \\<br>
+\sim &amp;- (v_y(t) - b*r(t))/v_x(t)  \\                <br>
+for \quad j = &amp;{L, R}
+\end{align*}$$</p>
+<p>$J = \frac{1}{(0.5*(a+b))^2*m}$ として、車両運動を記述する状態空間構造を設定できます。<br>
+次の状態を導入します。
+$$\begin{align*}
+x1(t) =&amp; v_x(t)   \quad  \quad     Longitudinal \ velocity  \ [m/s].  \\<br>
+x2(t) =&amp; v_y(t)    \quad  \quad    Lateral \ velocity \ [m/s].  \\<br>
+x3(t) =&amp; r(t)     \quad  \quad     Yaw \ rate \ [rad/s].  \\<br>
+\end{align*}$$</p>
+<p>5 つの測定または導出された入力信号
+$$\begin{align*}
+u1(t) =&amp; s_FL(t)   \quad  \quad     Slip \ of Front \ Left \ tire \ [ratio].\\<br>
+u2(t) =&amp; s_FR(t)   \quad  \quad     Slip \ of Front \ Right \ tire \ [ratio].\\<br>
+u3(t) =&amp; s_RL(t)   \quad  \quad     Slip \ of Rear \ Left tire \ [ratio].\\<br>
+u4(t) =&amp; s_RR(t)   \quad  \quad     Slip \ of Rear \ Right tire \ [ratio].\\<br>
+u5(t) =&amp; delta(t)   \quad  \quad     Steering \ angle \ [rad].\\<br>
+\end{align*}$$
+モデル パラメーター</p>
+<p>$m: \ $                   Mass of the vehicle [kg].<br>
+$a: \ $                   Distance from front axle to COG [m].<br>
+$b: \ $                   Distance from rear axle to COG [m].<br>
+$C_x: \ $                  Longitudinal tire stiffness [N].<br>
+$C_y: \ $                  Lateral tire stiffness [N/rad].<br>
+$C_A: \ $                  Air resistance coefficient [1/m].</p>
+<p>システムの出力は前後方向の車両速度$x_1(t)$と横方向の車両加速度$a_{y(t)}$とヨーレート$r(t)$です。</p>
+<p>$$\begin{align*}
+y_1(t) =&amp; x_1(t)\\<br>
+y_2(t) =&amp; a_{y(t)}\\<br>
+y_3(t) =&amp; r(t)
+\end{align*}$$</p>
+<p>ここで
+$$\begin{align*}
+y_2(t) =a_{y(t)} = 1/m*( &amp;(F_{xFL(t)} + F_{xFR(t)})*\sin(\delta(t))\\<br>
++ &amp;(F_{yFL(t)} + F_{yFR(t)})*\cos(\delta(t))\\<br>
++ &amp;F_{yRL(t)} + F_{yRR(t)})\\<br>
+\end{align*}$$</p>
+<p>これらをまとめて、次の状態空間モデル構造を得られます。</p>
+<p>$$\begin{align*}
+\frac{dx_1(t)}{dt}=x_2(t) \times x_3(t)+\frac{1}{m} \times  \lbrace&amp;(C_x*(u_1(t)+u_2(t))) \times \cos(\delta(t)) \\<br>
+&amp;-2  \times C_y  \times (u_5(t)-(x_2(t)+a*x_3(t))/x_1(t)) \times \sin(\delta(t))  \\<br>
+&amp;+C_x*(u_3(t)+u_4(t))  \\<br>
+&amp;-C_A*x_1(t)^2\rbrace
+\end{align*}$$</p>
+<p>$$\begin{align*}
+\frac{dx_2(t)}{dt}=-x_1(t) \times x_3(t)+\frac{1}{m} \times  \lbrace &amp; C_x*(u_1(t)+u_2(t)) \times \sin(\delta(t)) \\<br>
+&amp; +2 \times C_y \times (u_5(t)-(x_2(t)+a*x_3(t))/x_1(t)) \times \cos(\delta(t))  \\<br>
+&amp;+2 \times C_y \times (b*x_3(t)-x_2(t))/x_1(t))\rbrace
+\end{align*}$$</p>
+<p>$$\begin{align*}
+\frac{dx_3(t)}{dt}=\frac{1}{(0.5*(a+b))^2)*m} \times  \lbrace &amp; a \times C_x*(u_1(t)+u_2(t)) \times \sin(\delta(t)) \\<br>
+&amp;+a \times 2 \times C_y \times (u_5(t)-(x_2(t)+a*x_3(t))/x_1(t)) \times \cos(\delta(t)))  \\<br>
+&amp;-b \times 2 \times C_y \times (b*x_3(t)-x_2(t))/x_1(t))\rbrace
+\end{align*}$$</p>
+<p>$y_1(t) =x_1(t)$</p>
+<p>$\begin{align*}
+y_2(t) =a_{y(t)} = 1/m*( &amp;(F_{xFL(t)} + F_{xFR(t)})*\sin(\delta(t))\\<br>
++ &amp;(F_{yFL(t)} + F_{yFR(t)})*\cos(\delta(t))\\<br>
++ &amp;F_{yRL(t)} + F_{yRR(t)})\\<br>
+\end{align*}$</p>
+<p>$y_3(t) =r(t) $</p>
+<h2 id="idnlgrey-車両モデル">IDNLGREY 車両モデル</h2>
+<p>車両同定実験の基礎として、これらの車両方程式を記述する IDNLGREY モデル ファイルを作成する必要があります。つまるところ上式のモデルを作成します。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab"><span style="color:#66d9ef">function</span> [dx, y] = <span style="color:#a6e22e">vehicle_m</span>(t, x, u, m, a, b, Cx, Cy, CA, varargin)
+<span style="color:#75715e">%VEHICLE_M  A biycle vehicle model structure commonly employed in the</span>
+<span style="color:#75715e">%   vehicle dynamics literature.</span>
+
+<span style="color:#75715e">%   Copyright 2005-2006 The MathWorks, Inc.</span>
+
+<span style="color:#75715e">% Output equations.</span>
+y = [x(<span style="color:#ae81ff">1</span>);                                                <span style="color:#75715e">... % Longitudinal vehicle velocity.</span>
+     <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>m<span style="color:#f92672">*</span>(  Cx<span style="color:#f92672">*</span>(u(<span style="color:#ae81ff">1</span>)<span style="color:#f92672">+</span>u(<span style="color:#ae81ff">2</span>))<span style="color:#f92672">*</span>sin(u(<span style="color:#ae81ff">5</span>))                      <span style="color:#75715e">... % Lateral vehicle acceleration.</span>
+             <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>Cy<span style="color:#f92672">*</span>(u(<span style="color:#ae81ff">5</span>)<span style="color:#f92672">-</span>(x(<span style="color:#ae81ff">2</span>)<span style="color:#f92672">+</span>a<span style="color:#f92672">*</span>x(<span style="color:#ae81ff">3</span>))<span style="color:#f92672">/</span>x(<span style="color:#ae81ff">1</span>))<span style="color:#f92672">*</span>cos(u(<span style="color:#ae81ff">5</span>))   <span style="color:#75715e">...</span>
+             <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>Cy<span style="color:#f92672">*</span>(b<span style="color:#f92672">*</span>x(<span style="color:#ae81ff">3</span>)<span style="color:#f92672">-</span>x(<span style="color:#ae81ff">2</span>))<span style="color:#f92672">/</span>x(<span style="color:#ae81ff">1</span>));                  <span style="color:#75715e">...</span>
+     x(<span style="color:#ae81ff">3</span>)];                                               <span style="color:#75715e">... % Yaw rate.</span>
+
+<span style="color:#75715e">% State equations.</span>
+dx = [x(<span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span>x(<span style="color:#ae81ff">3</span>)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>m<span style="color:#f92672">*</span>(  Cx<span style="color:#f92672">*</span>(u(<span style="color:#ae81ff">1</span>)<span style="color:#f92672">+</span>u(<span style="color:#ae81ff">2</span>))<span style="color:#f92672">*</span>cos(u(<span style="color:#ae81ff">5</span>))                       <span style="color:#75715e">... % Longitudinal vehicle velocity.</span>
+                        <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>Cy<span style="color:#f92672">*</span>(u(<span style="color:#ae81ff">5</span>)<span style="color:#f92672">-</span>(x(<span style="color:#ae81ff">2</span>)<span style="color:#f92672">+</span>a<span style="color:#f92672">*</span>x(<span style="color:#ae81ff">3</span>))<span style="color:#f92672">/</span>x(<span style="color:#ae81ff">1</span>))<span style="color:#f92672">*</span>sin(u(<span style="color:#ae81ff">5</span>))    <span style="color:#75715e">...</span>
+                        <span style="color:#f92672">+</span> Cx<span style="color:#f92672">*</span>(u(<span style="color:#ae81ff">3</span>)<span style="color:#f92672">+</span>u(<span style="color:#ae81ff">4</span>))<span style="color:#f92672">-</span>CA<span style="color:#f92672">*</span>x(<span style="color:#ae81ff">1</span>)^<span style="color:#ae81ff">2</span>);                  <span style="color:#75715e">...</span>
+      <span style="color:#f92672">-</span>x(<span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>x(<span style="color:#ae81ff">3</span>)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>m<span style="color:#f92672">*</span>(  Cx<span style="color:#f92672">*</span>(u(<span style="color:#ae81ff">1</span>)<span style="color:#f92672">+</span>u(<span style="color:#ae81ff">2</span>))<span style="color:#f92672">*</span>sin(u(<span style="color:#ae81ff">5</span>))                      <span style="color:#75715e">... % Lateral vehicle velocity.</span>
+                         <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>Cy<span style="color:#f92672">*</span>(u(<span style="color:#ae81ff">5</span>)<span style="color:#f92672">-</span>(x(<span style="color:#ae81ff">2</span>)<span style="color:#f92672">+</span>a<span style="color:#f92672">*</span>x(<span style="color:#ae81ff">3</span>))<span style="color:#f92672">/</span>x(<span style="color:#ae81ff">1</span>))<span style="color:#f92672">*</span>cos(u(<span style="color:#ae81ff">5</span>))   <span style="color:#75715e">...</span>
+                         <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>Cy<span style="color:#f92672">*</span>(b<span style="color:#f92672">*</span>x(<span style="color:#ae81ff">3</span>)<span style="color:#f92672">-</span>x(<span style="color:#ae81ff">2</span>))<span style="color:#f92672">/</span>x(<span style="color:#ae81ff">1</span>));                  <span style="color:#75715e">...</span>
+      <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>((<span style="color:#ae81ff">0.5</span><span style="color:#f92672">*</span>(a<span style="color:#f92672">+</span>b))^<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>m)<span style="color:#f92672">*</span>(  a<span style="color:#f92672">*</span>(  Cx<span style="color:#f92672">*</span>(u(<span style="color:#ae81ff">1</span>)<span style="color:#f92672">+</span>u(<span style="color:#ae81ff">2</span>))<span style="color:#f92672">*</span>sin(u(<span style="color:#ae81ff">5</span>))            <span style="color:#75715e">... % Yaw rate.</span>
+                                <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>Cy<span style="color:#f92672">*</span>(u(<span style="color:#ae81ff">5</span>)<span style="color:#f92672">-</span>(x(<span style="color:#ae81ff">2</span>)<span style="color:#f92672">+</span>a<span style="color:#f92672">*</span>x(<span style="color:#ae81ff">3</span>))<span style="color:#f92672">/</span>x(<span style="color:#ae81ff">1</span>))<span style="color:#f92672">*</span>cos(u(<span style="color:#ae81ff">5</span>))) <span style="color:#75715e">...</span>
+                           <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>b<span style="color:#f92672">*</span>Cy<span style="color:#f92672">*</span>(b<span style="color:#f92672">*</span>x(<span style="color:#ae81ff">3</span>)<span style="color:#f92672">-</span>x(<span style="color:#ae81ff">2</span>))<span style="color:#f92672">/</span>x(<span style="color:#ae81ff">1</span>))];
+</code></pre></div><p>適切なモデル構造ファイルを作成した次のステップは、モデル化の状況を反映する IDNLGREY オブジェクトを作成することです。記録を簡単にするため、入力と出力の名前と単位も指定します。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">FileName      = <span style="color:#e6db74">&#39;vehicle_c&#39;</span>;                        <span style="color:#75715e">% File describing the model structure.</span>
+Order         = [<span style="color:#ae81ff">3</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">3</span>];                            <span style="color:#75715e">% Model orders [ny nx nu].</span>
+Parameters    = [<span style="color:#ae81ff">1700</span>; <span style="color:#ae81ff">1.5</span>; <span style="color:#ae81ff">1.5</span>; <span style="color:#ae81ff">1.5e5</span>; <span style="color:#ae81ff">4e4</span>; <span style="color:#ae81ff">0.5</span>];  <span style="color:#75715e">% Initial parameters.</span>
+InitialStates = [<span style="color:#ae81ff">1</span>; <span style="color:#ae81ff">0</span>; <span style="color:#ae81ff">0</span>];                          <span style="color:#75715e">% Initial value of initial states.</span>
+Ts            = <span style="color:#ae81ff">0</span>;                                  <span style="color:#75715e">% Time-continuous system.</span>
+nlgr = idnlgrey(FileName, Order, Parameters, InitialStates, Ts, <span style="color:#75715e">...</span>
+                <span style="color:#e6db74">&#39;Name&#39;</span>, <span style="color:#e6db74">&#39;Bicycle vehicle model&#39;</span>, <span style="color:#e6db74">&#39;TimeUnit&#39;</span>, <span style="color:#e6db74">&#39;s&#39;</span>);
+        nlgr.InputName =  {<span style="color:#e6db74">&#39;Slip on front left tire&#39;</span>;               <span style="color:#75715e">...   % u(1).</span>
+                         <span style="color:#e6db74">&#39;Slip on front right tire&#39;</span>;              <span style="color:#75715e">...   % u(2).</span>
+                         <span style="color:#e6db74">&#39;Slip on rear left tire&#39;</span>;                <span style="color:#75715e">...   % u(3).</span>
+                         <span style="color:#e6db74">&#39;Slip on rear right tire&#39;</span>;               <span style="color:#75715e">...   % u(4).</span>
+                         <span style="color:#e6db74">&#39;Steering angle&#39;</span>};                       <span style="color:#75715e">...   % u(5).</span>
+          nlgr.InputUnit =  {<span style="color:#e6db74">&#39;ratio&#39;</span>; <span style="color:#e6db74">&#39;ratio&#39;</span>; <span style="color:#e6db74">&#39;ratio&#39;</span>; <span style="color:#e6db74">&#39;ratio&#39;</span>; <span style="color:#e6db74">&#39;rad&#39;</span>};
+
+          nlgr.OutputName = {<span style="color:#e6db74">&#39;Long. velocity&#39;</span>;  <span style="color:#75715e">...   % y(1); Longitudinal vehicle velocity</span>
+                         <span style="color:#e6db74">&#39;Lat. accel.&#39;</span>;   <span style="color:#75715e">...     % y(2); Lateral vehicle acceleration</span>
+                         <span style="color:#e6db74">&#39;Yaw rate&#39;</span>};                             <span style="color:#75715e">...   % y(3).</span>
+          nlgr.OutputUnit = {<span style="color:#e6db74">&#39;m/s&#39;</span>; <span style="color:#e6db74">&#39;m/s^2&#39;</span>; <span style="color:#e6db74">&#39;rad/s&#39;</span>};
+</code></pre></div><p>(初期) 状態の名前と単位およびモデル パラメーターは SETINIT で指定されます。このコマンドを使用して、モデルを有効にするには最初の初期状態 (前後方向の速度) が正である必要があることと、すべてのモデル パラメーターが正であることを指定します。これらの制約は、以降の初期状態およびモデル パラメーターの推定にも適用されます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">nlgr = setinit(nlgr, <span style="color:#e6db74">&#39;Name&#39;</span>, {<span style="color:#e6db74">&#39;Longitudinal vehicle velocity&#39;</span>        <span style="color:#75715e">... % x(1).</span>
+                       <span style="color:#e6db74">&#39;Lateral vehicle velocity&#39;</span>             <span style="color:#75715e">... % x(2).</span>
+                       <span style="color:#e6db74">&#39;Yaw rate&#39;</span>});                          <span style="color:#75715e">... % x(3).</span>
+nlgr = setinit(nlgr, <span style="color:#e6db74">&#39;Unit&#39;</span>, {<span style="color:#e6db74">&#39;m/s&#39;</span>; <span style="color:#e6db74">&#39;m/s&#39;</span>; <span style="color:#e6db74">&#39;rad/s&#39;</span>});
+nlgr.InitialStates(<span style="color:#ae81ff">1</span>).Minimum = eps(<span style="color:#ae81ff">0</span>);   <span style="color:#75715e">% Longitudinal velocity &gt; 0 for the model to be valid.</span>
+nlgr = setpar(nlgr, <span style="color:#e6db74">&#39;Name&#39;</span>, {<span style="color:#e6db74">&#39;Vehicle mass&#39;</span>;                         <span style="color:#75715e">... % m.</span>
+                      <span style="color:#e6db74">&#39;Distance from front axle to COG&#39;</span>;      <span style="color:#75715e">... % a</span>
+                      <span style="color:#e6db74">&#39;Distance from rear axle to COG&#39;</span>;       <span style="color:#75715e">... % b.</span>
+                      <span style="color:#e6db74">&#39;Longitudinal tire stiffness&#39;</span>;          <span style="color:#75715e">... % Cx.</span>
+                      <span style="color:#e6db74">&#39;Lateral tire stiffness&#39;</span>;               <span style="color:#75715e">... % Cy.</span>
+                      <span style="color:#e6db74">&#39;Air resistance coefficient&#39;</span>});         <span style="color:#75715e">... % CA.</span>
+nlgr = setpar(nlgr, <span style="color:#e6db74">&#39;Unit&#39;</span>, {<span style="color:#e6db74">&#39;kg&#39;</span>; <span style="color:#e6db74">&#39;m&#39;</span>; <span style="color:#e6db74">&#39;m&#39;</span>; <span style="color:#e6db74">&#39;N&#39;</span>; <span style="color:#e6db74">&#39;N/rad&#39;</span>; <span style="color:#e6db74">&#39;1/m&#39;</span>});
+nlgr = setpar(nlgr, <span style="color:#e6db74">&#39;Minimum&#39;</span>, num2cell(eps(<span style="color:#ae81ff">0</span>)<span style="color:#f92672">*</span>ones(<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">1</span>)));   <span style="color:#75715e">% All parameters &gt; 0!</span>
+</code></pre></div><p>このモデル構造の 6 つのパラメーターのうちの 4 つは、該当する車両のデータ シートからすぐに取得できます。<br>
+$\begin{align*}             <br>
+m  =&amp; 1700 [kg]\\<br>
+a  =&amp; 1.5 [m]\\<br>
+b  =&amp; 1.5 [m]\\<br>
+CA =&amp; 0.5 or 0.7 [1/m] (see below)
+\end{align*}$<br>
+したがって、これらのパラメーターは推定しません。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">nlgr.Parameters(<span style="color:#ae81ff">1</span>).Fixed = true;
+nlgr.Parameters(<span style="color:#ae81ff">2</span>).Fixed = true;
+nlgr.Parameters(<span style="color:#ae81ff">3</span>).Fixed = true;
+nlgr.Parameters(<span style="color:#ae81ff">6</span>).Fixed = true;
+</code></pre></div><p>これによって、入力した IDNLGREY モデル構造のテキスト形式の概要は、次のように PRESENT から取得できます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">present(nlgr);
+</code></pre></div><h2 id="入出力データ">入出力データ</h2>
+<p>この時点で、使用できる入出力データを読み込みます。このファイルには、次の 3 つの異なる実験からのデータが含まれています。</p>
+<p>A. Simulated data with high stiffness tires [y1 u1].<br>
+B. Simulated data with low stiffness tires  [y2 u2].<br>
+C. Measured data from a Volvo V70           [y3 u3].<br>
+すべての場合において、サンプル時間 Ts = 0.1 秒です。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">load(fullfile(matlabroot, <span style="color:#e6db74">&#39;toolbox&#39;</span>, <span style="color:#e6db74">&#39;ident&#39;</span>, <span style="color:#e6db74">&#39;iddemos&#39;</span>, <span style="color:#e6db74">&#39;data&#39;</span>, <span style="color:#e6db74">&#39;vehicledata&#39;</span>));
+</code></pre></div><h2 id="a-シミュレートした高剛性タイヤ-データを使用したシステム同定">A. シミュレートした高剛性タイヤ データを使用したシステム同定</h2>
+<p>最初の車両同定実験では、高剛性タイヤをシミュレーションしたデータを検討します。モデル構造 nlgr のコピーとこの特定のモデル化状況を反映する IDDATA オブジェクト z1 が、まず作成されます。5 つの入力信号が u1 に、3 つの出力信号が y1 に保存されます。前輪のすべり入力 (車輪速度信号から生成) を一定オフセットの正弦波とし、ヨーレートも異なる振幅と周波数の正弦波としました。実際には、これは若干人工的な状況です。車両が横方向にこのように振られることはまれです。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">nlgr1 = nlgr;
+nlgr1.Name = <span style="color:#e6db74">&#39;Bicycle vehicle model with high tire stiffness&#39;</span>;
+z1 = iddata(y1, u1, <span style="color:#ae81ff">0.1</span>, <span style="color:#e6db74">&#39;Name&#39;</span>, <span style="color:#e6db74">&#39;Simulated high tire stiffness vehicle data&#39;</span>);
+z1.InputName = nlgr1.InputName;
+z1.InputUnit = nlgr1.InputUnit;
+z1.OutputName = nlgr1.OutputName;
+z1.OutputUnit = nlgr1.OutputUnit;
+z1.Tstart = <span style="color:#ae81ff">0</span>;
+z1.TimeUnit = <span style="color:#e6db74">&#39;s&#39;</span>;
+</code></pre></div><p>入出力は、2 つのプロット ウィンドウで表示されます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">h_gcf = gcf;
+set(h_gcf,<span style="color:#e6db74">&#39;DefaultLegendLocation&#39;</span>,<span style="color:#e6db74">&#39;southeast&#39;</span>);
+h_gcf.Position = [<span style="color:#ae81ff">100</span> <span style="color:#ae81ff">100</span> <span style="color:#ae81ff">795</span> <span style="color:#ae81ff">634</span>];
+<span style="color:#66d9ef">for</span> i = <span style="color:#ae81ff">1</span>:z1.Nu
+   subplot(z1.Nu, <span style="color:#ae81ff">1</span>, i);
+   plot(z1.SamplingInstants, z1.InputData(:,i));
+   title([<span style="color:#e6db74">&#39;Input #&#39;</span> num2str(i) <span style="color:#e6db74">&#39;: &#39;</span> z1.InputName{i}]);
+   xlabel(<span style="color:#e6db74">&#39;&#39;</span>);
+   axis tight;
+<span style="color:#66d9ef">end</span>
+xlabel([z1.Domain <span style="color:#e6db74">&#39; (&#39;</span> z1.TimeUnit <span style="color:#e6db74">&#39;)&#39;</span>]);
+</code></pre></div><h3 id="高剛性タイヤの車両システムへの入力">高剛性タイヤの車両システムへの入力</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab"><span style="color:#66d9ef">for</span> i = <span style="color:#ae81ff">1</span>:z1.Ny
+   subplot(z1.Ny, <span style="color:#ae81ff">1</span>, i);
+   plot(z1.SamplingInstants, z1.OutputData(:,i));
+   title([<span style="color:#e6db74">&#39;Output #&#39;</span> num2str(i) <span style="color:#e6db74">&#39;: &#39;</span> z1.OutputName{i}]);
+   xlabel(<span style="color:#e6db74">&#39;&#39;</span>);
+   axis tight;
+<span style="color:#66d9ef">end</span>
+xlabel([z1.Domain <span style="color:#e6db74">&#39; (&#39;</span> z1.TimeUnit <span style="color:#e6db74">&#39;)&#39;</span>]);
+</code></pre></div><h3 id="高剛性タイヤの車両システムからの出力">高剛性タイヤの車両システムからの出力</h3>
+<p>次のステップは、初期モデルの性能の調査で、これについてシミュレーションを実行します。最初の状態 (前後方向の車両速度) はモデル構造の分母として使用されるため、初期状態はゼロ以外の値に固定されることに注意してください。実出力とシミュレーションの出力 (初期モデルによる) との比較を、プロット ウィンドウに示します。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">clf
+compare(z1, nlgr1, [], compareOptions(<span style="color:#e6db74">&#39;InitialCondition&#39;</span>, <span style="color:#e6db74">&#39;model&#39;</span>));
+</code></pre></div><h3 id="高剛性タイヤの初期車両モデルの実際の出力とシミュレーションの出力の比較">高剛性タイヤの初期車両モデルの実際の出力とシミュレーションの出力の比較</h3>
+<p>モデルの一致を高めるため、2 つのタイヤ剛性パラメーター Cx と Cy を次に推定し、推定されたモデルの新しいシミュレーションを実行します。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">nlgr1 = nlgreyest(z1, nlgr1);
+</code></pre></div><p>実出力とシミュレーションの出力 (推定されたモデルによる) との比較を、プロット ウィンドウに示します。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">compare(z1, nlgr1, [], compareOptions(<span style="color:#e6db74">&#39;InitialCondition&#39;</span>, <span style="color:#e6db74">&#39;model&#39;</span>));
+</code></pre></div><h3 id="高剛性タイヤの推定された車両モデルの実際の出力とシミュレーションの出力の比較">高剛性タイヤの推定された車両モデルの実際の出力とシミュレーションの出力の比較</h3>
+<p>推定されたモデルのシミュレーションの性能は良好です。推定された剛性パラメーターも、Simulink® で実際の出力データの生成に使用されたパラメーターに近いものです。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">disp(<span style="color:#e6db74">&#39;                        True      Estimated&#39;</span>);
+fprintf(<span style="color:#e6db74">&#39;Longitudinal stiffness: %6.0f    %6.0f\n&#39;</span>, <span style="color:#ae81ff">2e5</span>, nlgr1.Parameters(<span style="color:#ae81ff">4</span>).Value);
+fprintf(<span style="color:#e6db74">&#39;Lateral stiffness     : %6.0f    %6.0f\n&#39;</span>, <span style="color:#ae81ff">5e4</span>, nlgr1.Parameters(<span style="color:#ae81ff">5</span>).Value);
+</code></pre></div>
+    
+  </article>
+  
+</div>
+<script src = 'https://kona-coffee.github.io/DSHiroki/js/autosize.min.js'></script>
+<script src = 'https://kona-coffee.github.io/DSHiroki/js/timeago.js'></script>
+    </main><svg width="0" height="0" class="hidden">
+  <symbol viewBox="0 0 699.428 699.428" xmlns="http://www.w3.org/2000/svg" id="copy">
+    <path d="M502.714 0H240.428C194.178 0 153 42.425 153 87.429l-25.267.59c-46.228 0-84.019 41.834-84.019 86.838V612c0 45.004 41.179 87.428 87.429 87.428H459c46.249 0 87.428-42.424 87.428-87.428h21.857c46.25 0 87.429-42.424 87.429-87.428v-349.19zM459 655.715H131.143c-22.95 0-43.714-21.441-43.714-43.715V174.857c0-22.272 18.688-42.993 41.638-42.993l23.933-.721v393.429C153 569.576 194.178 612 240.428 612h262.286c0 22.273-20.765 43.715-43.714 43.715zm153-131.143c0 22.271-20.765 43.713-43.715 43.713H240.428c-22.95 0-43.714-21.441-43.714-43.713V87.429c0-22.272 20.764-43.714 43.714-43.714H459c-.351 50.337 0 87.975 0 87.975 0 45.419 40.872 86.882 87.428 86.882H612zm-65.572-349.715c-23.277 0-43.714-42.293-43.714-64.981V44.348L612 174.857zm-43.714 131.537H306c-12.065 0-21.857 9.77-21.857 21.835s9.792 21.835 21.857 21.835h196.714c12.065 0 21.857-9.771 21.857-21.835 0-12.065-9.792-21.835-21.857-21.835zm0 109.176H306c-12.065 0-21.857 9.77-21.857 21.834 0 12.066 9.792 21.836 21.857 21.836h196.714c12.065 0 21.857-9.77 21.857-21.836 0-12.064-9.792-21.834-21.857-21.834z"
+    ></path>
+  </symbol>
+  <symbol viewBox="0 0 60.015 60.015" xmlns="http://www.w3.org/2000/svg" id="reply">
+    <path d="M42.007 0h-24c-9.925 0-18 8.075-18 18v14c0 9.59 7.538 17.452 17 17.973v8.344a1.694 1.694 0 0 0 1.699 1.698c.44 0 .873-.173 1.198-.498l1.876-1.876C26.708 52.713 33.259 50 40.227 50h1.78c9.925 0 18-8.075 18-18V18c0-9.925-8.075-18-18-18zm16 32c0 8.822-7.178 16-16 16h-1.78c-7.502 0-14.556 2.921-19.86 8.226l-1.359 1.359V44a1 1 0 1 0-2 0v3.949c-8.356-.52-15-7.465-15-15.949V18c0-8.822 7.178-16 16-16h24c8.822 0 16 7.178 16 16v14z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="scan">
+    <path d="M456.66 0H385c-8.284 0-15 6.716-15 15s6.716 15 15 15h71.66C470.632 30 482 41.368 482 55.341V127c0 8.284 6.716 15 15 15s15-6.716 15-15V55.341C512 24.826 487.174 0 456.66 0zM15 142c8.284 0 15-6.716 15-15V55.341C30 41.368 41.368 30 55.34 30H127c8.284 0 15-6.716 15-15s-6.716-15-15-15H55.34C24.826 0 0 24.826 0 55.341V127c0 8.284 6.716 15 15 15zm112 340H55.34C41.368 482 30 470.632 30 456.659V385c0-8.284-6.716-15-15-15s-15 6.716-15 15v71.659C0 487.174 24.826 512 55.34 512H127c8.284 0 15-6.716 15-15s-6.716-15-15-15zm370-112c-8.284 0-15 6.716-15 15v71.659C482 470.632 470.632 482 456.66 482H385c-8.284 0-15 6.716-15 15s6.716 15 15 15h71.66c30.515 0 55.34-24.826 55.34-55.341V385c0-8.284-6.716-15-15-15zM341.643 110h47.575c6.497 0 11.782 5.285 11.782 11.782v47.574c0 8.284 6.716 15 15 15s15-6.716 15-15v-47.574C431 98.743 412.256 80 389.218 80h-47.575c-8.284 0-15 6.716-15 15s6.716 15 15 15zM81 121.782v47.574c0 8.284 6.716 15 15 15s15-6.716 15-15v-47.574c0-6.497 5.286-11.782 11.782-11.782h47.575c8.284 0 15-6.716 15-15s-6.716-15-15-15h-47.575C99.744 80 81 98.743 81 121.782zM170.357 400h-47.575c-6.497 0-11.782-5.285-11.782-11.782v-47.574c0-8.284-6.716-15-15-15s-15 6.716-15 15v47.574C81 411.257 99.744 430 122.782 430h47.575c8.284 0 15-6.716 15-15s-6.716-15-15-15zM431 388.218v-47.574c0-8.284-6.716-15-15-15s-15 6.716-15 15v47.574c0 6.497-5.286 11.782-11.782 11.782h-47.575c-8.284 0-15 6.716-15 15s6.716 15 15 15h47.575C412.256 430 431 411.257 431 388.218zM1 256c0 8.284 6.716 15 15 15h480c8.284 0 15-6.716 15-15s-6.716-15-15-15H16c-8.284 0-15 6.716-15 15z"></path>
+  </symbol>
+</svg>
+<footer class="footer">
+  <div class="footer_inner wrap pale">
+    <p>&copy;&nbsp;<span class="year"></span>&nbsp;Data Scientist Hiroki&#39;s Blog.
+    </p>
+  </div>
+</footer><script type="text/javascript" src="https://kona-coffee.github.io/DSHiroki/js/bundle.633da34ac6cf408b6e79a92bb94a6e1bf37cbf0619beba2747490a60cbf42c1878b82fc8d0665cfb77961f9a463ac965b3e9b04c2cf70c12d562e71c01c45281.js" integrity="sha512-Yz2jSsbPQItueakruUpuG/N8vwYZvronR0kKYMv0LBh4uC/I0GZc&#43;3eWH5pGOslls&#43;mwTCz3DBLVYuccAcRSgQ==" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+ tex2jax: {
+ inlineMath: [['$', '$'] ],
+ displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+ }
+ });
+</script>
+
+  </body>
+</html>
