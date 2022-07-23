@@ -12,7 +12,7 @@
       <pubDate>Thu, 21 Jul 2022 10:16:50 +0900</pubDate>
       
       <guid>https://kona-coffee.github.io/DSHiroki/finance/furie3_correlationcoefficient/</guid>
-      <description>株価の時系列データをフーリエ解析してみた② ~相関係数〜 生徒：「2つの銘柄の株価データを比較して売り買いのタイミングを分析したいです」
+      <description>株価の時系列データをフーリエ解析してみた③ ~相関係数〜 生徒：「2つの銘柄の株価データを比較して売り買いのタイミングを分析したいです」
 先生：「そんな時は相関係数を求めればいいのだよ」
 生徒：「いきなり言われてもそもそも相関係数って何？」
 という方いらっしゃいませんでしょうか？
