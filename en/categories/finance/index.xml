@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>finance on Data Scientist Hiroki&#39;s Blog</title>
+    <link>https://dshiroki.com/en/categories/finance/</link>
+    <description>Recent content in finance on Data Scientist Hiroki&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 03 Sep 2023 20:50:28 +0900</lastBuildDate><atom:link href="https://dshiroki.com/en/categories/finance/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Inflation Rise! Visualizing Economic Indicators with Graphs</title>
+      <link>https://dshiroki.com/en/finance/20230903/</link>
+      <pubDate>Sun, 03 Sep 2023 20:50:28 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/20230903/</guid>
+      <description>Visualizing Economic Indicators Related to Inflation with Graphs Lately, inflation seems unstoppable! I wonder how high it will go&amp;hellip;
+Hello, it’s been a while. I&amp;rsquo;m Hiroki, a data scientist. In this blog post, I will explain:
+・How to download economic indicators like employment numbers or CPI using Matlab code from FRED ・How to compare data with Matlab code ・Deeply contemplating Taro Buffett&#39;s YouTube videos with data   You can get such graphs.</description>
+    </item>
+    
+  </channel>
+</rss>

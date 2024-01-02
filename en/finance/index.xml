@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Finances on Data Scientist Hiroki&#39;s Blog</title>
+    <link>https://dshiroki.com/en/finance/</link>
+    <description>Recent content in Finances on Data Scientist Hiroki&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 03 Sep 2023 20:50:28 +0900</lastBuildDate><atom:link href="https://dshiroki.com/en/finance/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Inflation Rise! Visualizing Economic Indicators with Graphs</title>
+      <link>https://dshiroki.com/en/finance/20230903/</link>
+      <pubDate>Sun, 03 Sep 2023 20:50:28 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/20230903/</guid>
+      <description>Visualizing Economic Indicators Related to Inflation with Graphs Lately, inflation seems unstoppable! I wonder how high it will go&amp;hellip;
+Hello, it’s been a while. I&amp;rsquo;m Hiroki, a data scientist. In this blog post, I will explain:
+・How to download economic indicators like employment numbers or CPI using Matlab code from FRED ・How to compare data with Matlab code ・Deeply contemplating Taro Buffett&#39;s YouTube videos with data   You can get such graphs.</description>
+    </item>
+    
+    <item>
+      <title>Fourie analysis for stock time series data⑤</title>
+      <link>https://dshiroki.com/en/finance/bandpass/</link>
+      <pubDate>Wed, 07 Dec 2022 10:16:50 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/bandpass/</guid>
+      <description>Fourie analysis for stock time series data⑤ 〜periodicity〜 Hello, Good morning, good evening and good night^^ This is Data scientist Hiroki🐶
+It is said that the stock price of toysrus goes up in christmas season🧸, and the stock price of coca cola goes up in summer season🥤
+Is it true? Let&amp;rsquo;s see with the data. in this blog, you can get the technique how to find the periodicity from the stock price data.</description>
+    </item>
+    
+    <item>
+      <title>Fourie analysis for stock time series data④</title>
+      <link>https://dshiroki.com/en/finance/detrend/</link>
+      <pubDate>Mon, 05 Dec 2022 10:16:50 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/detrend/</guid>
+      <description>How to calculate fourie analysis for stock time series data④ 〜Detrend〜 Hello, Good morning, good evening and good night^^ This is Data scientist Hiroki🐶
+Winter is coming☃️ Yes let’s celebrate the holiday🎂
+When you watching the stock chart, have you ever have the experience that you want to remove the trend component from the stock data?
+https://jp.mathworks.com/help/matlab/ref/detrend.html  You can do it just 1 line of Matlab code. It’s so useful for understanding overall periodicity.</description>
+    </item>
+    
+    <item>
+      <title>Fourie analysis for stock time series data③</title>
+      <link>https://dshiroki.com/en/finance/correlationcoefficient/</link>
+      <pubDate>Fri, 24 Dec 2021 10:16:50 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/correlationcoefficient/</guid>
+      <description>Manual calculation of Correlation coefficient You：&amp;ldquo;I want to analize the timing of buying and selling by comparing two stock data.&amp;rdquo;
+Teacher：&amp;ldquo;calculate the correlation coefficient then you&amp;rsquo;ll get the answer.&amp;rdquo;
+You：&amp;ldquo;what is correlation coefficient??&amp;rdquo;
+if you have this kind of problem, this blog is for you.
+this blog is for you who have below kind of problems.
+・what is correlation coefficient? ・You learned correlation coefficient at university but you didn&#39;t remember at all.</description>
+    </item>
+    
+    <item>
+      <title>Fourie analysis for stock time series data②</title>
+      <link>https://dshiroki.com/en/finance/spectrumanalysis/</link>
+      <pubDate>Wed, 24 Nov 2021 10:16:50 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/spectrumanalysis/</guid>
+      <description>spectrum analysis for stock data Hello this is data scientist Hiroki.
+Don&amp;rsquo;t you have some trouble for future analysis of stock time data, and do you want to use the basic mathmatics for it? I also have some trouble especially when I read the technical analysis books of stock time data. I wanted to use the besic mathmatics theory for the stock time data analysis. so I decided to write this blog.</description>
+    </item>
+    
+    <item>
+      <title>Fourie analysis for stock time series data①</title>
+      <link>https://dshiroki.com/en/finance/timeanalysisbasic/</link>
+      <pubDate>Tue, 09 Nov 2021 10:16:50 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/timeanalysisbasic/</guid>
+      <description>How to calculate fourie analysis for stock time series data Hello this is data scientist Hiroki.
+Don&amp;rsquo;t you have some trouble for future analysis of stock time data, and do you want to use the basic mathmatics for it? I also have some trouble especially when I read the technical analysis books of stock time data. I wanted to use the besic mathmatics theory for the stock time data analysis. so I decided to write this blog.</description>
+    </item>
+    
+    <item>
+      <title>How to get economy index data from FRED web site</title>
+      <link>https://dshiroki.com/en/finance/getfreddata/</link>
+      <pubDate>Sun, 07 Nov 2021 09:40:00 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/getfreddata/</guid>
+      <description>How to get economy index data from FRED web site Hello this is data scientist HIROKI. Don’t you have some problem that you want to get economy index data for analyzing but you have no idea how to do it? I also have this type of problem for a half year and I found how to solve it.
+This blog is for you who have below problems.
+・To compare two data(stock data and economy index data) in the same graph ・To download economy index data like GDP and FF ratio.</description>
+    </item>
+    
+    <item>
+      <title>The way how to get daily stock data from Yahoo finance by only one line Matlab code</title>
+      <link>https://dshiroki.com/en/finance/getstockdata/</link>
+      <pubDate>Sun, 31 Oct 2021 09:15:35 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/getstockdata/</guid>
+      <description>The way how to get daily stock data from Yahoo finance by only one line Matlab code Hello I’m data scientist Hiroki.
+Have you ever thinking if you can download daily stock data so that you can analyze it for your investment haven’t you?
+And you have no idea where you can get the data don’t you?
+This blog is for you who may have below trouble
+・You can’t find where you can download the stock data from.</description>
+    </item>
+    
+  </channel>
+</rss>

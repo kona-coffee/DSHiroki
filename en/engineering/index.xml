@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Engineerings on Data Scientist Hiroki&#39;s Blog</title>
+    <link>https://dshiroki.com/en/engineering/</link>
+    <description>Recent content in Engineerings on Data Scientist Hiroki&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 27 Dec 2023 23:50:43 +0900</lastBuildDate><atom:link href="https://dshiroki.com/en/engineering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>State-Space Representation of Single-Degree-of-Freedom Vibration Equation(II)</title>
+      <link>https://dshiroki.com/en/engineering/20231227/</link>
+      <pubDate>Wed, 27 Dec 2023 23:50:43 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/engineering/20231227/</guid>
+      <description>Hello, I&amp;rsquo;m Hiroki🐶, a data scientist. In my previous blog, I introduced the Matlab code to solve the single degree of freedom vibration motion equation. I have modified it a bit more to represent it in terms of inputs and outputs, and I&amp;rsquo;d like to solve it this way.
+ First, this single degree of freedom vibration model. Normally, it can be written as a motion equation like this:
+$$\begin{align*} m\ddot{x}+c\dot{x}+kx&amp;amp;=f \</description>
+    </item>
+    
+    <item>
+      <title>State-Space Representation of Single-Degree-of-Freedom Vibration Equation</title>
+      <link>https://dshiroki.com/en/engineering/20231031/</link>
+      <pubDate>Tue, 31 Oct 2023 21:03:29 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/engineering/20231031/</guid>
+      <description>Single-Degree-of-Freedom Vibration Equation Hello, I&amp;rsquo;m Hiroki 🐶, a data scientist. In my previous blog I introduced the Matlab code for the physical model, which actually uses a very fancy method called state-space representation.
+Today, I want to delve a little deeper into this state-space representation.
+So, in this post, I will introduce:
+What is state-space representation? The benefits of representing a single-degree-of-freedom vibration model in state-space representation    Firstly, this is the single-degree-of-freedom vibration model.</description>
+    </item>
+    
+    <item>
+      <title>ChatGPT x Programming of Physical Model</title>
+      <link>https://dshiroki.com/en/engineering/20231029/</link>
+      <pubDate>Sun, 29 Oct 2023 17:04:46 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/engineering/20231029/</guid>
+      <description>Programming Physical Modeling with ChatGPT A must-see for a student in science! Expand your learning horizons with this super convenient way to use ChatGPT!
+Hello, I&amp;rsquo;m Hiroki 🐶, a data scientist.
+There&amp;rsquo;s been a lot of buzz recently about ChatGPT gaining new capabilities!
+For example, check out this YouTube video.
+  I couldn&amp;rsquo;t wait to apply this!
+For instance, a fundamental model taught in the first year of engineering studies is the single-degree-of-freedom vibration model.</description>
+    </item>
+    
+  </channel>
+</rss>

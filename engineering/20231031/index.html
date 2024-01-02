@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang='ja'>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7B7JJJJ8N8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7B7JJJJ8N8');
+</script>
+
+
+<head>
+  <meta name="google-site-verification" content="jMgk06_1fynaHhhz3MtyldzvpUHakxxCsYYFeDtN1JQ" />
+  <title>1自由度振動運動方程式の状態空間表現 | Data Scientist Hiroki&#39;s Blog</title>
+  <meta charset='utf-8'>
+  <meta name="generator" content="Hugo 0.88.1" />
+  <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+  <meta http-equiv = 'X-UA-Compatible' content = 'IE=edge'>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7B7JJJJ8N8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7B7JJJJ8N8');
+</script>
+
+
+
+<meta property = 'og:locale' content = 'en_US' />
+<meta property="og:type" content="article">
+<meta property = 'og:title' content = '1自由度振動運動方程式の状態空間表現' />
+<meta name="description" content="1自由度振動運動方程式 こんにちは、データサイエンティストひろき🐶です。
+前回こちらのブログで紹介した物理モデルのMatlabコード
+実は、状態空間表現というとてもオシャレな解き方をしています。
+今回はその状態空間表現について、少し深くみていきたいと思います。
+そこで今回は、
+状態空間表現とは 1自由度振動モデルを状態 …">
+<meta property = 'og:description' content = '1自由度振動運動方程式 こんにちは、データサイエンティストひろき🐶です。
+前回こちらのブログで紹介した物理モデルのMatlabコード
+実は、状態空間表現というとてもオシャレな解き方をしています。
+今回はその状態空間表現について、少し深くみていきたいと思います。
+そこで今回は、
+状態空間表現とは 1自由度振動モデルを状態 …'>
+<meta property = 'og:url' content = 'https://dshiroki.com/engineering/20231031/' />
+<meta property = 'og:image' content = 'https://dshiroki.com/images/GreenField.png'/>
+<meta name = 'twitter:card' content = 'summary_large_image' />
+<meta name = 'twitter:creator' content = ''>
+<meta name = 'twitter:title' content = '1自由度振動運動方程式の状態空間表現' />
+<meta property = 'twitter:description'  content = '1自由度振動運動方程式 こんにちは、データサイエンティストひろき🐶です。
+前回こちらのブログで紹介した物理モデルのMatlabコード
+実は、状態空間表現というとてもオシャレな解き方をしています。
+今回はその状態空間表現について、少し深くみていきたいと思います。
+そこで今回は、
+状態空間表現とは 1自由度振動モデルを状態 …'/>
+<meta name = 'twitter:image' content = 'https://dshiroki.com/images/GreenField.png' />
+<link rel='apple-touch-icon' sizes='180x180' href='https://dshiroki.com/images/icons/apple-touch-icon.png'>
+<link rel='icon' type='image/png' sizes='32x32' href='https://dshiroki.com/images/icons/favicon-32x32.png'>
+<link rel='icon' type='image/png' sizes='16x16' href='https://dshiroki.com/images/icons/favicon-16x16.png'>
+<link rel='manifest' href='https://dshiroki.com/images/icons/site.webmanifest'>
+
+  <link rel='canonical' href='https://dshiroki.com/engineering/20231031/'>
+  <link rel = 'stylesheet' href = 'https://dshiroki.com/css/styles.42db596b1300421b76166668f896d65a0e912909aa95394f74e207c69da0d0b652fe2ad414cb6b746661857c824297f791d6df38fce0872ba2a9ccaa421a6b89.css' integrity = 'sha512-QttZaxMAQht2FmZo&#43;JbWWg6RKQmqlTlPdOIHxp2g0LZS/irUFMtrdGZhhXyCQpf3kdbfOPzghyuiqcyqQhpriQ=='>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4285957234988519"
+     crossorigin="anonymous"></script>
+
+     
+</head>
+
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>1自由度振動運動方程式の状態空間表現</title>
+     <link rel="stylesheet" type="text/css" href="https://dshiroki.com/css/style.css">
+      
+      
+  </head>
+  <body><div class = 'nav-drop'>
+  <div class = 'nav-body'>
+    
+      <a href = 'https://dshiroki.com/en' class = 'nav_item'>English Page</a>
+      <a href = 'https://dshiroki.com/info/privacy' class = 'nav_item'>プライバシーポリシー</a>
+
+    <div class = 'nav-close'></div>
+  </div>
+</div><header class = 'nav' >
+  <nav class = 'nav-menu'>
+    <a href='https://dshiroki.com' class = 'nav-brand nav_item'>Data Scientist Hiroki&#39;s Blog</a>
+    <div class = 'nav_bar-wrap'>
+      <div class = 'nav_bar'></div>
+    </div>
+  </nav>
+</header>
+
+
+    <main>
+
+<section class = 'post_header' style = 'background-image:url(https://dshiroki.com/images/GreenField.png);'>
+  <h1 class='post_title'>1自由度振動運動方程式の状態空間表現</h1>
+</section>
+<div class = 'post'>
+  <article class='post_content'><h1 id="1自由度振動運動方程式">1自由度振動運動方程式</h1>
+<p>こんにちは、データサイエンティストひろき🐶です。<br>
+前回<a href="https://dshiroki.com/engineering/20231029/">こちら</a>のブログで紹介した物理モデルのMatlabコード<br>
+実は、状態空間表現というとてもオシャレな解き方をしています。<br>
+今回はその状態空間表現について、少し深くみていきたいと思います。</p>
+<p>そこで今回は、</p>
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+<ul style="color:red">
+<li>状態空間表現とは</li>
+<li>1自由度振動モデルを状態空間表現で表すメリット</li>
+</ul>
+</div>
+を紹介します。  
+
+<figure >
+    
+        <img src="MCK.png"  />
+    
+    
+</figure>
+
+
+<p>まずこちらの1自由度振動モデル。<br>
+普通に数式で表すと下記のように運動方程式で書くことができます。</p>
+<p>$$\begin{align*}
+m\ddot{x}+c\dot{x}+kx&amp;=f \<br>
+\end{align*}$$</p>
+<p>でも前回紹介したMatlabコードでは、</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab"><span style="color:#75715e">% 微分方程式の定義</span>
+A = [<span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span>; <span style="color:#f92672">-</span>k<span style="color:#f92672">/</span>m <span style="color:#f92672">-</span>c<span style="color:#f92672">/</span>m];
+B = [<span style="color:#ae81ff">0</span>; <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>m];
+C = [<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span>];
+D = <span style="color:#ae81ff">0</span>;
+
+<span style="color:#75715e">% 状態空間モデルの作成</span>
+sys = ss(A, B, C, D);
+</code></pre></div><p>となっており、何やら様子が違います。</p>
+<p>これは状態空間表現といって、非常にオシャレな、有意義な表現方法で<br>
+運動方程式を変形して、解いてます。</p>
+<p>実は、</p>
+<p>$$\begin{align*}
+m\ddot{x}+c\dot{x}+kx&amp;=f \<br>
+\end{align*}$$</p>
+<p>この方程式を</p>
+<p>$$\begin{pmatrix}
+\dot{x} \\<br>
+\ddot{x} \\<br>
+\end{pmatrix}
+\begin{align*}
+&amp;=
+\end{align*}
+\begin{pmatrix}
+0 &amp; 1 \\<br>
+-k/m &amp; -c/m \\<br>
+\end{pmatrix}
+\begin{pmatrix}
+x \\<br>
+\dot{x} \\<br>
+\end{pmatrix}
++
+\begin{pmatrix}
+0 \\<br>
+1/m \\<br>
+\end{pmatrix}
+f
+$$</p>
+<p>と変形して、</p>
+<p>$$
+A
+\begin{align*}
+&amp;=
+\end{align*}
+\begin{pmatrix}
+0 &amp; 1 \\<br>
+-k/m &amp; -c/m \\<br>
+\end{pmatrix}$$</p>
+<p>$$
+B
+\begin{align*}
+&amp;=
+\end{align*}
+\begin{pmatrix}
+0 \\<br>
+1/m \\<br>
+\end{pmatrix}$$</p>
+<p>$$
+C
+\begin{align*}
+&amp;=
+\end{align*}
+\begin{pmatrix}
+1 \\<br>
+0 \\<br>
+\end{pmatrix}$$<br>
+$$
+D=0
+$$
+と置いています。</p>
+<p>なぜこの方程式</p>
+<p>$$\begin{align*}
+m\ddot{x}+c\dot{x}+kx&amp;=f \<br>
+\end{align*}$$</p>
+<p>が</p>
+<p>$$\begin{pmatrix}
+\dot{x} \\<br>
+\ddot{x} \\<br>
+\end{pmatrix}
+\begin{align*}
+&amp;=
+\end{align*}
+\begin{pmatrix}
+0 &amp; 1 \\<br>
+-k/m &amp; -c/m \\<br>
+\end{pmatrix}
+\begin{pmatrix}
+x \\<br>
+\dot{x} \\<br>
+\end{pmatrix}
++
+\begin{pmatrix}
+0 \\<br>
+1/m \\<br>
+\end{pmatrix}
+f
+$$</p>
+<p>と変形できるのかって？<br>
+それはまず、</p>
+<p>$$\begin{pmatrix}
+\dot{x} \\<br>
+\ddot{x} \\<br>
+\end{pmatrix}$$</p>
+<p>というベクトルを考えるところからはじめます。<br>
+そして、</p>
+<p>$$\begin{align*}
+m\ddot{x}+c\dot{x}+kx&amp;=f \<br>
+\end{align*}$$</p>
+<p>この方程式を<br>
+$$\begin{align*}
+\dot{x}-\dot{x}=0 \<br>
+\end{align*}$$</p>
+<p>$$\begin{align*}
+m\ddot{x}+c\dot{x}+kx&amp;=f \<br>
+\end{align*}$$</p>
+<p>と2つの数式に分けます。<br>
+　そして、先ほどの、こちら
+$$\begin{pmatrix}
+\dot{x} \\<br>
+\ddot{x} \\<br>
+\end{pmatrix}$$
+に着目すると、、、</p>
+<p>$$\begin{pmatrix}
+1 &amp; 0 \\<br>
+0 &amp; m \\<br>
+\end{pmatrix}
+\begin{pmatrix}
+\dot{x} \\<br>
+\ddot{x} \\<br>
+\end{pmatrix}
++
+\begin{pmatrix}
+0 &amp; -1 \\<br>
+k &amp; c \\<br>
+\end{pmatrix}
+\begin{pmatrix}
+x \\<br>
+\dot{x} \\<br>
+\end{pmatrix}
+\begin{align*}
+&amp;=
+\end{align*}
+\begin{pmatrix}
+0 \\<br>
+f \\<br>
+\end{pmatrix}$$</p>
+<p>このように変形できることがわかります。
+そうすると、</p>
+<p>$$\begin{pmatrix}
+1 &amp; 0 \\<br>
+0 &amp; m \\<br>
+\end{pmatrix}
+\begin{pmatrix}
+\dot{x} \\<br>
+\ddot{x} \\<br>
+\end{pmatrix}
+\begin{align*}
+&amp;=
+\end{align*}
+\begin{pmatrix}
+0 &amp; 1 \\<br>
+-k &amp; -c \\<br>
+\end{pmatrix}
+\begin{pmatrix}
+x \\<br>
+\dot{x} \\<br>
+\end{pmatrix}
++
+\begin{pmatrix}
+0 \\<br>
+1 \\<br>
+\end{pmatrix}
+f
+$$</p>
+<p>と変形できて、2行目の両編をmで割ると、</p>
+<p>$$\begin{pmatrix}
+\dot{x} \\<br>
+\ddot{x} \\<br>
+\end{pmatrix}
+\begin{align*}
+&amp;=
+\end{align*}
+\begin{pmatrix}
+0 &amp; 1 \\<br>
+-k/m &amp; -c/m \\<br>
+\end{pmatrix}
+\begin{pmatrix}
+x \\<br>
+\dot{x} \\<br>
+\end{pmatrix}
++
+\begin{pmatrix}
+0 \\<br>
+1/m \\<br>
+\end{pmatrix}
+f
+$$</p>
+<p>となり、</p>
+<p>$$\begin{pmatrix}
+\dot{x} \\<br>
+\ddot{x} \\<br>
+\end{pmatrix}
+\begin{align*}
+&amp;=
+\end{align*}
+A
+\begin{pmatrix}
+x \\<br>
+\dot{x} \\<br>
+\end{pmatrix}
++
+B
+f
+$$</p>
+<p>と表せます。これを状態空間表現と言います。<br>
+これで何が嬉しいかって？</p>
+<p>これは現代制御工学の基本的な形であり、<br>
+線型システムとして、様々な信号の入出力をシミュレートすることが簡単にできます。</p>
+<p>例えばそれが、<a href="https://dshiroki.com/engineering/20231029/">前回</a>、ChatGPTが示してくれた下記コードの部分で、<br>
+lsim関数がその代表例です。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">
+<span style="color:#75715e">% 状態空間モデルの作成</span>
+sys = ss(A, B, C, D);
+
+<span style="color:#75715e">% 応答のシミュレーション</span>
+t = linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">1000</span>); <span style="color:#75715e">% シミュレーション時間 [s]</span>
+u = f <span style="color:#f92672">*</span> ones(size(t)); <span style="color:#75715e">% 外力の時系列</span>
+y = lsim(sys, u, t);
+
+</code></pre></div><p>つまり、</p>
+<p>状態空間表現とは現代制御工学の基本的な形。</p>
+<p>1自由度振動モデルを状態空間表現で表すメリットは、lsim関数などを用いて、線型システムとして、様々な信号の入出力をシミュレートすることが簡単にできる。</p>
+<p>でした。</p>
+<p>それでは今日はこの辺で<br>
+たくさんの数式が出てきて疲れたかもしれません <br>
+最後まで読んでくださりありがとうございました。<br>
+Love&amp;Respect♡<br>
+Hiroki🐶</p>
+
+    
+  </article>
+  
+</div>
+<script src = 'https://dshiroki.com/js/autosize.min.js'></script>
+<script src = 'https://dshiroki.com/js/timeago.js'></script></main><svg width="0" height="0" class="hidden">
+  <symbol viewBox="0 0 699.428 699.428" xmlns="http://www.w3.org/2000/svg" id="copy">
+    <path d="M502.714 0H240.428C194.178 0 153 42.425 153 87.429l-25.267.59c-46.228 0-84.019 41.834-84.019 86.838V612c0 45.004 41.179 87.428 87.429 87.428H459c46.249 0 87.428-42.424 87.428-87.428h21.857c46.25 0 87.429-42.424 87.429-87.428v-349.19zM459 655.715H131.143c-22.95 0-43.714-21.441-43.714-43.715V174.857c0-22.272 18.688-42.993 41.638-42.993l23.933-.721v393.429C153 569.576 194.178 612 240.428 612h262.286c0 22.273-20.765 43.715-43.714 43.715zm153-131.143c0 22.271-20.765 43.713-43.715 43.713H240.428c-22.95 0-43.714-21.441-43.714-43.713V87.429c0-22.272 20.764-43.714 43.714-43.714H459c-.351 50.337 0 87.975 0 87.975 0 45.419 40.872 86.882 87.428 86.882H612zm-65.572-349.715c-23.277 0-43.714-42.293-43.714-64.981V44.348L612 174.857zm-43.714 131.537H306c-12.065 0-21.857 9.77-21.857 21.835s9.792 21.835 21.857 21.835h196.714c12.065 0 21.857-9.771 21.857-21.835 0-12.065-9.792-21.835-21.857-21.835zm0 109.176H306c-12.065 0-21.857 9.77-21.857 21.834 0 12.066 9.792 21.836 21.857 21.836h196.714c12.065 0 21.857-9.77 21.857-21.836 0-12.064-9.792-21.834-21.857-21.834z"
+    ></path>
+  </symbol>
+  <symbol viewBox="0 0 60.015 60.015" xmlns="http://www.w3.org/2000/svg" id="reply">
+    <path d="M42.007 0h-24c-9.925 0-18 8.075-18 18v14c0 9.59 7.538 17.452 17 17.973v8.344a1.694 1.694 0 0 0 1.699 1.698c.44 0 .873-.173 1.198-.498l1.876-1.876C26.708 52.713 33.259 50 40.227 50h1.78c9.925 0 18-8.075 18-18V18c0-9.925-8.075-18-18-18zm16 32c0 8.822-7.178 16-16 16h-1.78c-7.502 0-14.556 2.921-19.86 8.226l-1.359 1.359V44a1 1 0 1 0-2 0v3.949c-8.356-.52-15-7.465-15-15.949V18c0-8.822 7.178-16 16-16h24c8.822 0 16 7.178 16 16v14z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="scan">
+    <path d="M456.66 0H385c-8.284 0-15 6.716-15 15s6.716 15 15 15h71.66C470.632 30 482 41.368 482 55.341V127c0 8.284 6.716 15 15 15s15-6.716 15-15V55.341C512 24.826 487.174 0 456.66 0zM15 142c8.284 0 15-6.716 15-15V55.341C30 41.368 41.368 30 55.34 30H127c8.284 0 15-6.716 15-15s-6.716-15-15-15H55.34C24.826 0 0 24.826 0 55.341V127c0 8.284 6.716 15 15 15zm112 340H55.34C41.368 482 30 470.632 30 456.659V385c0-8.284-6.716-15-15-15s-15 6.716-15 15v71.659C0 487.174 24.826 512 55.34 512H127c8.284 0 15-6.716 15-15s-6.716-15-15-15zm370-112c-8.284 0-15 6.716-15 15v71.659C482 470.632 470.632 482 456.66 482H385c-8.284 0-15 6.716-15 15s6.716 15 15 15h71.66c30.515 0 55.34-24.826 55.34-55.341V385c0-8.284-6.716-15-15-15zM341.643 110h47.575c6.497 0 11.782 5.285 11.782 11.782v47.574c0 8.284 6.716 15 15 15s15-6.716 15-15v-47.574C431 98.743 412.256 80 389.218 80h-47.575c-8.284 0-15 6.716-15 15s6.716 15 15 15zM81 121.782v47.574c0 8.284 6.716 15 15 15s15-6.716 15-15v-47.574c0-6.497 5.286-11.782 11.782-11.782h47.575c8.284 0 15-6.716 15-15s-6.716-15-15-15h-47.575C99.744 80 81 98.743 81 121.782zM170.357 400h-47.575c-6.497 0-11.782-5.285-11.782-11.782v-47.574c0-8.284-6.716-15-15-15s-15 6.716-15 15v47.574C81 411.257 99.744 430 122.782 430h47.575c8.284 0 15-6.716 15-15s-6.716-15-15-15zM431 388.218v-47.574c0-8.284-6.716-15-15-15s-15 6.716-15 15v47.574c0 6.497-5.286 11.782-11.782 11.782h-47.575c-8.284 0-15 6.716-15 15s6.716 15 15 15h47.575C412.256 430 431 411.257 431 388.218zM1 256c0 8.284 6.716 15 15 15h480c8.284 0 15-6.716 15-15s-6.716-15-15-15H16c-8.284 0-15 6.716-15 15z"></path>
+  </symbol>
+</svg>
+<footer class="footer">
+  <div class="footer_inner wrap pale">
+    <p>&copy;&nbsp;<span class="year"></span>&nbsp;Data Scientist Hiroki&#39;s Blog.
+    </p>
+  </div>
+</footer><script type="text/javascript" src="https://dshiroki.com/js/bundle.6590e6cf69f12d159a45c6d12a3a78832f91d746097651ff38f6a5087ae0c1ec67d4fa91d07b31c39d375a2ef0ba84dfcdc1ca1bbb016b659d42ec892f50a2aa.js" integrity="sha512-ZZDmz2nxLRWaRcbRKjp4gy&#43;R10YJdlH/OPalCHrgwexn1PqR0Hsxw503Wi7wuoTfzcHKG7sBa2WdQuyJL1Ciqg==" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+ tex2jax: {
+ inlineMath: [['$', '$'] ],
+ displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+ }
+ });
+</script>
+
+  </body>
+
+
+
+
+
+</html>

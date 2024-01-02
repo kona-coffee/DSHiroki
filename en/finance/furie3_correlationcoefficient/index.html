@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QWLLK27CP8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWLLK27CP8');
+</script>
+
+
+<head>
+  <meta name="google-site-verification" content="jMgk06_1fynaHhhz3MtyldzvpUHakxxCsYYFeDtN1JQ" />
+  <title>Fourie analysis for stock time series data③ | Data Scientist Hiroki&#39;s Blog</title>
+  <meta charset='utf-8'>
+  <meta name="generator" content="Hugo 0.88.1" />
+  <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+  <meta http-equiv = 'X-UA-Compatible' content = 'IE=edge'>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QWLLK27CP8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWLLK27CP8');
+</script>
+
+
+
+<meta property = 'og:locale' content = 'en_US' />
+<meta property="og:type" content="article">
+<meta property = 'og:title' content = 'Fourie analysis for stock time series data③' />
+<meta name="description" content="Manual calculation of Correlation coefficient You：&ldquo;I want to analize the timing of buying and selling by comparing two stock data.&rdquo; …">
+<meta property = 'og:description' content = 'Manual calculation of Correlation coefficient You：&ldquo;I want to analize the timing of buying and selling by comparing two stock data.&rdquo; …'>
+<meta property = 'og:url' content = 'https://dshiroki.com/en/finance/furie3_correlationcoefficient/' />
+<meta property = 'og:image' content = 'https://dshiroki.com/images/kankei.jpg'/>
+<meta name = 'twitter:card' content = 'summary_large_image' />
+<meta name = 'twitter:creator' content = ''>
+<meta name = 'twitter:title' content = 'Fourie analysis for stock time series data③' />
+<meta property = 'twitter:description'  content = 'Manual calculation of Correlation coefficient You：&ldquo;I want to analize the timing of buying and selling by comparing two stock data.&rdquo; …'/>
+<meta name = 'twitter:image' content = 'https://dshiroki.com/images/kankei.jpg' />
+<link rel='apple-touch-icon' sizes='180x180' href='https://dshiroki.com/images/icons/apple-touch-icon.png'>
+<link rel='icon' type='image/png' sizes='32x32' href='https://dshiroki.com/images/icons/favicon-32x32.png'>
+<link rel='icon' type='image/png' sizes='16x16' href='https://dshiroki.com/images/icons/favicon-16x16.png'>
+<link rel='manifest' href='https://dshiroki.com/images/icons/site.webmanifest'>
+
+  <link rel='canonical' href='https://dshiroki.com/en/finance/furie3_correlationcoefficient/'>
+  <link rel = 'stylesheet' href = 'https://dshiroki.com/css/styles.42db596b1300421b76166668f896d65a0e912909aa95394f74e207c69da0d0b652fe2ad414cb6b746661857c824297f791d6df38fce0872ba2a9ccaa421a6b89.css' integrity = 'sha512-QttZaxMAQht2FmZo&#43;JbWWg6RKQmqlTlPdOIHxp2g0LZS/irUFMtrdGZhhXyCQpf3kdbfOPzghyuiqcyqQhpriQ=='>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4285957234988519"
+     crossorigin="anonymous"></script>
+
+     
+</head>
+
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Fourie analysis for stock time series data③</title>
+     <link rel="stylesheet" type="text/css" href="https://dshiroki.com/css/style.css">
+      
+      
+  </head>
+  <body><div class = 'nav-drop'>
+  <div class = 'nav-body'>
+    
+      <a href = 'https://dshiroki.com/ja' class = 'nav_item'>Japanese Page</a>
+      <a href = 'https://dshiroki.com/info/privacy' class = 'nav_item'>Privacy Policy</a>
+
+    <div class = 'nav-close'></div>
+  </div>
+</div><header class = 'nav' >
+  <nav class = 'nav-menu'>
+    <a href='https://dshiroki.com' class = 'nav-brand nav_item'>Data Scientist Hiroki&#39;s Blog</a>
+    <div class = 'nav_bar-wrap'>
+      <div class = 'nav_bar'></div>
+    </div>
+  </nav>
+</header>
+
+
+    <main>
+
+<section class = 'post_header' style = 'background-image:url(https://dshiroki.com/images/kankei.jpg);'>
+  <h1 class='post_title'>Fourie analysis for stock time series data③</h1>
+</section>
+<div class = 'post'>
+  <article class='post_content'><h1 id="manual-calculation-of-correlation-coefficient">Manual calculation of Correlation coefficient</h1>
+<p>You：&ldquo;I want to analize the timing of buying and selling by comparing two stock data.&rdquo;<br>
+Teacher：&ldquo;calculate the correlation coefficient then you&rsquo;ll get the answer.&rdquo;<br>
+You：&ldquo;what is correlation coefficient??&rdquo;<br>
+if you have this kind of problem, this blog is for you.</p>
+<p>this blog is for you who have below kind of problems.</p>
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+<ul style="color:red">
+<li>・what is correlation coefficient?</li>
+<li>・You learned correlation coefficient at university but you didn't remember at all.</li>
+<li>・You want to know the similarity of two data but you don't know how to do it. </li>
+<li>・You want to be able to calculate the correlation coefficient.</li>
+</ul>
+</div>
+<p>By reading this blog you can understand what is correlation coefficient and how to calculate it.<br>
+I explain step by step.🙂</p>
+<h2 id="what-is-correlation-coefficient">what is correlation coefficient.</h2>
+<pre><code>correlation coefficient is showing the similarity of two data.  
+the word similarity is the same one that you use for two face quite similar.  
+the correlation coefficient of Mark Zuckerberg and savanna Takahashi seems to be high.😁  
+How about Hirose Suzu and Tuchiya Tao?  
+</code></pre>
+<p>Let&rsquo;s see👀<br>
+The correlation coefficient seems high😍
+
+<div class = 'video'>
+  <iframe src='https://www.youtube.com/embed/4duZZFQboHM?controls=1&rel=0'></iframe>
+</div>
+</p>
+<h2 id="how-tomanual-calculation-of-correlation-coefficient">How to？〜Manual calculation of Correlation coefficient〜</h2>
+<p>The definition of correlation coefficient r is showen like below.</p>
+<p>$$\begin{align*}
+r&amp;=\frac{\sum (x_{i}-\bar{x})(y_{i}-\bar{y})}{\sqrt{\sum (x_{i}-\bar{x})^2}\sqrt{\sum (y_{i}-\bar{y})^2}} \\<br>
+&amp;=\frac{\sum (x_{i}-\bar{x})(y_{i}-\bar{y})/n}{\sqrt{\frac{\sum(x_{i}-\bar{x})^2}{n}}\sqrt{\frac{\sum(y_{i}-\bar{y})^2}{n}}}  \\<br>
+&amp;=\frac{V_{xy}}{\sigma_{x}\sigma_{y}}  \\<br>
+\end{align*}$$</p>
+<p>$$\begin{align*}
+V_{xy}&amp;: covariance of x and y \\<br>
+\sigma_{x}&amp;: standard deviation of x \\<br>
+\sigma_{y}&amp;: standard deviation of y \\<br>
+\end{align*}$$</p>
+<p>you might be what?? No idea🤔.
+don&rsquo;t worry.<br>
+I explain with below 4 steps.</p>
+<ol>
+<li>To calculate average</li>
+<li>To calculate stranded divination</li>
+<li>To calculate the covariance of x and y</li>
+<li>To calculate the correlation coefficient</li>
+</ol>
+<p>In this example, let&rsquo;s use x and y which stored below variables.<br>
+you can calculate it with calculator manually.<br>
+let&rsquo;s check this out!</p>
+<p>$$\begin{align*}
+x&amp;=(1,2,3,4,5) \\<br>
+y&amp;=(2,8,6,4,10)
+\end{align*}$$</p>
+<h3 id="1-to-calculate-average">1. To calculate average</h3>
+<p>$$\begin{align*}
+\bar{x}&amp;=\frac{1+2+3+4+5}{5} =3 \\<br>
+\bar{y}&amp;=\frac{2+8+6+4+10}{5} =6 \\<br>
+\end{align*}$$</p>
+<h3 id="2-to-calculate-stranded-divination">2. To calculate stranded divination.</h3>
+<p>calculate the square of deviation<br>
+$$\begin{align*}
+x_{i}-\bar{x}&amp;=((1-3)^2,(2-3)^2,(3-3)^2,(4-3)^2,(5-3)^2)　\\<br>
+&amp;=(4,1,0,1,4)　\\<br>
+\end{align*}$$</p>
+<p>$$\begin{align*}
+y_{i}-\bar{y}&amp;=((2-6)^2,(8-6)^2,(6-6)^2,(4-6)^2,(10-6)^2)　\\<br>
+&amp;=(16,4,0,4,16)　\\<br>
+\end{align*}$$</p>
+<p>calculate the square root of average</p>
+<p>$$\begin{align*}
+\sigma_{x}&amp;= \sqrt{\frac{4+1+0+1+4}{5}} \fallingdotseq 1.41 \\<br>
+\sigma_{y}&amp;=\sqrt{\frac{16+4+0+4+16}{5}} \fallingdotseq 2.83 \\<br>
+\end{align*}$$</p>
+<h3 id="3-to-calculate-the-covariance-of-x-and-y">3. To calculate the covariance of x and y</h3>
+<p>multiply by the deviation of x and y</p>
+<p>$$\begin{align*}
+(x_{i}-\bar{x})*(y_{i}-\bar{y})&amp;=((1-3)(2-6),(2-3)(8-6),(3-3)(6-6),(4-3)(4-6),(5-3)(10-6))　\\<br>
+&amp;=(8,-2,0,-2,8)　\\<br>
+\end{align*}$$</p>
+<p>calculate the average
+$$ V_{xy}= \frac{8-2+0-2+8}{5} =2.4 $$</p>
+<h3 id="4-to-calculate-the-correlation-coefficien">4. To calculate the correlation coefficien</h3>
+<p>$$\begin{align*}
+r&amp;=\frac{V_{xy}}{\sigma_{x}\sigma_{y}}=\frac{2.4}{1.41*2.83} \fallingdotseq 0.6 \\<br>
+\end{align*}$$</p>
+<p>the correlation coefficient is calculated. the answer is 0.6.
+the closer correlation coefficient is one, the higher correlation.</p>
+<h2 id="as-a-side-note-the-matlab-code-is">as a side note the Matlab code is</h2>
+<p>Matlab code is shown like below.<br>
+it is very simple!!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">x=[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>];
+y=[<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">10</span>];
+r=corrcoef(x,y)
+</code></pre></div><h2 id="caution">Caution</h2>
+<p>the correlation don&rsquo;t necessary mean causality.<br>
+for example, if the correlation coefficient between stock and some economic index, the reason of the stock raise is not necessary because the economic index raised.</p>
+<p>below YouTube also good for learning about this caution.
+
+<div class = 'video'>
+  <iframe src='https://www.youtube.com/embed/BiM29w4vgBc?controls=1&rel=0'></iframe>
+</div>
+</p>
+<p>it is important that you should think with your head about the cause hiding from the data.</p>
+<h1 id="future">Future</h1>
+<p>Next time I&rsquo;ll explain about the future prediction with using the model.</p>
+<h1 id="reference">Reference</h1>
+<p>Below books is good for beginners.</p>
+<p><a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AE%E6%99%82%E7%B3%BB%E5%88%97%E5%88%86%E6%9E%90-%E7%9F%B3%E6%9D%91-%E8%B2%9E%E5%A4%AB/dp/4489021259?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&keywords=%E5%85%A5%E9%96%80%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AE%E6%99%82%E7%B3%BB%E5%88%97%E5%88%86%E6%9E%90&qid=1636876888&s=books&sr=1-1&linkCode=li3&tag=dshiroshi-22&linkId=540c96d616dcba227dd8ec4003ba1a4b&language=ja_JP&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4489021259&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=dshiroshi-22&language=ja_JP" ></a><img src="https://ir-jp.amazon-adsystem.com/e/ir?t=dshiroshi-22&language=ja_JP&l=li3&o=9&a=4489021259" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /><br>
+<a href="https://amzn.to/3CbASMN">入門はじめての時系列分析/盛岡書房</a></p>
+<br/>
+<br/>
+<p>If you want to know more about Hirose Suzu please see below books ^_^.</p>
+<p><a href="https://www.amazon.co.jp/%E5%BA%83%E7%80%AC%E3%81%99%E3%81%9A-10%E5%91%A8%E5%B9%B4%E8%A8%98%E5%BF%B5%E5%86%99%E7%9C%9F%E9%9B%86-%E3%83%AC%E3%82%B8%E3%83%A3%E3%83%BC%E3%83%BB%E3%83%88%E3%83%AC%E3%82%B8%E3%83%A3%E3%83%BC-%E3%82%A2%E3%83%BC%E3%83%86%E3%82%A3%E3%82%B9%E3%83%88%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BAW-%E5%A5%A5%E5%B1%B1/dp/4065194008?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&keywords=%E5%BA%83%E7%80%AC%E3%81%99%E3%81%9A&qid=1639290919&sr=8-8&linkCode=li3&tag=dshiroshi-22&linkId=4fcca5b48772338742fd99b626065f59&language=ja_JP&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4065194008&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=dshiroshi-22&language=ja_JP" ></a><img src="https://ir-jp.amazon-adsystem.com/e/ir?t=dshiroshi-22&language=ja_JP&l=li3&o=9&a=4065194008" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /><br>
+<a href="https://amzn.to/3rYVKoX">広瀬すず 10周年記念写真集 レジャー・トレジャー</a></p>
+<br/>
+<p><a href="https://www.amazon.co.jp/%E5%BA%83%E7%80%AC%E3%81%99%E3%81%9A%E3%83%95%E3%82%A1%E3%83%BC%E3%82%B9%E3%83%88%E5%86%99%E7%9C%9F%E9%9B%86%E3%80%8Csuzu%E3%80%8D-%E5%BA%83%E7%80%AC%E3%81%99%E3%81%9A/dp/4863363915?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&keywords=%E5%BA%83%E7%80%AC%E3%81%99%E3%81%9A&qid=1639290919&sr=8-7&linkCode=li3&tag=dshiroshi-22&linkId=44ce9dea6f5a7a169bd87ddc98abf26e&language=ja_JP&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4863363915&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=dshiroshi-22&language=ja_JP" ></a><img src="https://ir-jp.amazon-adsystem.com/e/ir?t=dshiroshi-22&language=ja_JP&l=li3&o=9&a=4863363915" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /><br>
+<a href="https://amzn.to/3GAPV5f">広瀬すずファースト写真集「suzu」</a></p>
+<br/>
+<p>Thank you for reading😊</p>
+<p>Hiroki🐶</p>
+
+    
+    <div class = 'post_extra'><div class = 'copy' data-share = 'Copy' data-copied = 'Copied'><svg>
+  <use xlink:href="#copy"></use>
+</svg>
+</div>
+
+    </div>
+
+    
+  </article>
+  
+  <aside><h3>More from Data Scientist Hiroki&#39;s Blog</h3>
+<ul class='posts aside'>
+<li class = 'post_item fp'>
+  <a class = 'post_card' href='https://dshiroki.com/en/finance/20230903/' title = 'Inflation Rise! Visualizing Economic Indicators with Graphs' style = 'background-image: url(https://dshiroki.com/images/inflation.jpg);'>
+  </a>
+  <div class = 'excerpt'>
+    <div class = 'excerpt_meta'><div class = 'copy' data-share = 'Copy' data-copied = 'Copied'><svg>
+  <use xlink:href="#copy"></use>
+</svg>
+</div>
+
+    </div>
+    <h3 class = 'post_link'>
+      <a href='https://dshiroki.com/en/finance/20230903/'>Inflation Rise! Visualizing Economic Indicators with Graphs</a>
+    </h3>
+    <p class = 'pale'>Visualizing Economic Indicators Related to Inflation with Graphs Lately, inflation seems …</p>
+  </div>
+</li>
+
+<li class = 'post_item fp'>
+  <a class = 'post_card' href='https://dshiroki.com/en/finance/furie5_bandpass/' title = 'Fourie analysis for stock time series data⑤' style = 'background-image: url(https://dshiroki.com/images/trendA.jpg);'>
+  </a>
+  <div class = 'excerpt'>
+    <div class = 'excerpt_meta'><div class = 'copy' data-share = 'Copy' data-copied = 'Copied'><svg>
+  <use xlink:href="#copy"></use>
+</svg>
+</div>
+
+    </div>
+    <h3 class = 'post_link'>
+      <a href='https://dshiroki.com/en/finance/furie5_bandpass/'>Fourie analysis for stock time series data⑤</a>
+    </h3>
+    <p class = 'pale'>Fourie analysis for stock time series data⑤ 〜periodicity〜 Hello, Good morning, good …</p>
+  </div>
+</li>
+
+</ul>
+
+  </aside>
+  
+</div>
+<script src = 'https://dshiroki.com/js/autosize.min.js'></script>
+<script src = 'https://dshiroki.com/js/timeago.js'></script></main><svg width="0" height="0" class="hidden">
+  <symbol viewBox="0 0 699.428 699.428" xmlns="http://www.w3.org/2000/svg" id="copy">
+    <path d="M502.714 0H240.428C194.178 0 153 42.425 153 87.429l-25.267.59c-46.228 0-84.019 41.834-84.019 86.838V612c0 45.004 41.179 87.428 87.429 87.428H459c46.249 0 87.428-42.424 87.428-87.428h21.857c46.25 0 87.429-42.424 87.429-87.428v-349.19zM459 655.715H131.143c-22.95 0-43.714-21.441-43.714-43.715V174.857c0-22.272 18.688-42.993 41.638-42.993l23.933-.721v393.429C153 569.576 194.178 612 240.428 612h262.286c0 22.273-20.765 43.715-43.714 43.715zm153-131.143c0 22.271-20.765 43.713-43.715 43.713H240.428c-22.95 0-43.714-21.441-43.714-43.713V87.429c0-22.272 20.764-43.714 43.714-43.714H459c-.351 50.337 0 87.975 0 87.975 0 45.419 40.872 86.882 87.428 86.882H612zm-65.572-349.715c-23.277 0-43.714-42.293-43.714-64.981V44.348L612 174.857zm-43.714 131.537H306c-12.065 0-21.857 9.77-21.857 21.835s9.792 21.835 21.857 21.835h196.714c12.065 0 21.857-9.771 21.857-21.835 0-12.065-9.792-21.835-21.857-21.835zm0 109.176H306c-12.065 0-21.857 9.77-21.857 21.834 0 12.066 9.792 21.836 21.857 21.836h196.714c12.065 0 21.857-9.77 21.857-21.836 0-12.064-9.792-21.834-21.857-21.834z"
+    ></path>
+  </symbol>
+  <symbol viewBox="0 0 60.015 60.015" xmlns="http://www.w3.org/2000/svg" id="reply">
+    <path d="M42.007 0h-24c-9.925 0-18 8.075-18 18v14c0 9.59 7.538 17.452 17 17.973v8.344a1.694 1.694 0 0 0 1.699 1.698c.44 0 .873-.173 1.198-.498l1.876-1.876C26.708 52.713 33.259 50 40.227 50h1.78c9.925 0 18-8.075 18-18V18c0-9.925-8.075-18-18-18zm16 32c0 8.822-7.178 16-16 16h-1.78c-7.502 0-14.556 2.921-19.86 8.226l-1.359 1.359V44a1 1 0 1 0-2 0v3.949c-8.356-.52-15-7.465-15-15.949V18c0-8.822 7.178-16 16-16h24c8.822 0 16 7.178 16 16v14z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="scan">
+    <path d="M456.66 0H385c-8.284 0-15 6.716-15 15s6.716 15 15 15h71.66C470.632 30 482 41.368 482 55.341V127c0 8.284 6.716 15 15 15s15-6.716 15-15V55.341C512 24.826 487.174 0 456.66 0zM15 142c8.284 0 15-6.716 15-15V55.341C30 41.368 41.368 30 55.34 30H127c8.284 0 15-6.716 15-15s-6.716-15-15-15H55.34C24.826 0 0 24.826 0 55.341V127c0 8.284 6.716 15 15 15zm112 340H55.34C41.368 482 30 470.632 30 456.659V385c0-8.284-6.716-15-15-15s-15 6.716-15 15v71.659C0 487.174 24.826 512 55.34 512H127c8.284 0 15-6.716 15-15s-6.716-15-15-15zm370-112c-8.284 0-15 6.716-15 15v71.659C482 470.632 470.632 482 456.66 482H385c-8.284 0-15 6.716-15 15s6.716 15 15 15h71.66c30.515 0 55.34-24.826 55.34-55.341V385c0-8.284-6.716-15-15-15zM341.643 110h47.575c6.497 0 11.782 5.285 11.782 11.782v47.574c0 8.284 6.716 15 15 15s15-6.716 15-15v-47.574C431 98.743 412.256 80 389.218 80h-47.575c-8.284 0-15 6.716-15 15s6.716 15 15 15zM81 121.782v47.574c0 8.284 6.716 15 15 15s15-6.716 15-15v-47.574c0-6.497 5.286-11.782 11.782-11.782h47.575c8.284 0 15-6.716 15-15s-6.716-15-15-15h-47.575C99.744 80 81 98.743 81 121.782zM170.357 400h-47.575c-6.497 0-11.782-5.285-11.782-11.782v-47.574c0-8.284-6.716-15-15-15s-15 6.716-15 15v47.574C81 411.257 99.744 430 122.782 430h47.575c8.284 0 15-6.716 15-15s-6.716-15-15-15zM431 388.218v-47.574c0-8.284-6.716-15-15-15s-15 6.716-15 15v47.574c0 6.497-5.286 11.782-11.782 11.782h-47.575c-8.284 0-15 6.716-15 15s6.716 15 15 15h47.575C412.256 430 431 411.257 431 388.218zM1 256c0 8.284 6.716 15 15 15h480c8.284 0 15-6.716 15-15s-6.716-15-15-15H16c-8.284 0-15 6.716-15 15z"></path>
+  </symbol>
+</svg>
+<footer class="footer">
+  <div class="footer_inner wrap pale">
+    <p>&copy;&nbsp;<span class="year"></span>&nbsp;Data Scientist Hiroki&#39;s Blog.
+    Designed by  <a href = '<no value>' title = 'Linkedin Profile'><no value></a></p>
+  </div>
+</footer><script type="text/javascript" src="https://dshiroki.com/js/bundle.6590e6cf69f12d159a45c6d12a3a78832f91d746097651ff38f6a5087ae0c1ec67d4fa91d07b31c39d375a2ef0ba84dfcdc1ca1bbb016b659d42ec892f50a2aa.js" integrity="sha512-ZZDmz2nxLRWaRcbRKjp4gy&#43;R10YJdlH/OPalCHrgwexn1PqR0Hsxw503Wi7wuoTfzcHKG7sBa2WdQuyJL1Ciqg==" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+ tex2jax: {
+ inlineMath: [['$', '$'] ],
+ displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+ }
+ });
+</script>
+
+  </body>
+
+
+
+
+
+</html>

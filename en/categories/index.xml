@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Data Scientist Hiroki&#39;s Blog</title>
+    <link>https://dshiroki.com/en/categories/</link>
+    <description>Recent content in Categories on Data Scientist Hiroki&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 27 Dec 2023 23:50:43 +0900</lastBuildDate><atom:link href="https://dshiroki.com/en/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>engineering</title>
+      <link>https://dshiroki.com/en/categories/engineering/</link>
+      <pubDate>Wed, 27 Dec 2023 23:50:43 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/categories/engineering/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>finance</title>
+      <link>https://dshiroki.com/en/categories/finance/</link>
+      <pubDate>Sun, 03 Sep 2023 20:50:28 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/categories/finance/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

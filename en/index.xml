@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Scientist Hiroki&#39;s Blog</title>
+    <link>https://dshiroki.com/en/</link>
+    <description>Recent content on Data Scientist Hiroki&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 27 Dec 2023 23:50:43 +0900</lastBuildDate><atom:link href="https://dshiroki.com/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>State-Space Representation of Single-Degree-of-Freedom Vibration Equation(II)</title>
+      <link>https://dshiroki.com/en/engineering/20231227/</link>
+      <pubDate>Wed, 27 Dec 2023 23:50:43 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/engineering/20231227/</guid>
+      <description>Hello, I&amp;rsquo;m Hiroki🐶, a data scientist. In my previous blog, I introduced the Matlab code to solve the single degree of freedom vibration motion equation. I have modified it a bit more to represent it in terms of inputs and outputs, and I&amp;rsquo;d like to solve it this way.
+ First, this single degree of freedom vibration model. Normally, it can be written as a motion equation like this:
+$$\begin{align*} m\ddot{x}+c\dot{x}+kx&amp;amp;=f \</description>
+    </item>
+    
+    <item>
+      <title>State-Space Representation of Single-Degree-of-Freedom Vibration Equation</title>
+      <link>https://dshiroki.com/en/engineering/20231031/</link>
+      <pubDate>Tue, 31 Oct 2023 21:03:29 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/engineering/20231031/</guid>
+      <description>Single-Degree-of-Freedom Vibration Equation Hello, I&amp;rsquo;m Hiroki 🐶, a data scientist. In my previous blog I introduced the Matlab code for the physical model, which actually uses a very fancy method called state-space representation.
+Today, I want to delve a little deeper into this state-space representation.
+So, in this post, I will introduce:
+What is state-space representation? The benefits of representing a single-degree-of-freedom vibration model in state-space representation    Firstly, this is the single-degree-of-freedom vibration model.</description>
+    </item>
+    
+    <item>
+      <title>ChatGPT x Programming of Physical Model</title>
+      <link>https://dshiroki.com/en/engineering/20231029/</link>
+      <pubDate>Sun, 29 Oct 2023 17:04:46 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/engineering/20231029/</guid>
+      <description>Programming Physical Modeling with ChatGPT A must-see for a student in science! Expand your learning horizons with this super convenient way to use ChatGPT!
+Hello, I&amp;rsquo;m Hiroki 🐶, a data scientist.
+There&amp;rsquo;s been a lot of buzz recently about ChatGPT gaining new capabilities!
+For example, check out this YouTube video.
+  I couldn&amp;rsquo;t wait to apply this!
+For instance, a fundamental model taught in the first year of engineering studies is the single-degree-of-freedom vibration model.</description>
+    </item>
+    
+    <item>
+      <title>Inflation Rise! Visualizing Economic Indicators with Graphs</title>
+      <link>https://dshiroki.com/en/finance/20230903/</link>
+      <pubDate>Sun, 03 Sep 2023 20:50:28 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/20230903/</guid>
+      <description>Visualizing Economic Indicators Related to Inflation with Graphs Lately, inflation seems unstoppable! I wonder how high it will go&amp;hellip;
+Hello, it’s been a while. I&amp;rsquo;m Hiroki, a data scientist. In this blog post, I will explain:
+・How to download economic indicators like employment numbers or CPI using Matlab code from FRED ・How to compare data with Matlab code ・Deeply contemplating Taro Buffett&#39;s YouTube videos with data   You can get such graphs.</description>
+    </item>
+    
+    <item>
+      <title>Fourie analysis for stock time series data⑤</title>
+      <link>https://dshiroki.com/en/finance/bandpass/</link>
+      <pubDate>Wed, 07 Dec 2022 10:16:50 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/bandpass/</guid>
+      <description>Fourie analysis for stock time series data⑤ 〜periodicity〜 Hello, Good morning, good evening and good night^^ This is Data scientist Hiroki🐶
+It is said that the stock price of toysrus goes up in christmas season🧸, and the stock price of coca cola goes up in summer season🥤
+Is it true? Let&amp;rsquo;s see with the data. in this blog, you can get the technique how to find the periodicity from the stock price data.</description>
+    </item>
+    
+    <item>
+      <title>Fourie analysis for stock time series data④</title>
+      <link>https://dshiroki.com/en/finance/detrend/</link>
+      <pubDate>Mon, 05 Dec 2022 10:16:50 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/detrend/</guid>
+      <description>How to calculate fourie analysis for stock time series data④ 〜Detrend〜 Hello, Good morning, good evening and good night^^ This is Data scientist Hiroki🐶
+Winter is coming☃️ Yes let’s celebrate the holiday🎂
+When you watching the stock chart, have you ever have the experience that you want to remove the trend component from the stock data?
+https://jp.mathworks.com/help/matlab/ref/detrend.html  You can do it just 1 line of Matlab code. It’s so useful for understanding overall periodicity.</description>
+    </item>
+    
+    <item>
+      <title>Fourie analysis for stock time series data③</title>
+      <link>https://dshiroki.com/en/finance/correlationcoefficient/</link>
+      <pubDate>Fri, 24 Dec 2021 10:16:50 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/correlationcoefficient/</guid>
+      <description>Manual calculation of Correlation coefficient You：&amp;ldquo;I want to analize the timing of buying and selling by comparing two stock data.&amp;rdquo;
+Teacher：&amp;ldquo;calculate the correlation coefficient then you&amp;rsquo;ll get the answer.&amp;rdquo;
+You：&amp;ldquo;what is correlation coefficient??&amp;rdquo;
+if you have this kind of problem, this blog is for you.
+this blog is for you who have below kind of problems.
+・what is correlation coefficient? ・You learned correlation coefficient at university but you didn&#39;t remember at all.</description>
+    </item>
+    
+    <item>
+      <title>Fourie analysis for stock time series data②</title>
+      <link>https://dshiroki.com/en/finance/spectrumanalysis/</link>
+      <pubDate>Wed, 24 Nov 2021 10:16:50 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/spectrumanalysis/</guid>
+      <description>spectrum analysis for stock data Hello this is data scientist Hiroki.
+Don&amp;rsquo;t you have some trouble for future analysis of stock time data, and do you want to use the basic mathmatics for it? I also have some trouble especially when I read the technical analysis books of stock time data. I wanted to use the besic mathmatics theory for the stock time data analysis. so I decided to write this blog.</description>
+    </item>
+    
+    <item>
+      <title>Fourie analysis for stock time series data①</title>
+      <link>https://dshiroki.com/en/finance/timeanalysisbasic/</link>
+      <pubDate>Tue, 09 Nov 2021 10:16:50 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/timeanalysisbasic/</guid>
+      <description>How to calculate fourie analysis for stock time series data Hello this is data scientist Hiroki.
+Don&amp;rsquo;t you have some trouble for future analysis of stock time data, and do you want to use the basic mathmatics for it? I also have some trouble especially when I read the technical analysis books of stock time data. I wanted to use the besic mathmatics theory for the stock time data analysis. so I decided to write this blog.</description>
+    </item>
+    
+    <item>
+      <title>How to get economy index data from FRED web site</title>
+      <link>https://dshiroki.com/en/finance/getfreddata/</link>
+      <pubDate>Sun, 07 Nov 2021 09:40:00 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/getfreddata/</guid>
+      <description>How to get economy index data from FRED web site Hello this is data scientist HIROKI. Don’t you have some problem that you want to get economy index data for analyzing but you have no idea how to do it? I also have this type of problem for a half year and I found how to solve it.
+This blog is for you who have below problems.
+・To compare two data(stock data and economy index data) in the same graph ・To download economy index data like GDP and FF ratio.</description>
+    </item>
+    
+    <item>
+      <title>The way how to get daily stock data from Yahoo finance by only one line Matlab code</title>
+      <link>https://dshiroki.com/en/finance/getstockdata/</link>
+      <pubDate>Sun, 31 Oct 2021 09:15:35 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/finance/getstockdata/</guid>
+      <description>The way how to get daily stock data from Yahoo finance by only one line Matlab code Hello I’m data scientist Hiroki.
+Have you ever thinking if you can download daily stock data so that you can analyze it for your investment haven’t you?
+And you have no idea where you can get the data don’t you?
+This blog is for you who may have below trouble
+・You can’t find where you can download the stock data from.</description>
+    </item>
+    
+  </channel>
+</rss>
