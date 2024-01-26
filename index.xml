@@ -24,7 +24,7 @@ $$\begin{align*} f=c\dot{y}+ky&amp;amp; \
 \end{align*}$$
 です。
 こちらのモデルを解くMatlabコードは、前回のコードを少し変更して、下記のようになります。
-% パラメータの定義 m = 1; % 質点 [kg] ※適切な値を設定してください k = 1; % バネのばね定数 [N/m] ※適切な値を設定してください c = 1; % ダンパーの減衰係数 [N.s/m] ※適切な値を設定してください % 微分方程式の定義 A = [0 1; -k/m -c/m]; B = [0; 1/m]; C = [1 0]; D = 0; % 状態空間モデルの作成 sys = ss(A, B, C, D); % 応答のシミュレーション t = linspace(0, 50, 1000); % シミュレーション時間 [s] %外力fをシステムに入力 Y=1; w0=sqrt(k/m); f = c*Y*w0*cos(w0*t)+k*Y * sin(w0*t); % 外力の時系列 y = lsim(sys, f, t); % 結果のプロット figure; plot(t, y); xlabel(&amp;#39;Time [s]&amp;#39;); ylabel(&amp;#39;Displacement [m]&amp;#39;); title(&amp;#39;Response of the physical model&amp;#39;); grid on; 実行すると、下記のようなグラフが得られたのではないでしょうか。  このようにM K Cのシステムにfという入力を与えた時の出力xを求めることが簡単にかつ、システマチックにできるのが、現代制御の魅力です。</description>
+% パラメータの定義 m = 1; % 質点 [kg] ※適切な値を設定してください k = 1; % バネのばね定数 [N/m] ※適切な値を設定してください c = 1; % ダンパーの減衰係数 [N.s/m] ※適切な値を設定してください % 微分方程式の定義 A = [0 1; -k/m -c/m]; B = [0; 1/m]; C = [k c]; D = 0; % 状態空間モデルの作成 sys = ss(A, B, C, D); % 応答のシミュレーション t = linspace(0, 50, 1000); % シミュレーション時間 [s] %外力fをシステムに入力 Y=1; w0=sqrt(k/m); f = c*Y*w0*cos(w0*t)+k*Y * sin(w0*t); % 外力の時系列 y = lsim(sys, f, t); % 結果のプロット figure; plot(t, y); xlabel(&amp;#39;Time [s]&amp;#39;); ylabel(&amp;#39;Displacement [m]&amp;#39;); title(&amp;#39;Response of the physical model&amp;#39;); grid on; 実行すると、下記のようなグラフが得られたのではないでしょうか。  このようにM K Cのシステムにfという入力を与えた時の出力xを求めることが簡単にかつ、システマチックにできるのが、現代制御の魅力です。</description>
     </item>
     
     <item>
