@@ -5,7 +5,45 @@
     <link>https://dshiroki.com/</link>
     <description>Recent content on Data Scientist Hiroki&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 27 Dec 2023 23:50:43 +0900</lastBuildDate><atom:link href="https://dshiroki.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Jan 2024 23:55:29 +0900</lastBuildDate><atom:link href="https://dshiroki.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1自由度振動運動方程式の状態空間表現(続々)</title>
+      <link>https://dshiroki.com/engineering/20240128/</link>
+      <pubDate>Sat, 27 Jan 2024 23:55:29 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/engineering/20240128/</guid>
+      <description>1自由度振動運動方程式 こんにちは、データサイエンティストひろき🐶です。
+2024年が始まって1ヶ月が過ぎようとしております。
+時の流れは早いですね。
+こうしてブログを書いている時は、忙しい日々を忘れ、
+自分の世界観を表現できる大切な時間です。
+さて、
+前回こちらのブログで紹介した下図の1自由度振動運動方程式を解くためのMatlabコード
+ですが、
+ 入力fを
+$$\begin{align*} f=c\dot{y}+ky&amp;amp; \
+\end{align*}$$
+のように力入力で与えています。　しかし、本来は、図の通り、変位入力を与えた場合の状態空間表現が知りたくなると思います。
+そこで今回は、
+1自由度振動モデルに変位入力をインプットした時の振る舞いを状態空間表現で表す方法   を紹介します。 まずこちらの1自由度振動モデル。
+下記のように運動方程式で書くことができます。
+$$\begin{align*} m\ddot{x}+c\dot{x}+kx&amp;amp;=c\dot{y}+ky&amp;amp; \
+\end{align*}$$
+これをラプラス変換して、伝達関数G(=出力/入力)を求めてみます。
+$$\begin{align*} (ms^2+cs+k)x=(cs+k)y \
+\end{align*}$$
+なので、
+$$\begin{align*} G=\frac{x}{y}=\frac{cs+k}{ms^2+cs+k} \
+\end{align*}$$
+伝達関数がわかれば、それを状態空間表現に変換すればいいだけ。
+実は変換式が存在します。
+次回以降、数式を用いて、詳しく説明していきたいと思います。
+それでは今日はこの辺で
+最後まで読んでくださりありがとうございました。
+Love&amp;amp;Respect♡
+Hiroki🐶</description>
+    </item>
+    
     <item>
       <title>1自由度振動運動方程式の状態空間表現(続)</title>
       <link>https://dshiroki.com/engineering/20231227/</link>
@@ -24,7 +62,7 @@ $$\begin{align*} f=c\dot{y}+ky&amp;amp; \
 \end{align*}$$
 です。
 こちらのモデルを解くMatlabコードは、前回のコードを少し変更して、下記のようになります。
-% パラメータの定義 m = 1; % 質点 [kg] ※適切な値を設定してください k = 1; % バネのばね定数 [N/m] ※適切な値を設定してください c = 1; % ダンパーの減衰係数 [N.s/m] ※適切な値を設定してください % 微分方程式の定義 A = [0 1; -k/m -c/m]; B = [0; 1/m]; C = [k c]; D = 0; % 状態空間モデルの作成 sys = ss(A, B, C, D); % 応答のシミュレーション t = linspace(0, 50, 1000); % シミュレーション時間 [s] %外力fをシステムに入力 Y=1; w0=sqrt(k/m); f = c*Y*w0*cos(w0*t)+k*Y * sin(w0*t); % 外力の時系列 y = lsim(sys, f, t); % 結果のプロット figure; plot(t, y); xlabel(&amp;#39;Time [s]&amp;#39;); ylabel(&amp;#39;Displacement [m]&amp;#39;); title(&amp;#39;Response of the physical model&amp;#39;); grid on; 実行すると、下記のようなグラフが得られたのではないでしょうか。  このようにM K Cのシステムにfという入力を与えた時の出力xを求めることが簡単にかつ、システマチックにできるのが、現代制御の魅力です。</description>
+% パラメータの定義 m = 1; % 質点 [kg] ※適切な値を設定してください k = 1; % バネのばね定数 [N/m] ※適切な値を設定してください c = 1; % ダンパーの減衰係数 [N.s/m] ※適切な値を設定してください % 微分方程式の定義 A = [0 1; -k/m -c/m]; B = [0; 1/m]; C = [1 0]; D = 0; % 状態空間モデルの作成 sys = ss(A, B, C, D); % 応答のシミュレーション t = linspace(0, 50, 1000); % シミュレーション時間 [s] %外力fをシステムに入力 Y=1; w0=sqrt(k/m); f = c*Y*w0*cos(w0*t)+k*Y * sin(w0*t); % 外力の時系列 y = lsim(sys, f, t); % 結果のプロット figure; plot(t, y); xlabel(&amp;#39;Time [s]&amp;#39;); ylabel(&amp;#39;Displacement [m]&amp;#39;); title(&amp;#39;Response of the physical model&amp;#39;); grid on; 実行すると、下記のようなグラフが得られたのではないでしょうか。  このようにM K Cのシステムにfという入力を与えた時の出力xを求めることが簡単にかつ、システマチックにできるのが、現代制御の魅力です。</description>
     </item>
     
     <item>

@@ -323,11 +323,26 @@ x \\<br>
 B
 f
 $$</p>
-<p>This is the state-space representation.<br>
-Why is this exciting?</p>
+<p>This is the state-space representation.</p>
+<p>$$
+y
+\begin{align*}
+&amp;=
+\end{align*}
+C
+\begin{pmatrix}
+x \\<br>
+\dot{x} \\<br>
+\end{pmatrix}
++
+D
+f
+$$</p>
+<p>this is output equation.</p>
+<p>Why is this exciting?</p>
 <p>It&rsquo;s a fundamental form in modern control engineering,<br>
 allowing you to easily simulate various input-output signals for linear systems.</p>
-<p>For example、<a href="https://dshiroki.com/en/engineering/20231029/">this</a>is demonstrated in the part of the code shown by ChatGPT last time, where the lsim function is a prime example:</p>
+<p>For example、<a href="https://dshiroki.com/en/engineering/20231029/">this</a> is demonstrated in the part of the code shown by ChatGPT last time, where the lsim function is a prime example:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">
 
 <span style="color:#75715e">% Creation of the state-space model</span>

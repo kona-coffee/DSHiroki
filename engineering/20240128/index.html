@@ -14,7 +14,7 @@
 
 <head>
   <meta name="google-site-verification" content="jMgk06_1fynaHhhz3MtyldzvpUHakxxCsYYFeDtN1JQ" />
-  <title>1自由度振動運動方程式の状態空間表現(続) | Data Scientist Hiroki&#39;s Blog</title>
+  <title>1自由度振動運動方程式の状態空間表現(続々) | Data Scientist Hiroki&#39;s Blog</title>
   <meta charset='utf-8'>
   <meta name="generator" content="Hugo 0.88.1" />
   <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
@@ -34,34 +34,40 @@
 
 <meta property = 'og:locale' content = 'en_US' />
 <meta property="og:type" content="article">
-<meta property = 'og:title' content = '1自由度振動運動方程式の状態空間表現(続)' />
+<meta property = 'og:title' content = '1自由度振動運動方程式の状態空間表現(続々)' />
 <meta name="description" content="1自由度振動運動方程式 こんにちは、データサイエンティストひろき🐶です。
-前回こちらのブログで紹介した1自由度振動運動方程式を解くためのMatlabコード
-もう少し変形して、このような、入力と出力の形にして、解いてみたいと思います。
- まずこちらの1自由度振動モデル。
-普通に数式で表すと下記のように運動方程式で書くこと …">
+2024年が始まって1ヶ月が過ぎようとしております。
+時の流れは早いですね。
+こうしてブログを書いている時は、忙しい日々を忘れ、
+自分の世界観を表現できる大切な時間です。
+さて、
+前回こちらのブログで紹介した下図の1自由度振動運動方程式を解くため …">
 <meta property = 'og:description' content = '1自由度振動運動方程式 こんにちは、データサイエンティストひろき🐶です。
-前回こちらのブログで紹介した1自由度振動運動方程式を解くためのMatlabコード
-もう少し変形して、このような、入力と出力の形にして、解いてみたいと思います。
- まずこちらの1自由度振動モデル。
-普通に数式で表すと下記のように運動方程式で書くこと …'>
-<meta property = 'og:url' content = 'https://dshiroki.com/engineering/20231227/' />
+2024年が始まって1ヶ月が過ぎようとしております。
+時の流れは早いですね。
+こうしてブログを書いている時は、忙しい日々を忘れ、
+自分の世界観を表現できる大切な時間です。
+さて、
+前回こちらのブログで紹介した下図の1自由度振動運動方程式を解くため …'>
+<meta property = 'og:url' content = 'https://dshiroki.com/engineering/20240128/' />
 <meta property = 'og:image' content = 'https://dshiroki.com/images/tree.png'/>
 <meta name = 'twitter:card' content = 'summary_large_image' />
 <meta name = 'twitter:creator' content = ''>
-<meta name = 'twitter:title' content = '1自由度振動運動方程式の状態空間表現(続)' />
+<meta name = 'twitter:title' content = '1自由度振動運動方程式の状態空間表現(続々)' />
 <meta property = 'twitter:description'  content = '1自由度振動運動方程式 こんにちは、データサイエンティストひろき🐶です。
-前回こちらのブログで紹介した1自由度振動運動方程式を解くためのMatlabコード
-もう少し変形して、このような、入力と出力の形にして、解いてみたいと思います。
- まずこちらの1自由度振動モデル。
-普通に数式で表すと下記のように運動方程式で書くこと …'/>
+2024年が始まって1ヶ月が過ぎようとしております。
+時の流れは早いですね。
+こうしてブログを書いている時は、忙しい日々を忘れ、
+自分の世界観を表現できる大切な時間です。
+さて、
+前回こちらのブログで紹介した下図の1自由度振動運動方程式を解くため …'/>
 <meta name = 'twitter:image' content = 'https://dshiroki.com/images/tree.png' />
 <link rel='apple-touch-icon' sizes='180x180' href='https://dshiroki.com/images/icons/apple-touch-icon.png'>
 <link rel='icon' type='image/png' sizes='32x32' href='https://dshiroki.com/images/icons/favicon-32x32.png'>
 <link rel='icon' type='image/png' sizes='16x16' href='https://dshiroki.com/images/icons/favicon-16x16.png'>
 <link rel='manifest' href='https://dshiroki.com/images/icons/site.webmanifest'>
 
-  <link rel='canonical' href='https://dshiroki.com/engineering/20231227/'>
+  <link rel='canonical' href='https://dshiroki.com/engineering/20240128/'>
   <link rel = 'stylesheet' href = 'https://dshiroki.com/css/styles.42db596b1300421b76166668f896d65a0e912909aa95394f74e207c69da0d0b652fe2ad414cb6b746661857c824297f791d6df38fce0872ba2a9ccaa421a6b89.css' integrity = 'sha512-QttZaxMAQht2FmZo&#43;JbWWg6RKQmqlTlPdOIHxp2g0LZS/irUFMtrdGZhhXyCQpf3kdbfOPzghyuiqcyqQhpriQ=='>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4285957234988519"
      crossorigin="anonymous"></script>
@@ -72,7 +78,7 @@
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>1自由度振動運動方程式の状態空間表現(続)</title>
+      <title>1自由度振動運動方程式の状態空間表現(続々)</title>
      <link rel="stylesheet" type="text/css" href="https://dshiroki.com/css/style.css">
       
       
@@ -98,13 +104,18 @@
     <main>
 
 <section class = 'post_header' style = 'background-image:url(https://dshiroki.com/images/tree.png);'>
-  <h1 class='post_title'>1自由度振動運動方程式の状態空間表現(続)</h1>
+  <h1 class='post_title'>1自由度振動運動方程式の状態空間表現(続々)</h1>
 </section>
 <div class = 'post'>
   <article class='post_content'><h1 id="1自由度振動運動方程式">1自由度振動運動方程式</h1>
 <p>こんにちは、データサイエンティストひろき🐶です。<br>
-前回<a href="https://dshiroki.com/engineering/20231031/">こちら</a>のブログで紹介した1自由度振動運動方程式を解くためのMatlabコード<br>
-もう少し変形して、このような、入力と出力の形にして、解いてみたいと思います。</p>
+2024年が始まって1ヶ月が過ぎようとしております。<br>
+時の流れは早いですね。<br>
+こうしてブログを書いている時は、忙しい日々を忘れ、<br>
+自分の世界観を表現できる大切な時間です。</p>
+<p>さて、<br>
+前回<a href="https://dshiroki.com/engineering/20231227/">こちら</a>のブログで紹介した下図の1自由度振動運動方程式を解くためのMatlabコード<br>
+ですが、</p>
 
 <figure >
     
@@ -114,60 +125,35 @@
 </figure>
 
 
-<p>まずこちらの1自由度振動モデル。<br>
-普通に数式で表すと下記のように運動方程式で書くことができます。</p>
-<p>$$\begin{align*}
-m\ddot{x}+c\dot{x}+kx&amp;=f \<br>
-\end{align*}$$</p>
-<p>ここで、</p>
+<p>入力fを</p>
 <p>$$\begin{align*}
 f=c\dot{y}+ky&amp; \<br>
 \end{align*}$$</p>
-<p>です。</p>
-<p>こちらのモデルを解くMatlabコードは、前回のコードを少し変更して、下記のようになります。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab"><span style="color:#75715e">% パラメータの定義</span>
-m = <span style="color:#ae81ff">1</span>; <span style="color:#75715e">% 質点 [kg]  ※適切な値を設定してください</span>
-k = <span style="color:#ae81ff">1</span>; <span style="color:#75715e">% バネのばね定数 [N/m] ※適切な値を設定してください</span>
-c = <span style="color:#ae81ff">1</span>; <span style="color:#75715e">% ダンパーの減衰係数 [N.s/m] ※適切な値を設定してください</span>
-
-
-<span style="color:#75715e">% 微分方程式の定義</span>
-A = [<span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span>; <span style="color:#f92672">-</span>k<span style="color:#f92672">/</span>m <span style="color:#f92672">-</span>c<span style="color:#f92672">/</span>m];
-B = [<span style="color:#ae81ff">0</span>; <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>m];
-C = [<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span>];
-D = <span style="color:#ae81ff">0</span>;
-
-<span style="color:#75715e">% 状態空間モデルの作成</span>
-sys = ss(A, B, C, D);
-
-<span style="color:#75715e">% 応答のシミュレーション</span>
-t = linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">1000</span>); <span style="color:#75715e">% シミュレーション時間 [s]</span>
-
-<span style="color:#75715e">%外力fをシステムに入力</span>
-Y=<span style="color:#ae81ff">1</span>;
-w0=sqrt(k<span style="color:#f92672">/</span>m);
-f = c<span style="color:#f92672">*</span>Y<span style="color:#f92672">*</span>w0<span style="color:#f92672">*</span>cos(w0<span style="color:#f92672">*</span>t)<span style="color:#f92672">+</span>k<span style="color:#f92672">*</span>Y <span style="color:#f92672">*</span> sin(w0<span style="color:#f92672">*</span>t); <span style="color:#75715e">% 外力の時系列</span>
-y = lsim(sys, f, t);
-
-<span style="color:#75715e">% 結果のプロット</span>
-figure;
-plot(t, y);
-xlabel(<span style="color:#e6db74">&#39;Time [s]&#39;</span>);
-ylabel(<span style="color:#e6db74">&#39;Displacement [m]&#39;</span>);
-title(<span style="color:#e6db74">&#39;Response of the physical model&#39;</span>);
-grid on;
-</code></pre></div><p>実行すると、下記のようなグラフが得られたのではないでしょうか。
-
-<figure >
-    
-        <img src="graph.png"  />
-    
-    
-</figure>
-
-</p>
-<p>このようにM K Cのシステムにfという入力を与えた時の出力xを求めることが簡単にかつ、システマチックにできるのが、現代制御の魅力です。<br>
-次回以降、もう少し複雑なシステムに応用していきたいと思います。</p>
+<p>のように力入力で与えています。　　</p>
+<p>しかし、本来は、図の通り、変位入力を与えた場合の状態空間表現が知りたくなると思います。</p>
+<p>そこで今回は、</p>
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+<ul style="color:red">
+<li>1自由度振動モデルに変位入力をインプットした時の振る舞いを状態空間表現で表す方法</li>
+</ul>
+</div>
+を紹介します。  
+<p>まずこちらの1自由度振動モデル。<br>
+下記のように運動方程式で書くことができます。</p>
+<p>$$\begin{align*}
+m\ddot{x}+c\dot{x}+kx&amp;=c\dot{y}+ky&amp; \<br>
+\end{align*}$$</p>
+<p>これをラプラス変換して、伝達関数G(=出力/入力)を求めてみます。</p>
+<p>$$\begin{align*}
+(ms^2+cs+k)x=(cs+k)y \<br>
+\end{align*}$$</p>
+<p>なので、</p>
+<p>$$\begin{align*}
+G=\frac{x}{y}=\frac{cs+k}{ms^2+cs+k} \<br>
+\end{align*}$$</p>
+<p>伝達関数がわかれば、それを状態空間表現に変換すればいいだけ。<br>
+実は変換式が存在します。</p>
+<p>次回以降、数式を用いて、詳しく説明していきたいと思います。</p>
 <p>それでは今日はこの辺で<br>
 最後まで読んでくださりありがとうございました。<br>
 Love&amp;Respect♡<br>
