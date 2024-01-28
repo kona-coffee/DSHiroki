@@ -25,17 +25,17 @@ $$\begin{align*} G=\frac{x}{y}=\frac{cs+k}{ms^2+cs+k} \
 \end{align*}$$
 を状態空間表現で記述してみたいと思います。
 まず、状態空間表現の基本形は下記2式（状態方程式と観測方程式）でした。
-$$ \boldsymbol{\dot{x}} \begin{align*} &amp;amp;= \end{align*} A \boldsymbol{x} + B u ・・・状態方程式 $$
-$$ y \begin{align*} &amp;amp;= \end{align*} C \boldsymbol{x} + D u ・・・観測方程式 $$
+$$ \mathbf{\dot{x}} \begin{align*} &amp;amp;= \end{align*} A \mathbf{x} + B u ・・・状態方程式 $$
+$$ y \begin{align*} &amp;amp;= \end{align*} C \mathbf{x} + D u ・・・観測方程式 $$
 ちなみに、
-$$ \boldsymbol{x} \begin{align*} &amp;amp;= \end{align*} \begin{pmatrix} x \\
+$$ \mathbf{x} \begin{align*} &amp;amp;= \end{align*} \begin{pmatrix} x \\
 \dot{x} \\
 \end{pmatrix} $$
 $$ u:入力
 $$ とします。
 つまり今回は、
 伝達関数Gから状態空間表現A,B,C,Dを求める方法   を紹介します。
-まず状態方程式 $$ \boldsymbol{\dot{x}} \begin{align*} &amp;amp;= \end{align*} A \boldsymbol{x} + B u $$</description>
+まず状態方程式 $$ \mathbf{\dot{x}} \begin{align*} &amp;amp;= \end{align*} A \mathbf{x} + B u $$</description>
     </item>
     
     <item>
