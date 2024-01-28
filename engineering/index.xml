@@ -5,7 +5,39 @@
     <link>https://dshiroki.com/engineering/</link>
     <description>Recent content in Engineerings on Data Scientist Hiroki&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 27 Jan 2024 23:55:29 +0900</lastBuildDate><atom:link href="https://dshiroki.com/engineering/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Jan 2024 21:35:46 +0900</lastBuildDate><atom:link href="https://dshiroki.com/engineering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>伝達関数と状態空間表現の関係</title>
+      <link>https://dshiroki.com/engineering/20240129/</link>
+      <pubDate>Sun, 28 Jan 2024 21:35:46 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/engineering/20240129/</guid>
+      <description>生きていくことって結構難しいなと感じることがあるかもしれません。
+たくさんやらなければいけないことがあって、プレッシャーを感じながら、
+ついつい焦ってしまい、失敗して、結局やり直し。
+「忙しい時こそ、焦らない。早くやってもいいけど、焦ってやらない」
+ほっとお茶でも飲んで、落ち着いて、やっていきましょう^^
+こんにちは、データサイエンティストひろき🐶です。
+伝達関数の状態空間表現 さて、
+前回こちらのブログで紹介した下図の1自由度振動モデル、
+ この伝達関数
+$$\begin{align*} G=\frac{x}{y}=\frac{cs+k}{ms^2+cs+k} \
+\end{align*}$$
+を状態空間表現で記述してみたいと思います。
+まず、状態空間表現の基本形は下記2式（状態方程式と観測方程式）でした。
+$$ \boldsymbol{\dot{x}} \begin{align*} &amp;amp;= \end{align*} A \boldsymbol{x} + B u ・・・状態方程式 $$
+$$ y \begin{align*} &amp;amp;= \end{align*} C \boldsymbol{x} + D u ・・・観測方程式 $$
+ちなみに、
+$$ \boldsymbol{x} \begin{align*} &amp;amp;= \end{align*} \begin{pmatrix} x \\
+\dot{x} \\
+\end{pmatrix} $$
+$$ u:入力
+$$ とします。
+つまり今回は、
+伝達関数Gから状態空間表現A,B,C,Dを求める方法   を紹介します。
+まず状態方程式 $$ \boldsymbol{\dot{x}} \begin{align*} &amp;amp;= \end{align*} A \boldsymbol{x} + B u $$</description>
+    </item>
+    
     <item>
       <title>1自由度振動運動方程式の状態空間表現(続々)</title>
       <link>https://dshiroki.com/engineering/20240128/</link>

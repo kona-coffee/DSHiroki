@@ -2,11 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://dshiroki.com/engineering/20240128/</loc>
-    <lastmod>2024-01-27T23:55:29+09:00</lastmod>
-  </url><url>
     <loc>https://dshiroki.com/categories/</loc>
-    <lastmod>2024-01-27T23:55:29+09:00</lastmod>
+    <lastmod>2024-01-28T21:35:46+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -19,7 +16,7 @@
                 />
   </url><url>
     <loc>https://dshiroki.com/</loc>
-    <lastmod>2024-01-27T23:55:29+09:00</lastmod>
+    <lastmod>2024-01-28T21:35:46+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -32,7 +29,7 @@
                 />
   </url><url>
     <loc>https://dshiroki.com/categories/engineering/</loc>
-    <lastmod>2024-01-27T23:55:29+09:00</lastmod>
+    <lastmod>2024-01-28T21:35:46+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -45,7 +42,7 @@
                 />
   </url><url>
     <loc>https://dshiroki.com/engineering/</loc>
-    <lastmod>2024-01-27T23:55:29+09:00</lastmod>
+    <lastmod>2024-01-28T21:35:46+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -56,6 +53,12 @@
                 hreflang="ja"
                 href="https://dshiroki.com/engineering/"
                 />
+  </url><url>
+    <loc>https://dshiroki.com/engineering/20240129/</loc>
+    <lastmod>2024-01-28T21:35:46+09:00</lastmod>
+  </url><url>
+    <loc>https://dshiroki.com/engineering/20240128/</loc>
+    <lastmod>2024-01-27T23:55:29+09:00</lastmod>
   </url><url>
     <loc>https://dshiroki.com/engineering/20231227/</loc>
     <lastmod>2023-12-27T23:50:43+09:00</lastmod>
