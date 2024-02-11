@@ -14,7 +14,7 @@
 
 <head>
   <meta name="google-site-verification" content="jMgk06_1fynaHhhz3MtyldzvpUHakxxCsYYFeDtN1JQ" />
-  <title>伝達関数と状態空間表現の関係 | Data Scientist Hiroki&#39;s Blog</title>
+  <title>Matlabのtf2ssの謎 | Data Scientist Hiroki&#39;s Blog</title>
   <meta charset='utf-8'>
   <meta name="generator" content="Hugo 0.88.1" />
   <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
@@ -34,37 +34,43 @@
 
 <meta property = 'og:locale' content = 'en_US' />
 <meta property="og:type" content="article">
-<meta property = 'og:title' content = '伝達関数と状態空間表現の関係' />
-<meta name="description" content="生きていくことって結構難しいなと感じることがあるかもしれません。
-たくさんやらなければいけないことがあって、プレッシャーを感じながら、
-ついつい焦ってしまい、失敗して、結局やり直し。
-「忙しい時こそ、焦らない。早くやってもいいけど、焦ってやらない」
-ほっとお茶でも飲んで、落ち着いて、やっていきましょう^^
-こんにちは、 …">
-<meta property = 'og:description' content = '生きていくことって結構難しいなと感じることがあるかもしれません。
-たくさんやらなければいけないことがあって、プレッシャーを感じながら、
-ついつい焦ってしまい、失敗して、結局やり直し。
-「忙しい時こそ、焦らない。早くやってもいいけど、焦ってやらない」
-ほっとお茶でも飲んで、落ち着いて、やっていきましょう^^
-こんにちは、 …'>
-<meta property = 'og:url' content = 'https://dshiroki.com/engineering/20240129/' />
-<meta property = 'og:image' content = 'https://dshiroki.com/images/ss.png'/>
+<meta property = 'og:title' content = 'Matlabのtf2ssの謎' />
+<meta name="description" content="Matlabが好きだ。
+なぜなら、それはシンプルで、必要最低限のプログラミング言語習得で、
+大きなことが簡単にできるからだ。
+それでいて、構造的で、システマチック。
+「そなたは美しい」
+こんにちは、データサイエンティストひろき🐶です。
+伝達関数の状態空間表現tf2ssの謎 さて、
+前回こちらのブログで紹介した伝達関数か …">
+<meta property = 'og:description' content = 'Matlabが好きだ。
+なぜなら、それはシンプルで、必要最低限のプログラミング言語習得で、
+大きなことが簡単にできるからだ。
+それでいて、構造的で、システマチック。
+「そなたは美しい」
+こんにちは、データサイエンティストひろき🐶です。
+伝達関数の状態空間表現tf2ssの謎 さて、
+前回こちらのブログで紹介した伝達関数か …'>
+<meta property = 'og:url' content = 'https://dshiroki.com/engineering/20240211/' />
+<meta property = 'og:image' content = 'https://dshiroki.com/images/matlab.png'/>
 <meta name = 'twitter:card' content = 'summary_large_image' />
 <meta name = 'twitter:creator' content = ''>
-<meta name = 'twitter:title' content = '伝達関数と状態空間表現の関係' />
-<meta property = 'twitter:description'  content = '生きていくことって結構難しいなと感じることがあるかもしれません。
-たくさんやらなければいけないことがあって、プレッシャーを感じながら、
-ついつい焦ってしまい、失敗して、結局やり直し。
-「忙しい時こそ、焦らない。早くやってもいいけど、焦ってやらない」
-ほっとお茶でも飲んで、落ち着いて、やっていきましょう^^
-こんにちは、 …'/>
-<meta name = 'twitter:image' content = 'https://dshiroki.com/images/ss.png' />
+<meta name = 'twitter:title' content = 'Matlabのtf2ssの謎' />
+<meta property = 'twitter:description'  content = 'Matlabが好きだ。
+なぜなら、それはシンプルで、必要最低限のプログラミング言語習得で、
+大きなことが簡単にできるからだ。
+それでいて、構造的で、システマチック。
+「そなたは美しい」
+こんにちは、データサイエンティストひろき🐶です。
+伝達関数の状態空間表現tf2ssの謎 さて、
+前回こちらのブログで紹介した伝達関数か …'/>
+<meta name = 'twitter:image' content = 'https://dshiroki.com/images/matlab.png' />
 <link rel='apple-touch-icon' sizes='180x180' href='https://dshiroki.com/images/icons/apple-touch-icon.png'>
 <link rel='icon' type='image/png' sizes='32x32' href='https://dshiroki.com/images/icons/favicon-32x32.png'>
 <link rel='icon' type='image/png' sizes='16x16' href='https://dshiroki.com/images/icons/favicon-16x16.png'>
 <link rel='manifest' href='https://dshiroki.com/images/icons/site.webmanifest'>
 
-  <link rel='canonical' href='https://dshiroki.com/engineering/20240129/'>
+  <link rel='canonical' href='https://dshiroki.com/engineering/20240211/'>
   <link rel = 'stylesheet' href = 'https://dshiroki.com/css/styles.42db596b1300421b76166668f896d65a0e912909aa95394f74e207c69da0d0b652fe2ad414cb6b746661857c824297f791d6df38fce0872ba2a9ccaa421a6b89.css' integrity = 'sha512-QttZaxMAQht2FmZo&#43;JbWWg6RKQmqlTlPdOIHxp2g0LZS/irUFMtrdGZhhXyCQpf3kdbfOPzghyuiqcyqQhpriQ=='>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4285957234988519"
      crossorigin="anonymous"></script>
@@ -75,7 +81,7 @@
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>伝達関数と状態空間表現の関係</title>
+      <title>Matlabのtf2ssの謎</title>
      <link rel="stylesheet" type="text/css" href="https://dshiroki.com/css/style.css">
       
       
@@ -100,19 +106,19 @@
 
     <main>
 
-<section class = 'post_header' style = 'background-image:url(https://dshiroki.com/images/ss.png);'>
-  <h1 class='post_title'>伝達関数と状態空間表現の関係</h1>
+<section class = 'post_header' style = 'background-image:url(https://dshiroki.com/images/matlab.png);'>
+  <h1 class='post_title'>Matlabのtf2ssの謎</h1>
 </section>
 <div class = 'post'>
-  <article class='post_content'><p>生きていくことって結構難しいなと感じることがあるかもしれません。<br>
-たくさんやらなければいけないことがあって、プレッシャーを感じながら、<br>
-ついつい焦ってしまい、失敗して、結局やり直し。<br>
-「忙しい時こそ、焦らない。早くやってもいいけど、焦ってやらない」<br>
-ほっとお茶でも飲んで、落ち着いて、やっていきましょう^^</p>
+  <article class='post_content'><p>Matlabが好きだ。<br>
+なぜなら、それはシンプルで、必要最低限のプログラミング言語習得で、<br>
+大きなことが簡単にできるからだ。<br>
+それでいて、構造的で、システマチック。<br>
+「そなたは美しい」</p>
 <p>こんにちは、データサイエンティストひろき🐶です。</p>
-<h1 id="伝達関数の状態空間表現">伝達関数の状態空間表現</h1>
+<h1 id="伝達関数の状態空間表現tf2ssの謎">伝達関数の状態空間表現tf2ssの謎</h1>
 <p>さて、<br>
-前回<a href="https://dshiroki.com/engineering/20240128/">こちら</a>のブログで紹介した下図の1自由度振動モデル、</p>
+前回<a href="https://dshiroki.com/engineering/20240129/">こちら</a>のブログで紹介した伝達関数から状態空間表現の係数(A,B,C,D)を求める便利な関数“tf2ss”とても便利です。</p>
 
 <figure >
     
@@ -122,139 +128,60 @@
 </figure>
 
 
-<p>この伝達関数</p>
+<p>例えば、上記モデルの伝達関数から状態空間表現の係数を求めてみましょう。</p>
 <p>$$\begin{align*}
 G=\frac{x}{y}=\frac{cs+k}{ms^2+cs+k} \<br>
 \end{align*}$$</p>
-<p>を状態空間表現で記述してみたいと思います。</p>
-<p>まず、状態空間表現の基本形は下記2式（状態方程式と観測方程式）でした。</p>
+<p>使い方は簡単。<br>
+例えば下記のようなMatlabコードになります。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab"><span style="color:#75715e">% パラメータの定義</span>
+m = <span style="color:#ae81ff">2</span>; <span style="color:#75715e">% 質点 [kg]  </span>
+k = <span style="color:#ae81ff">1</span>; <span style="color:#75715e">% バネのばね定数 [N/m]</span>
+c = <span style="color:#ae81ff">3</span>; <span style="color:#75715e">% ダンパーの減衰係数 [N.s/m]</span>
+
+num=[c k];
+den=[m c k];
+[A,B,C,D]=tf2ss(num,den);
+
+<span style="color:#75715e">% 状態空間モデルの作成</span>
+sys = ss(A, B, C, D);
+
+
+<span style="color:#75715e">% 結果のプロット</span>
+figure;
+bode(sys)
+grid on;
+</code></pre></div><p>ここでtf2ssで出力されたA,B,C,Dの中身をみてみると、</p>
 <p>$$
-\mathbf{\dot{x}}
-\begin{align*}
-&amp;=
-\end{align*}
 A
-\mathbf{x}
-+
-B
-u
-　　　　　　　・・・状態方程式
-$$</p>
-<p>$$
-y
-\begin{align*}
-&amp;=
-\end{align*}
-C
-\mathbf{x}
-+
-D
-u
-　　　　　　　・・・観測方程式
-$$</p>
-<p>ちなみに、</p>
-<p>$$
-\mathbf{x}
 \begin{align*}
 &amp;=
 \end{align*}
 \begin{pmatrix}
-x \\<br>
-\dot{x} \\<br>
-\end{pmatrix}          <br>
-$$</p>
+-1.5 &amp; -0.5 \\<br>
+1 &amp; 0 \\<br>
+\end{pmatrix}$$</p>
 <p>$$
-u:入力<br>
+B
+\begin{align*}
+&amp;=
+\end{align*}
+\begin{pmatrix}
+1 \\<br>
+0 \\<br>
+\end{pmatrix}$$</p>
+<p>$$
+C
+\begin{align*}
+&amp;=
+\end{align*}
+\begin{pmatrix}
+1.5 &amp; 0.5 \\<br>
+\end{pmatrix}$$<br>
 $$
-とします。</p>
-<p>つまり今回は、</p>
-<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
-<ul style="color:red">
-<li>伝達関数Gから状態空間表現A,B,C,Dを求める方法</li>
-</ul>
-</div>
-<p>を紹介します。</p>
-<p>まず状態方程式
-$$
-\mathbf{\dot{x}}
-\begin{align*}
-&amp;=
-\end{align*}
-A
-\mathbf{x}
-+
-B
-u
-$$<br>
-をラプラス変換します。</p>
-<p>下記のようにラプラスの演算子sを用いて書くことができます。</p>
-<p>$$
-s\mathbf{x}
-\begin{align*}
-&amp;=
-\end{align*}
-A
-\mathbf{x}
-+
-B
-u
+D=0
 $$</p>
-<p>$$
-s\mathbf{x}
--A
-\mathbf{x}
-\begin{align*}
-&amp;=
-\end{align*}
-B
-u
-$$</p>
-<p>$$
-（s\mathbf{I}
--A）
-\mathbf{x}
-\begin{align*}
-&amp;=
-\end{align*}
-B
-u
-$$</p>
-<p>$$
-\mathbf{x}
-\begin{align*}
-&amp;=
-\end{align*}
-（s\mathbf{I}
--A）^{-1}
-B
-u
-$$</p>
-<p>これを観測方程式へ代入すると、</p>
-<p>$$
-y
-\begin{align*}
-&amp;=
-\end{align*}
-\lbrace
-\mathbf{C}
-（s\mathbf{I}
--A）^{-1}
-B
-+D
-\rbrace
-u
-$$</p>
-<p>uが入力、yが出力なので、伝達関数Gは</p>
-<p>$$\begin{align*}
-G=\mathbf{C}
-（s\mathbf{I}
--A）^{-1}
-B
-+D \<br>
-\end{align*}$$</p>
-<p>となります。</p>
-<p>AとBは<a href="https://dshiroki.com/engineering/20231031/">こちらの記事</a>で求めた下記を使えることが、<br>
-<a href="https://dshiroki.com/engineering/20231227/">こちらの記事</a>でChatGPTが答えてくれています。</p>
+<p>となっており、<a href="https://dshiroki.com/engineering/20231031/">前回のブログ</a>のA,B,C,Dと様子が違います。</p>
 <p>$$
 A
 \begin{align*}
@@ -273,14 +200,84 @@ B
 0 \\<br>
 1/m \\<br>
 \end{pmatrix}$$</p>
-<p>また、伝達関数がプロパー（分子の次数が分母の次数より小さいこと）の時はD=0となることがわかっている。<br>
-残るはC。元々の数理モデルから求めた伝達関数G</p>
-<p>$$\begin{align*}
-G=\frac{x}{y}=\frac{cs+k}{ms^2+cs+k} \<br>
-\end{align*}$$</p>
-<p>と比較して、Cを求めていきます。</p>
-<p>つまり、<br>
+<p>$$
+C
+\begin{align*}
+&amp;=
+\end{align*}
+\begin{pmatrix}
+k &amp; c \\<br>
+\end{pmatrix}$$<br>
 $$
+D=0
+$$
+と様子が違います。</p>
+<p>今回の記事では、</p>
+  <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+  <ul style="color:red">
+  <li>伝達関数Gからtf2ssで求めた状態空間パラメータA,B,C,Dを確かめる</li>
+  </ul>
+  </div>
+<p>を紹介します。</p>
+<p>まずは下記コードで確かめてみます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Matlab" data-lang="Matlab">  <span style="color:#75715e">% パラメータの定義</span>
+m = <span style="color:#ae81ff">2</span>; <span style="color:#75715e">% 質点 [kg]  ※適切な値を設定してください</span>
+k = <span style="color:#ae81ff">1</span>; <span style="color:#75715e">% バネのばね定数 [N/m] ※適切な値を設定してください</span>
+c = <span style="color:#ae81ff">3</span>; <span style="color:#75715e">% ダンパーの減衰係数 [N.s/m] ※適切な値を設定してください</span>
+
+num=[c k];
+den=[m c k];
+[A,B,C,D]=tf2ss(num,den)
+
+<span style="color:#75715e">% 状態空間モデルの作成</span>
+sys = ss(A, B, C, D);
+
+A1 = [<span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span>; <span style="color:#f92672">-</span>k<span style="color:#f92672">/</span>m <span style="color:#f92672">-</span>c<span style="color:#f92672">/</span>m];
+B1 = [<span style="color:#ae81ff">0</span>; <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>m];
+C1 = [k c];
+D1 = <span style="color:#ae81ff">0</span>;
+
+sys1=ss(A1,B1,C1,D1)
+
+
+<span style="color:#75715e">% 結果のプロット</span>
+figure;
+bode(sys)
+hold on
+bode(sys1)
+grid on;
+legend(&#34;sys&#34;,&#34;sys1&#34;)
+</code></pre></div><p>結果は下記の通り、ぴたりと重なります。</p>
+
+<figure >
+    
+        <img src="sys.png"  />
+    
+    
+</figure>
+
+
+<p>次に手計算で確かめてみます。<br>
+Matlabの&quot;tf2ss&quot;で求めたABCDは下記の形をしています。</p>
+<p>$$
+A
+\begin{align*}
+&amp;=
+\end{align*}
+\begin{pmatrix}
+a1 &amp; a2 \\<br>
+1 &amp; 0 \\<br>
+\end{pmatrix}$$</p>
+<p>$$
+B
+\begin{align*}
+&amp;=
+\end{align*}
+\begin{pmatrix}
+1 \\<br>
+0 \\<br>
+\end{pmatrix}$$</p>
+<p>$$
 C
 \begin{align*}
 &amp;=
@@ -288,7 +285,10 @@ C
 \begin{pmatrix}
 c1 &amp; c2 \\<br>
 \end{pmatrix}$$<br>
-と置いて、上記A~Dを下記Gへ代入して</p>
+$$
+D=0
+$$</p>
+<p>そこで、上記ABCDを下記伝達関数G</p>
 <p>$$\begin{align*}
 G=\mathbf{C}
 （s\mathbf{I}
@@ -296,29 +296,16 @@ G=\mathbf{C}
 B
 +D \<br>
 \end{align*}$$</p>
-<p>伝達関数<br>
+<p>へ代入した値と、モデルから直接求めた下記伝達関数<br>
 $$\begin{align*}
 G=\frac{x}{y}=\frac{cs+k}{ms^2+cs+k} \<br>
 \end{align*}$$</p>
-<p>と係数を比較します。実際に紙と鉛筆で手計算してみてください。</p>
-<p>すると、
-$$
-C
-\begin{align*}
-&amp;=
-\end{align*}
-\begin{pmatrix}
-k &amp; c \\<br>
-\end{pmatrix}$$</p>
-<p>となります。<br>
-そしてMatlabには、<br>
-伝達関数から状態空間表現の係数(A,B,C,D)を求める便利な関数 &ldquo;tf2ss&rdquo;<br>
-たるものがあります。</p>
-<p>まじ便利です。<br>
-詳しい使い方は<a href="https://jp.mathworks.com/help/signal/ref/tf2ss.html">こちら</a>を参照ください。</p>
-<p>もし詳しい式変形が知りたければ、<br>
-ChatGPTに「matlabのtf2ssのアルゴリズムは？」と聞いてみてください。<br>
-きっと<a href="https://chat.openai.com/share/ba507a41-dc48-4bc8-8f31-b512b0ae29f6">答え</a>がかえってくるはず。</p>
+<p>を比較して、a1 a2 c1 c2を求めると、
+確かに、tf2ssの結果と一致することがわかります。<br>
+手計算でやってみてくださいね♡</p>
+<p>最後に、なぜtf2ssで求めたABCDがこのような形をしているのか？</p>
+<p><INS>それは一般に、伝達関数から状態空間表現に変換した際の表し方は一通りではなく、
+様々な表現方法があるからです。</INS></p>
 <p>それでは今日はこの辺で<br>
 最後まで読んでくださりありがとうございました。<br>
 Love&amp;Respect♡<br>

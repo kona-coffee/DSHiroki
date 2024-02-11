@@ -5,7 +5,31 @@
     <link>https://dshiroki.com/engineering/</link>
     <description>Recent content in Engineerings on Data Scientist Hiroki&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 28 Jan 2024 21:35:46 +0900</lastBuildDate><atom:link href="https://dshiroki.com/engineering/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Feb 2024 16:35:46 +0900</lastBuildDate><atom:link href="https://dshiroki.com/engineering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Matlabのtf2ssの謎</title>
+      <link>https://dshiroki.com/engineering/20240211/</link>
+      <pubDate>Sun, 11 Feb 2024 16:35:46 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/engineering/20240211/</guid>
+      <description>Matlabが好きだ。
+なぜなら、それはシンプルで、必要最低限のプログラミング言語習得で、
+大きなことが簡単にできるからだ。
+それでいて、構造的で、システマチック。
+「そなたは美しい」
+こんにちは、データサイエンティストひろき🐶です。
+伝達関数の状態空間表現tf2ssの謎 さて、
+前回こちらのブログで紹介した伝達関数から状態空間表現の係数(A,B,C,D)を求める便利な関数“tf2ss”とても便利です。
+ 例えば、上記モデルの伝達関数から状態空間表現の係数を求めてみましょう。
+$$\begin{align*} G=\frac{x}{y}=\frac{cs+k}{ms^2+cs+k} \
+\end{align*}$$
+使い方は簡単。
+例えば下記のようなMatlabコードになります。
+% パラメータの定義 m = 2; % 質点 [kg]  k = 1; % バネのばね定数 [N/m] c = 3; % ダンパーの減衰係数 [N.s/m] num=[c k]; den=[m c k]; [A,B,C,D]=tf2ss(num,den); % 状態空間モデルの作成 sys = ss(A, B, C, D); % 結果のプロット figure; bode(sys) grid on; ここでtf2ssで出力されたA,B,C,Dの中身をみてみると、
+$$ A \begin{align*} &amp;amp;= \end{align*} \begin{pmatrix} -1.5 &amp;amp; -0.5 \\
+1 &amp;amp; 0 \\</description>
+    </item>
+    
     <item>
       <title>伝達関数と状態空間表現の関係</title>
       <link>https://dshiroki.com/engineering/20240129/</link>
