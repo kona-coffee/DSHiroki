@@ -5,7 +5,18 @@
     <link>https://dshiroki.com/en/engineering/</link>
     <description>Recent content in Engineerings on Data Scientist Hiroki&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 27 Dec 2023 23:50:43 +0900</lastBuildDate><atom:link href="https://dshiroki.com/en/engineering/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Mar 2024 23:55:29 +0900</lastBuildDate><atom:link href="https://dshiroki.com/en/engineering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>State-Space Representation of Single-Degree-of-Freedom Vibration Equation(Ⅲ)</title>
+      <link>https://dshiroki.com/en/engineering/20240128/</link>
+      <pubDate>Mon, 04 Mar 2024 23:55:29 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/engineering/20240128/</guid>
+      <description>Single Degree of Freedom Vibrational Motion Equation Hello, I&amp;rsquo;m Hiroki🐶, a data scientist.
+A month has almost passed since the start of 2024. Time flies, doesn&amp;rsquo;t it? Writing this blog allows me to forget about my busy days and express my own worldview, which is an important time for me.
+Now, in my previous blog, I introduced the Matlab code for solving the single degree of freedom vibrational motion equation shown in the diagram below:</description>
+    </item>
+    
     <item>
       <title>State-Space Representation of Single-Degree-of-Freedom Vibration Equation(II)</title>
       <link>https://dshiroki.com/en/engineering/20231227/</link>

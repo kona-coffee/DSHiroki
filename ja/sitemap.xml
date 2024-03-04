@@ -65,6 +65,16 @@
   </url><url>
     <loc>https://dshiroki.com/engineering/20240128/</loc>
     <lastmod>2024-01-27T23:55:29+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://dshiroki.com/en/engineering/20240128/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://dshiroki.com/engineering/20240128/"
+                />
   </url><url>
     <loc>https://dshiroki.com/engineering/20231227/</loc>
     <lastmod>2023-12-27T23:50:43+09:00</lastmod>

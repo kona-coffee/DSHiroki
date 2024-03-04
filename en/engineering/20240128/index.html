@@ -14,7 +14,7 @@
 
 <head>
   <meta name="google-site-verification" content="jMgk06_1fynaHhhz3MtyldzvpUHakxxCsYYFeDtN1JQ" />
-  <title>Data Scientist Hiroki&#39;s Blog | Data Scientist Hiroki&#39;s Blog</title>
+  <title>State-Space Representation of Single-Degree-of-Freedom Vibration Equation(Ⅲ) | Data Scientist Hiroki&#39;s Blog</title>
   <meta charset='utf-8'>
   <meta name="generator" content="Hugo 0.88.1" />
   <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
@@ -33,23 +33,26 @@
 
 
 <meta property = 'og:locale' content = 'en_US' />
-<meta property="og:type" content="website">
-<meta property = 'og:title' content = 'Data Scientist Hiroki&#39;s Blog' />
-<meta name="description" content="">
-<meta property = 'og:description' content = ''>
-<meta property = 'og:url' content = 'https://dshiroki.com/en/' />
-<meta property = 'og:image' content = 'images/%!s()'/>
+<meta property="og:type" content="article">
+<meta property = 'og:title' content = 'State-Space Representation of Single-Degree-of-Freedom Vibration Equation(Ⅲ)' />
+<meta name="description" content="Single Degree of Freedom Vibrational Motion Equation Hello, I&rsquo;m Hiroki🐶, a data scientist.
+A month has almost passed since the start of 2024. Time flies, …">
+<meta property = 'og:description' content = 'Single Degree of Freedom Vibrational Motion Equation Hello, I&rsquo;m Hiroki🐶, a data scientist.
+A month has almost passed since the start of 2024. Time flies, …'>
+<meta property = 'og:url' content = 'https://dshiroki.com/en/engineering/20240128/' />
+<meta property = 'og:image' content = 'https://dshiroki.com/images/tree.png'/>
 <meta name = 'twitter:card' content = 'summary_large_image' />
 <meta name = 'twitter:creator' content = ''>
-<meta name = 'twitter:title' content = 'Data Scientist Hiroki&#39;s Blog' />
-<meta property = 'twitter:description'  content = ''/>
-<meta name = 'twitter:image' content = 'images/%!s()' />
+<meta name = 'twitter:title' content = 'State-Space Representation of Single-Degree-of-Freedom Vibration Equation(Ⅲ)' />
+<meta property = 'twitter:description'  content = 'Single Degree of Freedom Vibrational Motion Equation Hello, I&rsquo;m Hiroki🐶, a data scientist.
+A month has almost passed since the start of 2024. Time flies, …'/>
+<meta name = 'twitter:image' content = 'https://dshiroki.com/images/tree.png' />
 <link rel='apple-touch-icon' sizes='180x180' href='https://dshiroki.com/images/icons/apple-touch-icon.png'>
 <link rel='icon' type='image/png' sizes='32x32' href='https://dshiroki.com/images/icons/favicon-32x32.png'>
 <link rel='icon' type='image/png' sizes='16x16' href='https://dshiroki.com/images/icons/favicon-16x16.png'>
 <link rel='manifest' href='https://dshiroki.com/images/icons/site.webmanifest'>
 
-  <link rel='canonical' href='https://dshiroki.com/en/'>
+  <link rel='canonical' href='https://dshiroki.com/en/engineering/20240128/'>
   <link rel = 'stylesheet' href = 'https://dshiroki.com/css/styles.42db596b1300421b76166668f896d65a0e912909aa95394f74e207c69da0d0b652fe2ad414cb6b746661857c824297f791d6df38fce0872ba2a9ccaa421a6b89.css' integrity = 'sha512-QttZaxMAQht2FmZo&#43;JbWWg6RKQmqlTlPdOIHxp2g0LZS/irUFMtrdGZhhXyCQpf3kdbfOPzghyuiqcyqQhpriQ=='>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4285957234988519"
      crossorigin="anonymous"></script>
@@ -60,7 +63,7 @@
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Data Scientist Hiroki&#39;s Blog</title>
+      <title>State-Space Representation of Single-Degree-of-Freedom Vibration Equation(Ⅲ)</title>
      <link rel="stylesheet" type="text/css" href="https://dshiroki.com/css/style.css">
       
       
@@ -84,80 +87,60 @@
 
 
     <main>
-  
-<div class = 'intro'>
-  <div class = 'intro_inner'>
-    <div><div class = 'waves'>
-  <canvas id = 'waves' class = 'waves_inner'></canvas>
-</div>
-<script src =  'https://dshiroki.com/js/sine-waves.min.js'></script>
-<script src = 'https://dshiroki.com/js/audio.js'></script>
-</div>
-    <section>
-      <h1 class = 'intro_headline'>Data Scientist Hiroki&#39;s Blog</h1>
-      <p class = 'intro_desc'></p>
-    </section>
-  </div>
-</div>
 
-<ul class='posts wrap' id = 'posts'>
-<li class = 'post_item fp'>
-  <a class = 'post_card' href='https://dshiroki.com/en/finance/getfreddata/' title = 'How to get economy index data from FRED web site' style = 'background-image: url(https://dshiroki.com/images/22234709_s.jpg);'>
-  </a>
-  <div class = 'excerpt'>
-    <div class = 'excerpt_meta'><div class = 'copy' data-share = 'Copy' data-copied = 'Copied'><svg>
-  <use xlink:href="#copy"></use>
-</svg>
-</div>
+<section class = 'post_header' style = 'background-image:url(https://dshiroki.com/images/tree.png);'>
+  <h1 class='post_title'>State-Space Representation of Single-Degree-of-Freedom Vibration Equation(Ⅲ)</h1>
+</section>
+<div class = 'post'>
+  <article class='post_content'><h1 id="single-degree-of-freedom-vibrational-motion-equation">Single Degree of Freedom Vibrational Motion Equation</h1>
+<p>Hello, I&rsquo;m Hiroki🐶, a data scientist.<br>
+A month has almost passed since the start of 2024.
+Time flies, doesn&rsquo;t it? Writing this blog allows me to forget about my busy days and express my own worldview, which is an important time for me.</p>
+<p>Now, in <a href="https://dshiroki.com/engineering/20231227/">my previous blog</a>, I introduced the Matlab code for solving the single degree of freedom vibrational motion equation shown in the diagram below:</p>
 
-    </div>
-    <h3 class = 'post_link'>
-      <a href='https://dshiroki.com/en/finance/getfreddata/'>How to get economy index data from FRED web site</a>
-    </h3>
-    <p class = 'pale'>How to get economy index data from FRED web site Hello this is data scientist HIROKI. …</p>
-  </div>
-</li>
+<figure >
+    
+        <img src="OneDofModel.png"  />
+    
+    
+</figure>
 
-<li class = 'post_item fp'>
-  <a class = 'post_card' href='https://dshiroki.com/en/finance/getstockdata/' title = 'The way how to get daily stock data from Yahoo finance by only one line Matlab code' style = 'background-image: url(https://dshiroki.com/images/669807_s.jpg);'>
-  </a>
-  <div class = 'excerpt'>
-    <div class = 'excerpt_meta'><div class = 'copy' data-share = 'Copy' data-copied = 'Copied'><svg>
-  <use xlink:href="#copy"></use>
-</svg>
-</div>
 
-    </div>
-    <h3 class = 'post_link'>
-      <a href='https://dshiroki.com/en/finance/getstockdata/'>The way how to get daily stock data from Yahoo finance by only one line Matlab code</a>
-    </h3>
-    <p class = 'pale'>The way how to get daily stock data from Yahoo finance by only one line Matlab code Hello …</p>
-  </div>
-</li>
-
+<p>The input f is given as a force input like this:</p>
+<p>$$\begin{align*}
+f=c\dot{y}+ky&amp; \<br>
+\end{align*}$$</p>
+<p>However, I believe you might be interested in the state space representation when displacement input is provided, as shown in the diagram.</p>
+<p>Therefore, this time,</p>
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+<ul style="color:red">
+<li>I will introduce how to express the behavior of a single degree of freedom vibration model when displacement input is provided, using state space representation</li>
 </ul>
-    <ul class="pagination pagination-default">
-      <li class="page-item">
-        <a href="https://dshiroki.com/en/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
-      </li>
-      <li class="page-item">
-        <a href="https://dshiroki.com/en/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
-      </li>
-      <li class="page-item">
-        <a href="https://dshiroki.com/en/" aria-label="Page 1" class="page-link" role="button">1</a>
-      </li>
-      <li class="page-item active">
-        <a href="#" aria-current="page" aria-label="Page 2" class="page-link" role="button">2</a>
-      </li>
-      <li class="page-item disabled">
-        <a href="#" aria-disabled="true" aria-label="Next" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;</span></a>
-      </li>
-      <li class="page-item disabled">
-        <a href="#" aria-disabled="true" aria-label="Last" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;&raquo;</span></a>
-      </li>
-    </ul>
+</div>
+<p>First, this single degree of freedom vibration model can be written using the motion equation as follows:</p>
+<p>$$\begin{align*}
+m\ddot{x}+c\dot{x}+kx&amp;=c\dot{y}+ky&amp; \<br>
+\end{align*}$$</p>
+<p>If we apply the Laplace transform and find the transfer function G (output/input), we get:</p>
+<p>$$\begin{align*}
+(ms^2+cs+k)x=(cs+k)y \<br>
+\end{align*}$$</p>
+<p>Therefore,</p>
+<p>$$\begin{align*}
+G=\frac{x}{y}=\frac{cs+k}{ms^2+cs+k} \<br>
+\end{align*}$$</p>
+<p>Once the transfer function is known, all that&rsquo;s left is to convert it into a state space representation. Actually, there is a formula for this conversion.</p>
+<p>In the future posts, I plan to explain this in detail using equations.</p>
+<p>That&rsquo;s all for today. Thank you very much for reading until the end.</p>
+<p>Love&amp;Respect♡</p>
+<p>Hiroki🐶</p>
 
-</main><svg width="0" height="0" class="hidden">
+    
+  </article>
+  
+</div>
+<script src = 'https://dshiroki.com/js/autosize.min.js'></script>
+<script src = 'https://dshiroki.com/js/timeago.js'></script></main><svg width="0" height="0" class="hidden">
   <symbol viewBox="0 0 699.428 699.428" xmlns="http://www.w3.org/2000/svg" id="copy">
     <path d="M502.714 0H240.428C194.178 0 153 42.425 153 87.429l-25.267.59c-46.228 0-84.019 41.834-84.019 86.838V612c0 45.004 41.179 87.428 87.429 87.428H459c46.249 0 87.428-42.424 87.428-87.428h21.857c46.25 0 87.429-42.424 87.429-87.428v-349.19zM459 655.715H131.143c-22.95 0-43.714-21.441-43.714-43.715V174.857c0-22.272 18.688-42.993 41.638-42.993l23.933-.721v393.429C153 569.576 194.178 612 240.428 612h262.286c0 22.273-20.765 43.715-43.714 43.715zm153-131.143c0 22.271-20.765 43.713-43.715 43.713H240.428c-22.95 0-43.714-21.441-43.714-43.713V87.429c0-22.272 20.764-43.714 43.714-43.714H459c-.351 50.337 0 87.975 0 87.975 0 45.419 40.872 86.882 87.428 86.882H612zm-65.572-349.715c-23.277 0-43.714-42.293-43.714-64.981V44.348L612 174.857zm-43.714 131.537H306c-12.065 0-21.857 9.77-21.857 21.835s9.792 21.835 21.857 21.835h196.714c12.065 0 21.857-9.771 21.857-21.835 0-12.065-9.792-21.835-21.857-21.835zm0 109.176H306c-12.065 0-21.857 9.77-21.857 21.834 0 12.066 9.792 21.836 21.857 21.836h196.714c12.065 0 21.857-9.77 21.857-21.836 0-12.064-9.792-21.834-21.857-21.834z"
     ></path>

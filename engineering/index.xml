@@ -14,7 +14,7 @@
       <guid>https://dshiroki.com/engineering/20240304/</guid>
       <description>chatGPTの後続Gemini どちらが性能良いの？ 両者に聞いてみました。「chatGPTとGeminiはどちらが性能高いの？」
 chatGPTは2023年4月時点までの情報なので、Geminiという文字は辞書にはなかったようです。一方Geminiによると、
-ChatGPT 強み：  創造的な文章生成 ユーモアのある文章生成 多様な言語への対応  弱み：  事実に基づく正確性 倫理的な問題 計算コスト  Gemini 強み：  事実に基づく正確性 倫理的な問題への配慮 計算効率  弱み：  創造的な文章生成 ユーモアのある文章生成 多様な言語への対応  だそうです。
+ChatGPT 強み：  事実に基づく正確性 倫理的な問題への配慮 計算効率  弱み：  創造的な文章生成 ユーモアのある文章生成 多様な言語への対応  Gemini 強み：  創造的な文章生成 ユーモアのある文章生成 多様な言語への対応  弱み：  事実に基づく正確性 倫理的な問題 計算コスト  だそうです。
 前回こちらのブログで紹介した内容、「この物理モデルを解くMatlabコードを教えて〜」を2024年3月時点のchatGPT4とGemini Advancedに問いかけてみるとどうか？試してみました。
  ↓まずはChatGPT
 function pendulum_simulation m = 1; % 質量 c = 0.1; % ダンパー係数 k = 10; % ばね定数 F = 1; % 外力の大きさ % 時間範囲と初期条件 tspan = [0 10]; % シミュレーションする時間の範囲 x0 = [0; 0]; % 初期変位と初期速度 % ODEソルバーを使用してシステムを解く [t, x] = ode45(@(t, x) system_dynamics(t, x, m, c, k, F), tspan, x0); % 結果をプロットする figure; plot(t, x(:,1)); title(&amp;#39;Displacement over Time&amp;#39;); xlabel(&amp;#39;Time (s)&amp;#39;); ylabel(&amp;#39;Displacement (m)&amp;#39;); end function dxdt = system_dynamics(t, x, m, c, k, F) % 変位と速度 x1 = x(1); x2 = x(2); % 外力（この例では定数） % 実際の問題では、f = F(t) の形で時間関数を定義する必要があるかもしれません。 f = F; % 二階の微分方程式を一階の方程式のシステムに変換 dx1dt = x2; dx2dt = (1/m)*(f - c*x2 - k*x1); % 結果を返す dxdt = [dx1dt; dx2dt]; end さすがです。前回とすこし解き方が違いますが、これもまたよし。</description>
