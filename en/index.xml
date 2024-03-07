@@ -5,7 +5,20 @@
     <link>https://dshiroki.com/en/</link>
     <description>Recent content on Data Scientist Hiroki&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 05 Mar 2024 21:15:46 +0900</lastBuildDate><atom:link href="https://dshiroki.com/en/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Mar 2024 16:35:46 +0900</lastBuildDate><atom:link href="https://dshiroki.com/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Mystery of Matlab&#39;s tf2ss</title>
+      <link>https://dshiroki.com/en/engineering/20240211/</link>
+      <pubDate>Wed, 06 Mar 2024 16:35:46 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/engineering/20240211/</guid>
+      <description>I love Matlab. Because it&amp;rsquo;s simple, with just the bare minimum of programming language acquisition, you can do big things easily.
+And yet, it&amp;rsquo;s structured and systematic.
+&amp;ldquo;You are beautiful&amp;rdquo;
+Hello, I&amp;rsquo;m Hiroki🐶, a data scientist.
+The Mystery of the State Space Representation tf2ss from Transfer Functions as introduced in the previous blog, the handy function &amp;ldquo;tf2ss&amp;rdquo; that calculates the coefficients (A,B,C,D) of the state space representation from a transfer function is very convenient.</description>
+    </item>
+    
     <item>
       <title>The Relationship Between Transfer Functions and State Space Representations</title>
       <link>https://dshiroki.com/en/engineering/20240129/</link>
