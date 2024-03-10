@@ -5,7 +5,17 @@
     <link>https://dshiroki.com/en/categories/engineering/</link>
     <description>Recent content in engineering on Data Scientist Hiroki&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 06 Mar 2024 16:35:46 +0900</lastBuildDate><atom:link href="https://dshiroki.com/en/categories/engineering/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Mar 2024 16:35:46 +0900</lastBuildDate><atom:link href="https://dshiroki.com/en/categories/engineering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>chatGPT vs Gemini: A Comparison from a Physical Model Perspective</title>
+      <link>https://dshiroki.com/en/engineering/20240304/</link>
+      <pubDate>Thu, 07 Mar 2024 16:35:46 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/en/engineering/20240304/</guid>
+      <description>Which Performs Better: chatGPT&amp;rsquo;s Successor Gemini? I asked both, &amp;ldquo;Which has higher performance, chatGPT or Gemini?&amp;rdquo; As of April 2023, chatGPT doesn&amp;rsquo;t recognize the term &amp;ldquo;Gemini.&amp;rdquo; According to Gemini, however,
+ChatGPT Strengths:  Fact-based accuracy Ethical considerations Computational efficiency  Weaknesses:  Creative writing Humorous writing Multilingual support  Gemini Strengths:  Creative writing Humorous writing Multilingual support  Weaknesses:  Fact-based accuracy Ethical issue Computational cost  As previously introduced in this blog, we wondered how the March 2024 versions of chatGPT 4 and Gemini Advanced would handle solving a physical model&amp;rsquo;s Matlab code.</description>
+    </item>
+    
     <item>
       <title>The Mystery of Matlab&#39;s tf2ss</title>
       <link>https://dshiroki.com/en/engineering/20240211/</link>
