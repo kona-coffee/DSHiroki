@@ -5,7 +5,48 @@
     <link>https://dshiroki.com/</link>
     <description>Recent content on Data Scientist Hiroki&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 04 Mar 2024 16:35:46 +0900</lastBuildDate><atom:link href="https://dshiroki.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 16 Aug 2024 14:04:46 +0900</lastBuildDate><atom:link href="https://dshiroki.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>機械学習を使って株式投資 〜条件付き確率〜</title>
+      <link>https://dshiroki.com/datascience/20240816/</link>
+      <pubDate>Fri, 16 Aug 2024 14:04:46 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/datascience/20240816/</guid>
+      <description>機械学習を使って株式投資 〜条件付き確率〜 2024年も8月になりました。
+暑いですね〜💦 この暑い夏、確率論や機械学習を活用し、涼しくさらっと乗り切りたい🌞
+こんにちは、データサイエンティストひろきです。
+ようやくデータサイエンティストらしく、機械学習をテーマにブログを書くことにします。
+今回は条件付き確率について、
+その前に普通の確率の話から、ロールプレイングゲームの勇者を例にお話しします。　普通の確率 勇者が宝箱📦を2つ見つけました。
+一方は宝石💎、もう一方にはうんこ💩が入っています。
+どちらかの箱📦を選ぶ必要があります。
+箱📦の中身が宝石💎である確率は？　はい、1/2の確率で、宝箱には宝石💎が入っていますね。
+$$\begin{align*} P(📦=💎)=\frac{💎}{💎 or 💩}=\frac{1}{2} \
+\end{align*}$$
+と書くことにします。　 では、うんこ💩を選んでしまう確率は？
+$$\begin{align*} P(📦=💩)=\frac{💩}{💎 or 💩}=\frac{1}{2} \
+\end{align*}$$
+1/2ですね。 つまり、確率P=(probability)というのは、対象となる事象/全体事象です。
+$$\begin{align*} 確率P=\frac{対象となる事象}{全体事象} \
+\end{align*}$$
+条件付き確率 次に、勇者は魔法を使って、箱を開ける前にどちらの箱に宝石💎が入っているかどうかを当てることができるとします。
+ でも、勇者の魔法は未熟で、確率1/4で判定ミスをします。
+さて、今、勇者は魔法🪄をかけました。
+そして、勇者は言いました。
+「右の箱に宝石💎が入っている‼️」
+ はい、ここまでが前提条件です。
+この時、魔法🪄が外れてうんこ💩を選んでしまう確率は？
+つまり、
+魔法🪄をかけて、「右の箱に宝石💎が入っている‼️」と勇者が言っている条件の元、 箱📦の中身はうんこ💩である確率を
+$$\begin{align*} P(📦=💩|🪄=💎) = \frac{P(📦=💩 and 🪄=💎)}{P(🪄=💎)}\
+\end{align*}$$
+と表します。
+これを求めます。
+魔法🪄が当たる場合と、外れる場合に場合分けして考えます。
+ 魔法🪄が当たる場合：「右の箱に宝石💎が入っている‼️」と言って、本当に箱📦に宝石💎が入っていた場合 魔法🪄が外れる場合：「右の箱に宝石💎が入っている‼️」と言って、箱📦にはうんこ💩が入っていた場合  1. 魔法🪄が当たる場合　 勇者の魔法🪄が当たる確率、
+$$\begin{align*} P(📦=💎 and 🪄=💎)\</description>
+    </item>
+    
     <item>
       <title>chagGPT vs Gemini 物理モデルの観点から</title>
       <link>https://dshiroki.com/engineering/20240304/</link>
