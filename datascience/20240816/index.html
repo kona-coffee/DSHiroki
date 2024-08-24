@@ -285,6 +285,21 @@ P(A)&amp;:事前分布 (prior)\\<br>
 \end{align*}$$</p>
 <p>と呼び、事前分布をlikely hood関数で更新し、事後分布を得ます。<br>
 これをベイズ更新と呼びます。</p>
+<p>また、一般に次のように添字iとj(この場合、i=1,2, j=1,2)で表わすと、</p>
+<p>$$\begin{align*}
+P(A_i|B_j) = \frac{P(B_j|A_i)}{P(B_j)}\cdot P(A_i) 　\<br>
+\end{align*}$$</p>
+<p>これらの関係を図示すると下記となります。</p>
+
+<figure >
+    
+        <img src="AB.png"  />
+    
+    
+</figure>
+
+
+<p>最後にまた、うんこの例に戻ると、</p>
 <p>$$\begin{align*}
 P(📦=💩|🪄=💎) = \frac{P(🪄=💎|📦=💩)}{P(🪄=💎)}\cdot P(📦=💩) 　\<br>
 \end{align*}$$</p>
