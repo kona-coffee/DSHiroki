@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang='ja'>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7B7JJJJ8N8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7B7JJJJ8N8');
+</script>
+
+
+<head>
+  <meta name="google-site-verification" content="jMgk06_1fynaHhhz3MtyldzvpUHakxxCsYYFeDtN1JQ" />
+  <title>機械学習の基礎 〜ベイズの定理 その2〜 | Data Scientist Hiroki&#39;s Blog</title>
+  <meta charset='utf-8'>
+  <meta name="generator" content="Hugo 0.88.1" />
+  <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+  <meta http-equiv = 'X-UA-Compatible' content = 'IE=edge'>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7B7JJJJ8N8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7B7JJJJ8N8');
+</script>
+
+
+
+<meta property = 'og:locale' content = 'en_US' />
+<meta property="og:type" content="article">
+<meta property = 'og:title' content = '機械学習の基礎 〜ベイズの定理 その2〜' />
+<meta name="description" content="機械学習の基礎 〜ベイズの定理〜 2024年も8月後半、まだまだ残暑厳しいですね🌞
+こんにちは、データサイエンティストひろきです。
+前回に引き続き、ベイズの定理の具体例を紹介します。
+ベイズの定理 $$\begin{align*} P(A|B) = \frac{P(B|A)}{P(B)}\cdot P(A) \ …">
+<meta property = 'og:description' content = '機械学習の基礎 〜ベイズの定理〜 2024年も8月後半、まだまだ残暑厳しいですね🌞
+こんにちは、データサイエンティストひろきです。
+前回に引き続き、ベイズの定理の具体例を紹介します。
+ベイズの定理 $$\begin{align*} P(A|B) = \frac{P(B|A)}{P(B)}\cdot P(A) \ …'>
+<meta property = 'og:url' content = 'https://dshiroki.com/datascience/20240824/' />
+<meta property = 'og:image' content = 'https://dshiroki.com/images/ssCentral.png'/>
+<meta name = 'twitter:card' content = 'summary_large_image' />
+<meta name = 'twitter:creator' content = ''>
+<meta name = 'twitter:title' content = '機械学習の基礎 〜ベイズの定理 その2〜' />
+<meta property = 'twitter:description'  content = '機械学習の基礎 〜ベイズの定理〜 2024年も8月後半、まだまだ残暑厳しいですね🌞
+こんにちは、データサイエンティストひろきです。
+前回に引き続き、ベイズの定理の具体例を紹介します。
+ベイズの定理 $$\begin{align*} P(A|B) = \frac{P(B|A)}{P(B)}\cdot P(A) \ …'/>
+<meta name = 'twitter:image' content = 'https://dshiroki.com/images/ssCentral.png' />
+<link rel='apple-touch-icon' sizes='180x180' href='https://dshiroki.com/images/icons/apple-touch-icon.png'>
+<link rel='icon' type='image/png' sizes='32x32' href='https://dshiroki.com/images/icons/favicon-32x32.png'>
+<link rel='icon' type='image/png' sizes='16x16' href='https://dshiroki.com/images/icons/favicon-16x16.png'>
+<link rel='manifest' href='https://dshiroki.com/images/icons/site.webmanifest'>
+
+  <link rel='canonical' href='https://dshiroki.com/datascience/20240824/'>
+  <link rel = 'stylesheet' href = 'https://dshiroki.com/css/styles.42db596b1300421b76166668f896d65a0e912909aa95394f74e207c69da0d0b652fe2ad414cb6b746661857c824297f791d6df38fce0872ba2a9ccaa421a6b89.css' integrity = 'sha512-QttZaxMAQht2FmZo&#43;JbWWg6RKQmqlTlPdOIHxp2g0LZS/irUFMtrdGZhhXyCQpf3kdbfOPzghyuiqcyqQhpriQ=='>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4285957234988519"
+     crossorigin="anonymous"></script>
+
+     
+</head>
+
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>機械学習の基礎 〜ベイズの定理 その2〜</title>
+     <link rel="stylesheet" type="text/css" href="https://dshiroki.com/css/style.css">
+      
+      
+  </head>
+  <body><div class = 'nav-drop'>
+  <div class = 'nav-body'>
+    
+      <a href = 'https://dshiroki.com/en' class = 'nav_item'>English Page</a>
+      <a href = 'https://dshiroki.com/info/privacy' class = 'nav_item'>プライバシーポリシー</a>
+
+    <div class = 'nav-close'></div>
+  </div>
+</div><header class = 'nav' >
+  <nav class = 'nav-menu'>
+    <a href='https://dshiroki.com' class = 'nav-brand nav_item'>Data Scientist Hiroki&#39;s Blog</a>
+    <div class = 'nav_bar-wrap'>
+      <div class = 'nav_bar'></div>
+    </div>
+  </nav>
+</header>
+
+
+    <main>
+
+<section class = 'post_header' style = 'background-image:url(https://dshiroki.com/images/ssCentral.png);'>
+  <h1 class='post_title'>機械学習の基礎 〜ベイズの定理 その2〜</h1>
+</section>
+<div class = 'post'>
+  <article class='post_content'><h1 id="機械学習の基礎-ベイズの定理">機械学習の基礎 〜ベイズの定理〜</h1>
+<p>2024年も8月後半、まだまだ残暑厳しいですね🌞<br>
+こんにちは、データサイエンティストひろきです。<br>
+前回に引き続き、ベイズの定理の具体例を紹介します。</p>
+<h2 id="ベイズの定理">ベイズの定理</h2>
+<p>$$\begin{align*}
+P(A|B) = \frac{P(B|A)}{P(B)}\cdot P(A) 　\<br>
+\end{align*}$$</p>
+<p>$$\begin{align*}
+P(A|B)&amp;:事後分布 (posterior)\\<br>
+P(B|A)/P(B)&amp;:尤度 (likely hood)\\<br>
+P(A)&amp;:事前分布 (prior)\\<br>
+\end{align*}$$</p>
+<p>事前分布をlikely hood関数で更新し、事後分布を得る。これをベイズ更新と呼びます。</p>
+<h2 id="ベイズの定理の応用例沈没船を探せ">ベイズの定理の応用例：沈没船を探せ</h2>
+<pre><code>
+<div class = 'video'>
+  <iframe src='https://www.youtube.com/embed/jhrPJT2UMw8?si?controls=1&rel=0'></iframe>
+</div>
+  
+</code></pre>
+<p>沈没船をある海域から探す時、見つかる確率をベイズの定理を使って考えてみましょう。<br>
+まず下記事象を考えます。</p>
+<p>$$\begin{align*}
+&amp;A={ある海域に船が沈んでいる} \\<br>
+&amp;B={船を探して実際に船が見つかる}\\<br>
+&amp;A^c={ある海域に船が沈んでいない} \\<br>
+&amp;B^c={船を探して実際に船が見つからない}\<br>
+\end{align*}$$</p>
+<p>そして、下記確率を考えてみます。</p>
+<p>$$\begin{align*}
+&amp;p=P(A) :ある海域に船が沈んでいる確率(主観的に決める) \\<br>
+&amp;q=P(B|A):ある海域に船が沈んでいて、船を探して実際に船が見つかる確率(捜査船の能力)\\<br>
+\end{align*}$$</p>
+<p>この時、ある海域を探して見つからなかったけれども、実はその海域に船が沈んでいる確率
+$$\begin{align*}
+P(A|B^c)\\<br>
+\end{align*}$$
+を求めてみましょう。<br>
+まずはベイズの定理より
+$$\begin{align*}
+P(A|B^c)&amp;=\frac{P(A \land B^c)}{P(B^c)}\\<br>
+&amp;=\frac{P(B^c|A) \cdot P(A)}{P(B^c)}\\<br>
+\end{align*}$$</p>
+<p>これをpとqで表したいので、P(A)があからさまな形で出てくるように分母を変形し、<br>
+ベイズの定理の一部を適用すると、<br>
+$$\begin{align*}
+P(B^c)&amp;=P(A \land B^c)+P(A^c \land B^c)\\<br>
+&amp;=P(B^c|A)\cdot P(A)+P(B^c|A^c)\cdot P(A^c)\\<br>
+&amp;=P(B^c|A)\cdot P(A)+P(B^c|A^c)\cdot (1-P(A))\\<br>
+&amp;=(1-q)\cdot p+1\cdot (1-p)\\<br>
+&amp;=1-pq\<br>
+\end{align*}$$</p>
+<p>上記式変形には下記2つの確率の意味を利用しています。<br>
+$$\begin{align*}
+&amp;P(B^c|A)=1-q\\<br>
+&amp; \because　P(B|A)+P(B^c|A)=1\\<br>
+&amp;P(B^c|A^c)=1\\<br>
+&amp;\because A^c(沈んでいない)という条件の元で、B^c(見つからない)確率は1だから\\<br>
+\end{align*}$$</p>
+<p>故に、ある海域を探して見つからなかったけれども、実はその海域に船が沈んでいる確率は、
+$$\begin{align*}
+P(A|B^c)&amp;=\frac{P(B^c|A) \cdot P(A)}{P(B^c)}\\<br>
+&amp;=\frac{(1-q)\cdot p}{(1-pq)}\\<br>
+&amp;=\frac{1-q}{1-pq}\cdot p\<br>
+\end{align*}$$</p>
+<p>つまり、ある海域を探して見つからなかった場合、</p>
+<p>$$\begin{align*}
+&amp;P(A) :その海域に船が沈んでいる確率(主観的に決める)\\<br>
+&amp;が、\\<br>
+&amp;P(A|B^c):探して見つからなかったけど、まだその海域に船が沈んでいる確率\<br>
+\end{align*}$$
+に更新されたわけです。</p>
+<p>例えばですが、
+$$\begin{align*}
+&amp;p=P(A)=1/4=25\% :ある海域に船が沈んでいる確率(主観的に決める)\\<br>
+&amp;q=P(B|A)=2/3:ある海域に船が沈んでいて、船を探して実際に船が見つかる確率(捜査船の能力)\\<br>
+\end{align*}$$
+とすると、
+$$\begin{align*}
+P(A|B^c)&amp;=\frac{1-q}{1-pq}\cdot p\\<br>
+&amp;=\frac{(1-2/3)\cdot 1/4}{(1-2/3 \cdot1/4)}\\<br>
+&amp;=0.1=10\% \\<br>
+\end{align*}$$</p>
+<p>つまり、<br>
+ある海域に船が沈んでいる確率p=25%が、<br>
+捜索し見つからなかったことで、<br>
+それでもまだ、船が沈んでいる確率10%に更新されたということです。</p>
+<p>実例は<a href="https://www.researchgate.net/publication/247823555_Search_for_the_SS_Central_America_Mathematical_Treasure_Hunting">こちら</a>の文献を参照ください。</p>
+<p>それでは私もお宝を探しに行ってきます💰<br>
+Love&amp;Respect❤️<br>
+Hiroki🐶</p>
+
+    
+  </article>
+  
+</div>
+<script src = 'https://dshiroki.com/js/autosize.min.js'></script>
+<script src = 'https://dshiroki.com/js/timeago.js'></script></main><svg width="0" height="0" class="hidden">
+  <symbol viewBox="0 0 699.428 699.428" xmlns="http://www.w3.org/2000/svg" id="copy">
+    <path d="M502.714 0H240.428C194.178 0 153 42.425 153 87.429l-25.267.59c-46.228 0-84.019 41.834-84.019 86.838V612c0 45.004 41.179 87.428 87.429 87.428H459c46.249 0 87.428-42.424 87.428-87.428h21.857c46.25 0 87.429-42.424 87.429-87.428v-349.19zM459 655.715H131.143c-22.95 0-43.714-21.441-43.714-43.715V174.857c0-22.272 18.688-42.993 41.638-42.993l23.933-.721v393.429C153 569.576 194.178 612 240.428 612h262.286c0 22.273-20.765 43.715-43.714 43.715zm153-131.143c0 22.271-20.765 43.713-43.715 43.713H240.428c-22.95 0-43.714-21.441-43.714-43.713V87.429c0-22.272 20.764-43.714 43.714-43.714H459c-.351 50.337 0 87.975 0 87.975 0 45.419 40.872 86.882 87.428 86.882H612zm-65.572-349.715c-23.277 0-43.714-42.293-43.714-64.981V44.348L612 174.857zm-43.714 131.537H306c-12.065 0-21.857 9.77-21.857 21.835s9.792 21.835 21.857 21.835h196.714c12.065 0 21.857-9.771 21.857-21.835 0-12.065-9.792-21.835-21.857-21.835zm0 109.176H306c-12.065 0-21.857 9.77-21.857 21.834 0 12.066 9.792 21.836 21.857 21.836h196.714c12.065 0 21.857-9.77 21.857-21.836 0-12.064-9.792-21.834-21.857-21.834z"
+    ></path>
+  </symbol>
+  <symbol viewBox="0 0 60.015 60.015" xmlns="http://www.w3.org/2000/svg" id="reply">
+    <path d="M42.007 0h-24c-9.925 0-18 8.075-18 18v14c0 9.59 7.538 17.452 17 17.973v8.344a1.694 1.694 0 0 0 1.699 1.698c.44 0 .873-.173 1.198-.498l1.876-1.876C26.708 52.713 33.259 50 40.227 50h1.78c9.925 0 18-8.075 18-18V18c0-9.925-8.075-18-18-18zm16 32c0 8.822-7.178 16-16 16h-1.78c-7.502 0-14.556 2.921-19.86 8.226l-1.359 1.359V44a1 1 0 1 0-2 0v3.949c-8.356-.52-15-7.465-15-15.949V18c0-8.822 7.178-16 16-16h24c8.822 0 16 7.178 16 16v14z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="scan">
+    <path d="M456.66 0H385c-8.284 0-15 6.716-15 15s6.716 15 15 15h71.66C470.632 30 482 41.368 482 55.341V127c0 8.284 6.716 15 15 15s15-6.716 15-15V55.341C512 24.826 487.174 0 456.66 0zM15 142c8.284 0 15-6.716 15-15V55.341C30 41.368 41.368 30 55.34 30H127c8.284 0 15-6.716 15-15s-6.716-15-15-15H55.34C24.826 0 0 24.826 0 55.341V127c0 8.284 6.716 15 15 15zm112 340H55.34C41.368 482 30 470.632 30 456.659V385c0-8.284-6.716-15-15-15s-15 6.716-15 15v71.659C0 487.174 24.826 512 55.34 512H127c8.284 0 15-6.716 15-15s-6.716-15-15-15zm370-112c-8.284 0-15 6.716-15 15v71.659C482 470.632 470.632 482 456.66 482H385c-8.284 0-15 6.716-15 15s6.716 15 15 15h71.66c30.515 0 55.34-24.826 55.34-55.341V385c0-8.284-6.716-15-15-15zM341.643 110h47.575c6.497 0 11.782 5.285 11.782 11.782v47.574c0 8.284 6.716 15 15 15s15-6.716 15-15v-47.574C431 98.743 412.256 80 389.218 80h-47.575c-8.284 0-15 6.716-15 15s6.716 15 15 15zM81 121.782v47.574c0 8.284 6.716 15 15 15s15-6.716 15-15v-47.574c0-6.497 5.286-11.782 11.782-11.782h47.575c8.284 0 15-6.716 15-15s-6.716-15-15-15h-47.575C99.744 80 81 98.743 81 121.782zM170.357 400h-47.575c-6.497 0-11.782-5.285-11.782-11.782v-47.574c0-8.284-6.716-15-15-15s-15 6.716-15 15v47.574C81 411.257 99.744 430 122.782 430h47.575c8.284 0 15-6.716 15-15s-6.716-15-15-15zM431 388.218v-47.574c0-8.284-6.716-15-15-15s-15 6.716-15 15v47.574c0 6.497-5.286 11.782-11.782 11.782h-47.575c-8.284 0-15 6.716-15 15s6.716 15 15 15h47.575C412.256 430 431 411.257 431 388.218zM1 256c0 8.284 6.716 15 15 15h480c8.284 0 15-6.716 15-15s-6.716-15-15-15H16c-8.284 0-15 6.716-15 15z"></path>
+  </symbol>
+</svg>
+<footer class="footer">
+  <div class="footer_inner wrap pale">
+    <p>&copy;&nbsp;<span class="year"></span>&nbsp;Data Scientist Hiroki&#39;s Blog.
+    </p>
+  </div>
+</footer><script type="text/javascript" src="https://dshiroki.com/js/bundle.6590e6cf69f12d159a45c6d12a3a78832f91d746097651ff38f6a5087ae0c1ec67d4fa91d07b31c39d375a2ef0ba84dfcdc1ca1bbb016b659d42ec892f50a2aa.js" integrity="sha512-ZZDmz2nxLRWaRcbRKjp4gy&#43;R10YJdlH/OPalCHrgwexn1PqR0Hsxw503Wi7wuoTfzcHKG7sBa2WdQuyJL1Ciqg==" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+ tex2jax: {
+ inlineMath: [['$', '$'] ],
+ displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+ }
+ });
+</script>
+
+  </body>
+
+
+
+
+
+</html>

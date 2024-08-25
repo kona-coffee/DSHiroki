@@ -14,7 +14,7 @@
 
 <head>
   <meta name="google-site-verification" content="jMgk06_1fynaHhhz3MtyldzvpUHakxxCsYYFeDtN1JQ" />
-  <title>機械学習を使って株式投資 〜条件付き確率〜 | Data Scientist Hiroki&#39;s Blog</title>
+  <title>機械学習の基礎 〜ベイズの定理 その1〜 | Data Scientist Hiroki&#39;s Blog</title>
   <meta charset='utf-8'>
   <meta name="generator" content="Hugo 0.88.1" />
   <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
@@ -34,28 +34,31 @@
 
 <meta property = 'og:locale' content = 'en_US' />
 <meta property="og:type" content="article">
-<meta property = 'og:title' content = '機械学習を使って株式投資 〜条件付き確率〜' />
-<meta name="description" content="機械学習を使って株式投資 〜条件付き確率〜 2024年も8月になりました。
+<meta property = 'og:title' content = '機械学習の基礎 〜ベイズの定理 その1〜' />
+<meta name="description" content="機械学習の基礎 〜ベイズの定理〜 2024年も8月になりました。
 暑いですね〜💦 この暑い夏、確率論や機械学習を活用し、涼しくさらっと乗り切りたい🌞
 こんにちは、データサイエンティストひろきです。
 ようやくデータサイエンティストらしく、機械学習をテーマにブログを書くことにします。
-今回は条件付き確率について、 …">
-<meta property = 'og:description' content = '機械学習を使って株式投資 〜条件付き確率〜 2024年も8月になりました。
+今回は条件付き確率について、
+その前に …">
+<meta property = 'og:description' content = '機械学習の基礎 〜ベイズの定理〜 2024年も8月になりました。
 暑いですね〜💦 この暑い夏、確率論や機械学習を活用し、涼しくさらっと乗り切りたい🌞
 こんにちは、データサイエンティストひろきです。
 ようやくデータサイエンティストらしく、機械学習をテーマにブログを書くことにします。
-今回は条件付き確率について、 …'>
+今回は条件付き確率について、
+その前に …'>
 <meta property = 'og:url' content = 'https://dshiroki.com/datascience/20240816/' />
-<meta property = 'og:image' content = 'https://dshiroki.com/images/MLImage.png'/>
+<meta property = 'og:image' content = 'https://dshiroki.com/images/bayes.png'/>
 <meta name = 'twitter:card' content = 'summary_large_image' />
 <meta name = 'twitter:creator' content = ''>
-<meta name = 'twitter:title' content = '機械学習を使って株式投資 〜条件付き確率〜' />
-<meta property = 'twitter:description'  content = '機械学習を使って株式投資 〜条件付き確率〜 2024年も8月になりました。
+<meta name = 'twitter:title' content = '機械学習の基礎 〜ベイズの定理 その1〜' />
+<meta property = 'twitter:description'  content = '機械学習の基礎 〜ベイズの定理〜 2024年も8月になりました。
 暑いですね〜💦 この暑い夏、確率論や機械学習を活用し、涼しくさらっと乗り切りたい🌞
 こんにちは、データサイエンティストひろきです。
 ようやくデータサイエンティストらしく、機械学習をテーマにブログを書くことにします。
-今回は条件付き確率について、 …'/>
-<meta name = 'twitter:image' content = 'https://dshiroki.com/images/MLImage.png' />
+今回は条件付き確率について、
+その前に …'/>
+<meta name = 'twitter:image' content = 'https://dshiroki.com/images/bayes.png' />
 <link rel='apple-touch-icon' sizes='180x180' href='https://dshiroki.com/images/icons/apple-touch-icon.png'>
 <link rel='icon' type='image/png' sizes='32x32' href='https://dshiroki.com/images/icons/favicon-32x32.png'>
 <link rel='icon' type='image/png' sizes='16x16' href='https://dshiroki.com/images/icons/favicon-16x16.png'>
@@ -72,7 +75,7 @@
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>機械学習を使って株式投資 〜条件付き確率〜</title>
+      <title>機械学習の基礎 〜ベイズの定理 その1〜</title>
      <link rel="stylesheet" type="text/css" href="https://dshiroki.com/css/style.css">
       
       
@@ -97,11 +100,11 @@
 
     <main>
 
-<section class = 'post_header' style = 'background-image:url(https://dshiroki.com/images/MLImage.png);'>
-  <h1 class='post_title'>機械学習を使って株式投資 〜条件付き確率〜</h1>
+<section class = 'post_header' style = 'background-image:url(https://dshiroki.com/images/bayes.png);'>
+  <h1 class='post_title'>機械学習の基礎 〜ベイズの定理 その1〜</h1>
 </section>
 <div class = 'post'>
-  <article class='post_content'><h1 id="機械学習を使って株式投資-条件付き確率">機械学習を使って株式投資 〜条件付き確率〜</h1>
+  <article class='post_content'><h1 id="機械学習の基礎-ベイズの定理">機械学習の基礎 〜ベイズの定理〜</h1>
 <p>2024年も8月になりました。<br>
 暑いですね〜💦 <br>
 この暑い夏、確率論や機械学習を活用し、涼しくさらっと乗り切りたい🌞</p>
@@ -266,7 +269,8 @@ P(📦=💩|🪄=💎) \<br>
 \end{align*}$$</p>
 <p>条件Bの元Aが起こる確率は</p>
 <p>$$\begin{align*}
-P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} 　\<br>
+P(A|B) &amp;= \frac{P(A \land B)}{P(B)}\\<br>
+&amp;= \frac{P(B|A) \cdot P(A)}{P(B)}\\<br>
 \end{align*}$$</p>
 <p>すなはち、<br>
 結果がBだった時の、原因Aが起こる確率P(A|B)を<br>

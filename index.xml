@@ -5,14 +5,52 @@
     <link>https://dshiroki.com/</link>
     <description>Recent content on Data Scientist Hiroki&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 16 Aug 2024 14:04:46 +0900</lastBuildDate><atom:link href="https://dshiroki.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Aug 2024 14:04:46 +0900</lastBuildDate><atom:link href="https://dshiroki.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>機械学習を使って株式投資 〜条件付き確率〜</title>
+      <title>機械学習の基礎 〜ベイズの定理 その2〜</title>
+      <link>https://dshiroki.com/datascience/20240824/</link>
+      <pubDate>Sat, 24 Aug 2024 14:04:46 +0900</pubDate>
+      
+      <guid>https://dshiroki.com/datascience/20240824/</guid>
+      <description>機械学習の基礎 〜ベイズの定理〜 2024年も8月後半、まだまだ残暑厳しいですね🌞
+こんにちは、データサイエンティストひろきです。
+前回に引き続き、ベイズの定理の具体例を紹介します。
+ベイズの定理 $$\begin{align*} P(A|B) = \frac{P(B|A)}{P(B)}\cdot P(A) \
+\end{align*}$$
+$$\begin{align*} P(A|B)&amp;amp;:事後分布 (posterior)\\
+P(B|A)/P(B)&amp;amp;:尤度 (likely hood)\\
+P(A)&amp;amp;:事前分布 (prior)\\
+\end{align*}$$
+事前分布をlikely hood関数で更新し、事後分布を得る。これをベイズ更新と呼びます。
+ベイズの定理の応用例：沈没船を探せ     沈没船をある海域から探す時、見つかる確率をベイズの定理を使って考えてみましょう。
+まず下記事象を考えます。
+$$\begin{align*} &amp;amp;A={ある海域に船が沈んでいる} \\
+&amp;amp;B={船を探して実際に船が見つかる}\\
+&amp;amp;A^c={ある海域に船が沈んでいない} \\
+&amp;amp;B^c={船を探して実際に船が見つからない}\
+\end{align*}$$
+そして、下記確率を考えてみます。
+$$\begin{align*} &amp;amp;p=P(A) :ある海域に船が沈んでいる確率(主観的に決める) \\
+&amp;amp;q=P(B|A):ある海域に船が沈んでいて、船を探して実際に船が見つかる確率(捜査船の能力)\\
+\end{align*}$$
+この時、ある海域を探して見つからなかったけれども、実はその海域に船が沈んでいる確率 $$\begin{align*} P(A|B^c)\\
+\end{align*}$$ を求めてみましょう。
+まずはベイズの定理より $$\begin{align*} P(A|B^c)&amp;amp;=\frac{P(A \land B^c)}{P(B^c)}\\
+&amp;amp;=\frac{P(B^c|A) \cdot P(A)}{P(B^c)}\\
+\end{align*}$$
+これをpとqで表したいので、P(A)があからさまな形で出てくるように分母を変形し、
+ベイズの定理の一部を適用すると、
+$$\begin{align*} P(B^c)&amp;amp;=P(A \land B^c)+P(A^c \land B^c)\\
+&amp;amp;=P(B^c|A)\cdot P(A)+P(B^c|A^c)\cdot P(A^c)\\</description>
+    </item>
+    
+    <item>
+      <title>機械学習の基礎 〜ベイズの定理 その1〜</title>
       <link>https://dshiroki.com/datascience/20240816/</link>
       <pubDate>Fri, 16 Aug 2024 14:04:46 +0900</pubDate>
       
       <guid>https://dshiroki.com/datascience/20240816/</guid>
-      <description>機械学習を使って株式投資 〜条件付き確率〜 2024年も8月になりました。
+      <description>機械学習の基礎 〜ベイズの定理〜 2024年も8月になりました。
 暑いですね〜💦 この暑い夏、確率論や機械学習を活用し、涼しくさらっと乗り切りたい🌞
 こんにちは、データサイエンティストひろきです。
 ようやくデータサイエンティストらしく、機械学習をテーマにブログを書くことにします。

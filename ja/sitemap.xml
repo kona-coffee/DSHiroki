@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://dshiroki.com/categories/</loc>
-    <lastmod>2024-08-16T14:04:46+09:00</lastmod>
+    <lastmod>2024-08-24T14:04:46+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -16,7 +16,7 @@
                 />
   </url><url>
     <loc>https://dshiroki.com/</loc>
-    <lastmod>2024-08-16T14:04:46+09:00</lastmod>
+    <lastmod>2024-08-24T14:04:46+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -29,10 +29,13 @@
                 />
   </url><url>
     <loc>https://dshiroki.com/categories/datascience/</loc>
-    <lastmod>2024-08-16T14:04:46+09:00</lastmod>
+    <lastmod>2024-08-24T14:04:46+09:00</lastmod>
   </url><url>
     <loc>https://dshiroki.com/datascience/</loc>
-    <lastmod>2024-08-16T14:04:46+09:00</lastmod>
+    <lastmod>2024-08-24T14:04:46+09:00</lastmod>
+  </url><url>
+    <loc>https://dshiroki.com/datascience/20240824/</loc>
+    <lastmod>2024-08-24T14:04:46+09:00</lastmod>
   </url><url>
     <loc>https://dshiroki.com/datascience/20240816/</loc>
     <lastmod>2024-08-16T14:04:46+09:00</lastmod>
